@@ -1,0 +1,397 @@
+/* publico/css/modulos/asignatura.css · Estilos para la vista de unidades y temas de una asignatura */
+.asignatura-detalle-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+}
+
+.asignatura-unidad-bloque {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  background-color: var(--superficie);
+  overflow: hidden;
+  margin-bottom: var(--espacio-m);
+}
+
+.asignatura-unidad-cabecera {
+  background-color: var(--fondo);
+  padding: var(--espacio-m) var(--espacio-l);
+  border-bottom: 1px solid var(--borde);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asignatura-temas-lista {
+  display: flex;
+  flex-direction: column;
+  divide-y: 1px solid var(--borde);
+}
+
+.asignatura-tema-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espacio-m) var(--espacio-l);
+  border-bottom: 1px solid var(--borde);
+  transition: background-color var(--transicion);
+  gap: var(--espacio-m);
+}
+
+.asignatura-tema-fila:last-child {
+  border-bottom: none;
+}
+
+.asignatura-tema-fila:hover {
+  background-color: var(--fondo);
+}
+
+.asignatura-tema-info {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  flex: 1;
+}
+
+.tema-numero-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radio-completo);
+  background-color: var(--primario);
+  color: var(--texto-inverso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--peso-negrita);
+  font-size: var(--tamano-s);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   ÍNDICE DEL CURSO (Offcanvas / Cajón deslizable institucional)
+   Colores: Azul institucional UNEMI (--primario, --primario-oscuro),
+   Acento naranja institucional (--acento) y bordes refinados.
+   ========================================================= */
+
+.asignatura-layout-con-indice {
+  position: relative;
+}
+
+.asignatura-tema-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--espacio-xs);
+}
+
+.asignatura-cabecera__fila-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-xs);
+}
+
+.btn-accion-indice-top {
+  border-color: var(--primario);
+  color: var(--primario);
+  font-weight: var(--peso-seminegrita);
+  white-space: nowrap;
+}
+
+.btn-accion-indice-top:hover {
+  background-color: var(--primario);
+  color: var(--texto-inverso);
+  border-color: var(--primario);
+}
+
+/* Botón flotante accesible a la derecha */
+.btn-flotante-indice {
+  position: fixed;
+  top: 140px;
+  right: 0;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  background-color: var(--primario);
+  color: var(--texto-inverso);
+  border: 1px solid var(--secundario);
+  border-right: 4px solid var(--acento);
+  border-radius: var(--radio-m) 0 0 var(--radio-m);
+  padding: 8px 10px 8px 14px;
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
+  cursor: pointer;
+  box-shadow: -2px 4px 12px rgba(0, 46, 69, 0.15);
+  transition: transform var(--transicion-corta), background-color var(--transicion-corta);
+  font-family: inherit;
+}
+
+.btn-flotante-indice:hover,
+.btn-flotante-indice:focus-visible {
+  transform: translateX(-4px);
+  background-color: var(--primario-oscuro);
+  outline: 2px solid var(--acento);
+}
+
+.btn-flotante-indice__icono {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Fondo oscurecido (Backdrop) */
+.indice-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 46, 69, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transicion), visibility var(--transicion);
+}
+
+.indice-backdrop--activo {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Cajón / Drawer lateral en el lado derecho */
+.panel-indice-curso {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 340px;
+  max-width: 85vw;
+  background-color: var(--superficie);
+  box-shadow: -4px 0 24px rgba(0, 46, 69, 0.2);
+  z-index: 101;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--borde);
+}
+
+.panel-indice-curso--abierto {
+  transform: translateX(0);
+}
+
+/* Cabecera del panel */
+.panel-indice-curso__cabecera {
+  background-color: var(--primario-oscuro);
+  color: var(--texto-inverso);
+  padding: var(--espacio-m);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--acento);
+}
+
+.panel-indice-curso__titulo-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.panel-indice-curso__badge-materia {
+  font-size: 0.65rem;
+  font-weight: var(--peso-extranegrita);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acento);
+}
+
+.panel-indice-curso__titulo {
+  margin: 0;
+  font-size: var(--tamano-m);
+  color: var(--texto-inverso);
+  font-weight: var(--peso-negrita);
+}
+
+.btn-cerrar-indice {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--texto-inverso);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radio-completo);
+  font-size: var(--tamano-s);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transicion-corta), color var(--transicion-corta);
+}
+
+.btn-cerrar-indice:hover,
+.btn-cerrar-indice:focus-visible {
+  background-color: var(--acento);
+  color: var(--primario-oscuro);
+  border-color: var(--acento);
+  outline: none;
+}
+
+/* Cuerpo con scroll */
+.panel-indice-curso__cuerpo {
+  padding: var(--espacio-m);
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.panel-indice-curso__info-materia {
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--primario);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-s) var(--espacio-m);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Árbol y lista de unidades/temas */
+.indice-curso__arbol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-s);
+}
+
+.indice-curso__unidad-acordeon {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  overflow: hidden;
+  background-color: var(--superficie);
+}
+
+.indice-curso__unidad-boton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  background-color: var(--fondo);
+  border: none;
+  border-bottom: 1px solid var(--borde);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--transicion-corta);
+}
+
+.indice-curso__unidad-boton:hover {
+  background-color: #eaf1f5;
+}
+
+.indice-curso__flecha {
+  font-size: 0.65rem;
+  color: var(--acento);
+}
+
+.indice-curso__unidad-nombre {
+  flex: 1;
+}
+
+.indice-curso__temas-sublista {
+  list-style: none;
+  margin: 0;
+  padding: var(--espacio-xs) 0;
+}
+
+.indice-curso__item-tema {
+  margin: 0;
+}
+
+.indice-curso__enlace-glosario {
+  display: inline-block;
+  margin: 0 0 var(--espacio-xs) calc(var(--espacio-l) + var(--espacio-s));
+  color: var(--primario);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-seminegrita);
+  text-decoration: none;
+}
+
+.indice-curso__enlace-glosario:hover,
+.indice-curso__enlace-glosario:focus-visible {
+  text-decoration: underline;
+}
+
+.indice-curso__enlace-tema {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  padding: 8px 14px 8px 24px;
+  color: var(--texto);
+  font-size: var(--tamano-xs);
+  text-decoration: none;
+  transition: background-color var(--transicion-corta), color var(--transicion-corta);
+  border-left: 3px solid transparent;
+}
+
+.indice-curso__enlace-tema:hover {
+  background-color: var(--fondo);
+  color: var(--acento);
+  border-left-color: var(--acento);
+}
+
+.indice-curso__enlace-tema--activo {
+  background-color: var(--info-fondo);
+  color: var(--primario);
+  font-weight: var(--peso-negrita);
+  border-left-color: var(--primario);
+}
+
+.indice-curso__icono-estado {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radio-completo);
+  background-color: var(--borde);
+  color: var(--texto-suave);
+  font-size: 0.65rem;
+  font-weight: var(--peso-negrita);
+  flex-shrink: 0;
+}
+
+.indice-curso__icono-estado--revisado {
+  background-color: var(--exito);
+  color: var(--texto-inverso);
+}
+
+.indice-curso__sin-temas {
+  padding: var(--espacio-xs) var(--espacio-m);
+  color: var(--texto-suave);
+  font-size: var(--tamano-xs);
+  font-style: italic;
+}
+
+/* Efecto de resaltado suave al navegar a un tema desde el índice */
+.asignatura-tema-fila--resaltado {
+  animation: pulso-resaltado 2s ease-out;
+}
+
+@keyframes pulso-resaltado {
+  0% {
+    background-color: #fff3e6;
+    outline: 2px solid var(--acento);
+  }
+  50% {
+    background-color: #ffe6cc;
+    outline: 2px solid var(--acento);
+  }
+  100% {
+    background-color: transparent;
+    outline: none;
+  }
+}

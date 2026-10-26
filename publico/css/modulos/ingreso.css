@@ -1,0 +1,24 @@
+/* publico/css/modulos/ingreso.css · Estilos para la página de ingreso */
+.auth-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--espacio-xl) 0;
+  min-height: calc(100vh - 200px);
+}
+
+.auth-tarjeta {
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-pie {
+  margin-top: var(--espacio-l);
+  text-align: center;
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+.auth-pie a {
+  font-weight: var(--peso-seminegrita);
+}

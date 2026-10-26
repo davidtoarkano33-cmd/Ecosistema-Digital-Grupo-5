@@ -1,0 +1,258 @@
+/* publico/css/base.css · Estilos base, reset ligero, tipografía y utilidades */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* 1. Reset ligero */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--tamano-m);
+}
+
+#plantilla {
+  display: contents;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente-base);
+  font-size: var(--tamano-m);
+  line-height: var(--interlineado-base);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 260px 1fr;
+  grid-template-areas:
+    "encabezado encabezado"
+    "menu contenido"
+    "pie pie";
+}
+
+header.encabezado {
+  grid-area: encabezado;
+  width: 100%;
+}
+
+aside.menu {
+  grid-area: menu;
+  height: 100%;
+}
+
+main#contenido,
+.layout-guia {
+  grid-area: contenido;
+  min-width: 0;
+  padding-top: var(--espacio-l);
+  padding-bottom: var(--espacio-2xl);
+}
+
+footer.pie {
+  grid-area: pie;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "encabezado"
+      "contenido"
+      "pie";
+  }
+
+  aside.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 280px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform var(--transicion);
+    box-shadow: var(--sombra-3);
+  }
+
+  aside.menu.abierto {
+    transform: translateX(0);
+  }
+
+  .menu-alternar {
+    display: inline-flex;
+  }
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+ul,
+ol {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* 2. Tipografía */
+h1 {
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-3xl);
+  font-weight: var(--peso-extranegrita);
+  line-height: var(--interlineado-ajustado);
+  color: var(--primario);
+  margin-bottom: var(--espacio-m);
+}
+
+h2 {
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-2xl);
+  font-weight: var(--peso-negrita);
+  line-height: var(--interlineado-ajustado);
+  color: var(--primario);
+  margin-bottom: var(--espacio-s);
+}
+
+h3 {
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-xl);
+  font-weight: var(--peso-negrita);
+  line-height: var(--interlineado-ajustado);
+  color: var(--primario);
+  margin-bottom: var(--espacio-s);
+}
+
+h4 {
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-seminegrita);
+  line-height: var(--interlineado-ajustado);
+  color: var(--primario);
+  margin-bottom: var(--espacio-xs);
+}
+
+p {
+  margin-bottom: var(--espacio-m);
+  color: var(--texto);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+small {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+/* 3. Enlaces */
+a {
+  color: var(--primario);
+  text-decoration: none;
+  transition: color var(--transicion);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--info);
+}
+
+/* 4. Foco visible (:focus-visible) */
+:focus-visible {
+  outline: 3px solid var(--info);
+  outline-offset: 2px;
+}
+
+/* 5. Contenedor principal */
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--espacio-m);
+  padding-right: var(--espacio-m);
+}
+
+/* 6. Disposiciones: Pila y Fila */
+.pila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.pila--xs { gap: var(--espacio-xs); }
+.pila--s  { gap: var(--espacio-s); }
+.pila--l  { gap: var(--espacio-l); }
+.pila--xl { gap: var(--espacio-xl); }
+
+.fila {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--espacio-m);
+  flex-wrap: wrap;
+}
+
+.fila--xs { gap: var(--espacio-xs); }
+.fila--s  { gap: var(--espacio-s); }
+.fila--l  { gap: var(--espacio-l); }
+.fila--xl { gap: var(--espacio-xl); }
+
+/* 7. Cuadrícula adaptable */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--espacio-m);
+}
+
+/* 8. Visibilidad y accesibilidad */
+.oculto {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

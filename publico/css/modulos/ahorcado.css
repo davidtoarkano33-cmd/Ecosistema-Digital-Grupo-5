@@ -1,0 +1,249 @@
+/* publico/css/modulos/ahorcado.css · Estilos del juego didáctico del Ahorcado */
+.ahorcado-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.ahorcado-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+}
+
+.ahorcado-cabecera__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.ahorcado-cabecera__titulo {
+  margin: 0;
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+}
+
+.ahorcado-cabecera__tema {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+.ahorcado-escenario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-m);
+  padding: var(--espacio-l) var(--espacio-m);
+  background-color: var(--superficie);
+  border-radius: var(--radio-l);
+  border: 1px solid var(--borde);
+  text-align: center;
+}
+
+/* SVG del globo que se desinfla (figura no violenta de 4 estados) */
+.globo-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+}
+
+.globo-svg {
+  width: 140px;
+  height: 180px;
+  overflow: visible;
+}
+
+.globo__cuerpo,
+.globo__brillo,
+.globo__nudo,
+.globo__hilo {
+  transform-origin: 70px 130px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+}
+
+.globo__cuerpo {
+  fill: var(--acento);
+}
+
+.globo__brillo {
+  fill: var(--superficie);
+  opacity: 0.45;
+}
+
+.globo__nudo {
+  fill: var(--acento);
+}
+
+.globo__hilo {
+  stroke: var(--texto-suave);
+  stroke-width: 2;
+  stroke-dasharray: 2 2;
+}
+
+/* Transiciones entre estados de error (0 a 4) */
+.globo-svg[data-errores="1"] .globo__cuerpo {
+  transform: scale(0.85, 0.88);
+}
+.globo-svg[data-errores="1"] .globo__brillo {
+  opacity: 0.35;
+  transform: scale(0.85);
+}
+
+.globo-svg[data-errores="2"] .globo__cuerpo {
+  transform: scale(0.65, 0.72) rotate(8deg);
+}
+.globo-svg[data-errores="2"] .globo__brillo {
+  opacity: 0.2;
+  transform: scale(0.65);
+}
+
+.globo-svg[data-errores="3"] .globo__cuerpo {
+  transform: scale(0.45, 0.52) rotate(-12deg);
+}
+.globo-svg[data-errores="3"] .globo__brillo {
+  opacity: 0.1;
+  transform: scale(0.4);
+}
+
+.globo-svg[data-errores="4"] .globo__cuerpo {
+  transform: scale(0.25, 0.18) translateY(90px) rotate(35deg);
+  opacity: 0.6;
+}
+.globo-svg[data-errores="4"] .globo__brillo {
+  opacity: 0;
+}
+.globo-svg[data-errores="4"] .globo__hilo {
+  transform: scaleY(0.4) translateY(60px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globo__cuerpo,
+  .globo__brillo,
+  .globo__nudo,
+  .globo__hilo {
+    transition: none;
+  }
+}
+
+/* Pista descriptiva */
+.ahorcado-pista {
+  max-width: 580px;
+  background-color: var(--fondo);
+  padding: var(--espacio-s) var(--espacio-m);
+  border-radius: var(--radio-m);
+  font-size: var(--tamano-s);
+  color: var(--texto);
+}
+
+.ahorcado-pista strong {
+  color: var(--primario);
+}
+
+/* Casillas de la palabra de 6 letras */
+.ahorcado-palabra {
+  display: flex;
+  gap: var(--espacio-s);
+  justify-content: center;
+  margin: var(--espacio-m) 0;
+}
+
+.casilla {
+  width: 44px;
+  height: 54px;
+  border-bottom: 4px solid var(--primario);
+  border-radius: var(--radio-s) var(--radio-s) 0 0;
+  background-color: var(--fondo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--tamano-xl);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  text-transform: uppercase;
+  transition: all var(--transicion);
+}
+
+.casilla--acierto {
+  color: var(--exito);
+  border-bottom-color: var(--exito);
+  background-color: var(--exito-fondo);
+}
+
+.casilla--fallo {
+  color: var(--error);
+  border-bottom-color: var(--error);
+  background-color: var(--error-fondo);
+}
+
+/* Teclado en pantalla */
+.ahorcado-teclado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  align-items: center;
+  width: 100%;
+}
+
+.teclado-fila {
+  display: flex;
+  gap: var(--espacio-xs);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tecla {
+  min-width: 38px;
+  height: 44px;
+  padding: 0 var(--espacio-xs);
+  border-radius: var(--radio-s);
+  border: 1px solid var(--borde);
+  background-color: var(--superficie);
+  color: var(--texto);
+  font-size: var(--tamano-m);
+  font-weight: var(--peso-seminegrita);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transicion);
+  user-select: none;
+}
+
+.tecla:hover:not(:disabled),
+.tecla:focus-visible:not(:disabled) {
+  border-color: var(--primario);
+  background-color: var(--fondo);
+  outline: 2px solid var(--info);
+}
+
+.tecla:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.tecla--acierto {
+  background-color: var(--exito-fondo) !important;
+  color: var(--exito) !important;
+  border-color: var(--exito) !important;
+  opacity: 1 !important;
+}
+
+.tecla--error {
+  background-color: var(--error-fondo) !important;
+  color: var(--error) !important;
+  border-color: var(--error) !important;
+  opacity: 0.5 !important;
+}
+
+.ahorcado-acciones {
+  display: flex;
+  justify-content: center;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-m);
+}

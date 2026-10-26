@@ -1,0 +1,67 @@
+/* publico/css/modulos/actividades.css · Estilos de la cartelera de actividades */
+.actividades-encabezado {
+  margin-bottom: var(--espacio-l);
+}
+
+.actividades-encabezado__titulo {
+  margin: 0;
+  font-size: var(--tamano-2xl);
+  color: var(--primario);
+}
+
+.actividades-encabezado__subtitulo {
+  margin-top: var(--espacio-xs);
+  color: var(--texto-suave);
+  font-size: var(--tamano-m);
+}
+
+.actividades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--espacio-l);
+}
+
+.actividad-tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.actividad-tarjeta:hover,
+.actividad-tarjeta:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-m);
+}
+
+.actividad-tarjeta__cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-s);
+}
+
+.actividad-tarjeta__icono {
+  font-size: var(--tamano-xl);
+  line-height: 1;
+}
+
+.actividad-tarjeta__titulo {
+  margin: 0;
+  font-size: var(--tamano-l);
+  color: var(--primario);
+}
+
+.actividad-tarjeta__descripcion {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--tamano-s);
+  line-height: var(--linea-normal);
+  flex-grow: 1;
+  margin-bottom: var(--espacio-m);
+}
+
+.actividad-tarjeta__accion {
+  align-self: flex-start;
+}

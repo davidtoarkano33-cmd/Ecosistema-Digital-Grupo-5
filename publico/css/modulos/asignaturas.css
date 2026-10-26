@@ -1,0 +1,37 @@
+/* publico/css/modulos/asignaturas.css · Estilos para Mis Asignaturas */
+.asignaturas-estudiante-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--espacio-l);
+  margin-top: var(--espacio-m);
+}
+
+.tarjeta-asignatura-estudiante {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 4px solid var(--acento);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.tarjeta-asignatura-estudiante:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-2);
+}
+
+.asignatura-avance-seccion {
+  margin: var(--espacio-m) 0;
+}
+
+.asignatura-avance-texto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--tamano-xs);
+  margin-bottom: var(--espacio-xs);
+}
+
+.asignatura-avance-porcentaje {
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+}

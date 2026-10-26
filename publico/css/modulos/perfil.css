@@ -1,0 +1,227 @@
+/* publico/css/modulos/perfil.css · Estilos para la página de perfil */
+.perfil-contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-l);
+  max-width: 900px;
+  margin: var(--espacio-l) auto;
+}
+
+@media (min-width: 768px) {
+  .perfil-contenedor {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.perfil-foto-seccion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-m);
+}
+
+.perfil-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radio-completo);
+  object-fit: cover;
+  border: 3px solid var(--primario);
+  background-color: var(--superficie);
+}
+
+.perfil-avatar--vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--tamano-xl);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  background-color: var(--fondo);
+}
+
+.perfil-acciones-foto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+/* Sección Logros y Gamificación */
+.perfil-logros-seccion {
+  max-width: 900px;
+  margin: var(--espacio-l) auto;
+  grid-column: 1 / -1;
+}
+
+.perfil-logros-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-m);
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: var(--espacio-m);
+}
+
+.perfil-logros-titulo {
+  margin: 0;
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+}
+
+.perfil-logros-subtitulo {
+  margin: var(--espacio-xs) 0 0;
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+.perfil-puntos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  background: var(--superficie);
+  border: 2px solid var(--acento);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-xs) var(--espacio-m);
+  box-shadow: var(--sombra-s);
+}
+
+.perfil-puntos-icono {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.perfil-puntos-etiqueta {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: var(--peso-negrita);
+  letter-spacing: 0.05em;
+  color: var(--texto-suave);
+}
+
+.perfil-puntos-valor {
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  line-height: 1.1;
+}
+
+/* Vitrina de insignias */
+.vitrina-insignias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--espacio-m);
+}
+
+.tarjeta-insignia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--espacio-m);
+  border-radius: var(--radio-m);
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  transition: transform var(--transicion-corta), box-shadow var(--transicion-corta);
+}
+
+.tarjeta-insignia--desbloqueada {
+  border-color: var(--exito);
+  background: linear-gradient(180deg, var(--superficie) 0%, var(--fondo) 100%);
+  box-shadow: var(--sombra-s);
+}
+
+.tarjeta-insignia--desbloqueada:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-m);
+}
+
+.tarjeta-insignia--bloqueada {
+  opacity: 0.7;
+  filter: grayscale(1);
+  background-color: var(--fondo);
+  border-style: dashed;
+}
+
+.tarjeta-insignia__icono {
+  font-size: 2.5rem;
+  margin-bottom: var(--espacio-xs);
+  line-height: 1;
+}
+
+.tarjeta-insignia__nombre {
+  margin: 0 0 var(--espacio-xs);
+  font-size: var(--tamano-base);
+  font-weight: var(--peso-negrita);
+  color: var(--texto);
+}
+
+.tarjeta-insignia__detalle {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+  margin-bottom: var(--espacio-s);
+  flex-grow: 1;
+}
+
+.tarjeta-insignia__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 2px var(--espacio-xs);
+  border-radius: var(--radio-s);
+}
+
+.tarjeta-insignia__badge--verde {
+  background-color: var(--exito);
+  color: var(--blanco, #ffffff);
+}
+
+.tarjeta-insignia__badge--gris {
+  background-color: var(--borde);
+  color: var(--texto-suave);
+}
+
+/* Certificado de cumplimiento */
+.certificado-cumplimiento-bloque {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-l);
+  box-shadow: var(--sombra-s);
+}
+
+.certificado-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-l);
+}
+
+.condiciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.condicion-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.condicion-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--tamano-s);
+}
+
+.condicion-nombre {
+  color: var(--texto);
+  font-weight: var(--peso-medio, 500);
+}
+
+.condicion-valores {
+  color: var(--primario);
+}
+

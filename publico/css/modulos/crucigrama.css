@@ -1,0 +1,148 @@
+.crucigrama-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+}
+
+.crucigrama-cabecera,
+.crucigrama-controles,
+.crucigrama-estado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--espacio-s);
+}
+
+.crucigrama-cabecera h1 {
+  margin: 0;
+  color: var(--primario);
+  font-size: var(--tamano-xl);
+}
+
+.crucigrama-juego {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(calc(var(--espacio-xl) * 7), 1fr);
+  gap: var(--espacio-l);
+  align-items: start;
+}
+
+.crucigrama-tablero-contenedor {
+  max-width: 100%;
+  overflow: auto;
+  padding: var(--espacio-m);
+}
+
+.crucigrama-tablero {
+  display: grid;
+  width: max-content;
+  margin: 0 auto;
+  border: 1px solid var(--primario);
+  background-color: var(--primario);
+  gap: calc(var(--espacio-xs) / 4);
+}
+
+.crucigrama-celda,
+.crucigrama-bloque {
+  width: clamp(calc(var(--espacio-xl) + var(--espacio-xs)), 7vw, calc(var(--espacio-xl) + var(--espacio-m)));
+  aspect-ratio: 1;
+}
+
+.crucigrama-bloque {
+  background-color: var(--primario);
+}
+
+.crucigrama-celda {
+  position: relative;
+  background-color: var(--superficie);
+}
+
+.crucigrama-celda--seleccionada {
+  background-color: var(--info-fondo);
+}
+
+.crucigrama-celda--correcta {
+  background-color: var(--exito-fondo);
+}
+
+.crucigrama-celda--incorrecta {
+  background-color: var(--error-fondo);
+}
+
+.crucigrama-celda--revelada {
+  background-color: var(--advertencia-fondo);
+}
+
+.crucigrama-celda input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: var(--espacio-xs);
+  background: transparent;
+  color: var(--texto);
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-negrita);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.crucigrama-celda input:focus-visible {
+  outline: calc(var(--espacio-xs) / 2) solid var(--acento);
+  outline-offset: calc(var(--espacio-xs) / -2);
+}
+
+.crucigrama-celda__numero {
+  position: absolute;
+  top: 0;
+  left: var(--espacio-xs);
+  z-index: 1;
+  color: var(--primario);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
+  line-height: var(--interlineado-ajustado);
+  pointer-events: none;
+}
+
+.crucigrama-pistas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.crucigrama-pistas h2 {
+  margin-bottom: var(--espacio-xs);
+  color: var(--primario);
+  font-size: var(--tamano-m);
+}
+
+.crucigrama-pistas ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  margin: 0;
+  padding-left: var(--espacio-l);
+}
+
+.crucigrama-pista {
+  width: 100%;
+  border: 0;
+  padding: var(--espacio-xs);
+  background: transparent;
+  color: var(--texto);
+  text-align: left;
+  cursor: pointer;
+}
+
+.crucigrama-pista:hover,
+.crucigrama-pista:focus-visible,
+.crucigrama-pista--activa {
+  border-radius: var(--radio-s);
+  background-color: var(--info-fondo);
+  color: var(--primario);
+}
+
+@media (max-width: 760px) {
+  .crucigrama-juego {
+    grid-template-columns: 1fr;
+  }
+}

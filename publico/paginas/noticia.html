@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noticia</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/noticia.css">
+</head>
+<body>
+  <div id="plantilla"></div>
+
+  <main id="contenido" class="contenedor">
+    <div class="miga-noticia">
+      <a href="/paginas/noticias.html" class="btn btn--texto btn--pequeno">&larr; Volver a Noticias</a>
+    </div>
+
+    <!-- Cargando -->
+    <div id="cargando-detalle" class="estado-vacio">
+      <div class="cargando cargando--grande"></div>
+      <p>Cargando noticia...</p>
+    </div>
+
+    <!-- Contenedor del artículo -->
+    <article id="articulo-noticia" class="noticia-detalle card" style="display: none;">
+      <header class="noticia-detalle__cabecera">
+        <div class="noticia-detalle__etiquetas" id="detalle-etiquetas">
+          <!-- Categoría, Destacada, Estado -->
+        </div>
+
+        <h1 id="detalle-titulo" class="noticia-detalle__titulo"></h1>
+
+        <div class="noticia-detalle__meta">
+          <span id="detalle-fecha" class="noticia-detalle__fecha"></span>
+          <span id="detalle-tema-wrap" style="display: none;">
+            &bull; Tema: <a id="detalle-tema-enlace" href="#" class="chip chip--pequeno"></a>
+          </span>
+          <span id="detalle-acciones-docente" style="display: none; margin-left: auto;">
+            <a id="btn-editar-noticia" href="#" class="btn btn--secundario btn--pequeno">Editar noticia</a>
+          </span>
+        </div>
+      </header>
+
+      <div id="detalle-imagen-wrap" class="noticia-detalle__portada" style="display: none;">
+        <img id="detalle-imagen" src="" alt="" class="noticia-detalle__img">
+      </div>
+
+      <div class="noticia-detalle__resumen card card--sombra" id="detalle-resumen-wrap">
+        <p id="detalle-resumen" class="texto-destacado"></p>
+      </div>
+
+      <div id="detalle-cuerpo" class="noticia-detalle__cuerpo contenido-formateado">
+        <!-- Cuerpo con util.formatoBasico -->
+      </div>
+    </article>
+  </main>
+
+  <script type="module" src="/js/modulos/noticia.js"></script>
+</body>
+</html>

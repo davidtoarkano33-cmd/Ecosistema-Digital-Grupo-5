@@ -1,0 +1,254 @@
+/* publico/css/modulos/pareja.css · Estilos para el juego Encuentra la Pareja */
+.pareja-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.pareja-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+}
+
+.pareja-cabecera__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.pareja-cabecera__titulo {
+  margin: 0;
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+}
+
+.pareja-cabecera__tema {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+/* Barra de controles, dificultad y estadísticas */
+.pareja-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+  padding: var(--espacio-s) var(--espacio-m);
+  background-color: var(--superficie);
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+}
+
+.pareja-dificultad {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  flex-wrap: wrap;
+}
+
+.pareja-dificultad__etiqueta {
+  font-size: var(--tamano-s);
+  font-weight: var(--peso-seminegrita);
+  color: var(--primario);
+  margin-right: var(--espacio-xs);
+}
+
+.pareja-estadisticas {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  flex-wrap: wrap;
+}
+
+.estadistica-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+}
+
+.estadistica-item strong {
+  color: var(--primario);
+  font-size: var(--tamano-m);
+}
+
+/* Cuadrícula adaptable para las tarjetas */
+.tablero-parejas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: var(--espacio-m);
+  perspective: 1000px;
+}
+
+/* Tarjeta 3D interactiva */
+.carta {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 140px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  border-radius: var(--radio-m);
+}
+
+.carta:disabled {
+  cursor: default;
+}
+
+.carta__interior {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radio-m);
+  box-shadow: var(--sombra-s);
+}
+
+.carta:focus-visible .carta__interior {
+  outline: 3px solid var(--info);
+  outline-offset: 3px;
+}
+
+/* Giro 3D cuando está volteada o descubierta */
+.carta.volteada .carta__interior,
+.carta.descubierta .carta__interior {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carta__interior {
+    transition: none;
+  }
+}
+
+/* Cara oculta (frente cuando está boca abajo) */
+.carta__frente {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: linear-gradient(135deg, var(--primario), var(--secundario));
+  color: var(--texto-inverso);
+  border-radius: var(--radio-m);
+  border: 2px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-xs);
+  user-select: none;
+}
+
+.carta__frente-icono {
+  font-size: var(--tamano-2xl);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.carta__frente-texto {
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-seminegrita);
+  color: var(--texto-inverso);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Cara visible (dorso al voltear) */
+.carta__dorso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background-color: var(--superficie);
+  color: var(--texto);
+  border-radius: var(--radio-m);
+  border: 2px solid var(--primario);
+  padding: var(--espacio-s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.carta--termino .carta__dorso {
+  border-color: var(--primario);
+  background-color: var(--fondo);
+}
+
+.carta--termino .carta__dorso-tipo {
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-bold, 700);
+  color: var(--acento);
+  text-transform: uppercase;
+  margin-bottom: var(--espacio-xs);
+}
+
+.carta--termino .carta__dorso-contenido {
+  font-size: var(--tamano-m);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+}
+
+.carta--definicion .carta__dorso {
+  border-color: var(--secundario);
+  background-color: var(--superficie);
+}
+
+.carta--definicion .carta__dorso-tipo {
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-bold, 700);
+  color: var(--info);
+  text-transform: uppercase;
+  margin-bottom: var(--espacio-xs);
+}
+
+.carta--definicion .carta__dorso-contenido {
+  font-size: var(--tamano-xs);
+  line-height: var(--linea-apretada, 1.25);
+  color: var(--texto);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Estado de pareja descubierta / acertada */
+.carta.descubierta .carta__dorso {
+  border-color: var(--exito);
+  background-color: var(--exito-fondo);
+}
+
+.carta.descubierta .carta__dorso-tipo {
+  color: var(--exito);
+}
+
+.carta.descubierta .carta__dorso-contenido {
+  color: var(--texto);
+}
+
+/* Área de acciones y retroalimentación */
+.pareja-acciones {
+  display: flex;
+  justify-content: center;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-m);
+}

@@ -1,0 +1,62 @@
+/* publico/css/modulos/admin-usuarios.css · Estilos para administración de usuarios */
+.admin-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+  align-items: flex-end;
+  margin-bottom: var(--espacio-l);
+}
+
+.admin-filtros .campo {
+  flex: 1;
+  min-width: 200px;
+}
+
+.tabla-usuarios-contenedor {
+  overflow-x: auto;
+  margin-top: var(--espacio-m);
+}
+
+.celda-usuario {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+}
+
+.avatar-miniatura {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio-completo);
+  object-fit: cover;
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+}
+
+.avatar-miniatura--vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  background-color: var(--fondo);
+}
+
+.modal-clave-temporal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espacio-s) var(--espacio-m);
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  margin: var(--espacio-m) 0;
+}
+
+.modal-clave-codigo {
+  font-family: var(--fuente-mono, monospace);
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  letter-spacing: 1px;
+}

@@ -1,0 +1,93 @@
+/* publico/css/tokens.css · Tokens de diseño del sistema UNEMI */
+:root {
+  /* 1. Colores institucionales y funcionales */
+  --primario: #002e45;            /* Azul institucional UNEMI (Pantone 7463 C) */
+  --primario-oscuro: #1c3247;     /* Azul oscuro diapositiva 900 */
+  --secundario: #264763;          /* Azul intermedio institucional 800 */
+  --acento: #ff6900;              /* Naranja institucional UNEMI (Pantone 1505 C) */
+  --exito: #1b7a43;               /* Verde accesible AA */
+  --advertencia: #b55300;         /* Ámbar accesible AA */
+  --error: #b52626;               /* Rojo accesible AA */
+  --info: #1470a8;                /* Azul interactivo y foco */
+  --fondo: #f5f7f8;               /* Superficie de aplicación / canvas */
+  --superficie: #ffffff;          /* Tarjetas y módulos blancos */
+  --borde: #dfe7ec;               /* Bordes y divisores */
+  --texto: #182d3e;               /* Texto principal legible */
+  --texto-suave: #627586;         /* Metadatos y texto secundario (contraste AA) */
+  --texto-inverso: #ffffff;       /* Texto sobre fondos oscuros */
+
+  /* Fondos suaves para mensajes de estado */
+  --exito-fondo: #e6f5ec;         /* PROVISIONAL */
+  --advertencia-fondo: #fff5ea;   /* PROVISIONAL */
+  --error-fondo: #fde8e8;         /* PROVISIONAL */
+  --info-fondo: #ecf6fa;          /* PROVISIONAL */
+
+  /* Aliases de conveniencia */
+  --color-primario: var(--primario);
+  --color-primario-oscuro: var(--primario-oscuro);
+  --color-secundario: var(--secundario);
+  --color-acento: var(--acento);
+  --color-exito: var(--exito);
+  --color-advertencia: var(--advertencia);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-borde: var(--borde);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-texto-inverso: var(--texto-inverso);
+
+  /* 2. Tipografía */
+  --fuente-base: Poppins, Arial, sans-serif;
+  --fuente-titulos: Poppins, Arial, sans-serif;
+  --fuente-mono: ui-monospace, SFMono-Regular, Consolas, monospace; /* PROVISIONAL */
+
+  /* Tamaños de tipografía (xs a 3xl) */
+  --tamano-xs: 0.75rem;           /* 12px */
+  --tamano-s: 0.875rem;           /* 14px */
+  --tamano-m: 1rem;               /* 16px - Base */
+  --tamano-l: 1.125rem;           /* 18px */
+  --tamano-xl: 1.5rem;            /* 24px */
+  --tamano-2xl: 2rem;             /* 32px */
+  --tamano-3xl: 2.5rem;           /* 40px */
+
+  /* Pesos de fuente */
+  --peso-regular: 400;
+  --peso-medio: 500;
+  --peso-seminegrita: 600;
+  --peso-negrita: 700;
+  --peso-extranegrita: 800;
+
+  /* Interlineado */
+  --interlineado-ajustado: 1.25;
+  --interlineado-base: 1.6;
+  --interlineado-amplio: 1.8;
+
+  /* 3. Espaciados (xs a 2xl basados en rejilla de 4px) */
+  --espacio-xs: 0.25rem;          /* 4px */
+  --espacio-s: 0.5rem;            /* 8px */
+  --espacio-m: 1rem;              /* 16px */
+  --espacio-l: 1.5rem;            /* 24px */
+  --espacio-xl: 2rem;             /* 32px */
+  --espacio-2xl: 3rem;            /* 48px */
+
+  /* 4. Radios de borde (s, m, l, completo) */
+  --radio-s: 4px;
+  --radio-m: 8px;
+  --radio-l: 12px;
+  --radio-xl: 20px;               /* PROVISIONAL */
+  --radio-completo: 9999px;
+
+  /* 5. Sombras (1 a 3) */
+  --sombra-1: 0 2px 10px rgba(0, 46, 69, 0.06);
+  --sombra-2: 0 8px 24px rgba(0, 46, 69, 0.09);
+  --sombra-3: 0 16px 36px rgba(0, 46, 69, 0.12);
+
+  /* 6. Transición */
+  --transicion: 0.2s ease;
+  --transicion-rapida: 0.12s ease; /* PROVISIONAL */
+
+  /* 7. Ancho máximo */
+  --ancho-maximo: 1280px;
+}

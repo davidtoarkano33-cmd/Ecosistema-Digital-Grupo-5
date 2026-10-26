@@ -1,0 +1,38 @@
+/* publico/css/modulos/editor-noticia.css · Estilos para el editor de noticias */
+.editor-noticia-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-l);
+}
+
+@media (min-width: 900px) {
+  .editor-noticia-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.noticia-preview-box {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-l);
+  background-color: var(--superficie);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.noticia-preview-img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+}
+
+.contador-caracteres {
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--tamano-xs);
+  color: var(--texto-suave);
+  margin-top: 4px;
+}

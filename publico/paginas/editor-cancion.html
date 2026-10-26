@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editor de Canción · Ecosistema Educativo</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/editor-cancion.css">
+</head>
+<body>
+  <div id="plantilla"></div>
+
+  <main id="contenido" class="contenedor">
+    <div class="miga-editor">
+      <a href="/paginas/canciones.html" class="btn btn--texto btn--pequeno">&larr; Volver a Canciones</a>
+    </div>
+
+    <header class="cabecera-editor">
+      <h1 id="titulo-pagina" class="cabecera-editor__titulo">Nueva Canción Educativa</h1>
+      <p class="cabecera-editor__descripcion">Sube o edita música didáctica con letra y sincronización LRC para tus estudiantes.</p>
+    </header>
+
+    <form id="form-cancion" class="tarjeta form-cancion" novalidate>
+      <div class="form-grid">
+        <!-- Título -->
+        <div class="campo">
+          <label for="titulo" class="etiqueta">Título de la canción <span class="requerido" aria-hidden="true">*</span></label>
+          <input type="text" id="titulo" name="titulo" class="entrada" required placeholder="Ej. Dale la mano al caído">
+        </div>
+
+        <!-- Tema relacionado -->
+        <div class="campo">
+          <label for="temaId" class="etiqueta">Tema relacionado <span class="requerido" aria-hidden="true">*</span></label>
+          <select id="temaId" name="temaId" class="select" required>
+            <option value="">Selecciona un tema...</option>
+          </select>
+        </div>
+
+        <!-- Archivo MP3 -->
+        <div class="campo campo--completo">
+          <label class="etiqueta">Archivo de audio MP3 <span class="requerido" aria-hidden="true">*</span></label>
+          <div class="fila fila--s audio-subida-fila">
+            <input type="text" id="audio" name="audio" class="entrada" placeholder="/recursos/subidas/cancion.mp3 o URL" required>
+            <label for="subir-audio-input" class="btn btn--secundario" style="cursor: pointer; white-space: nowrap;">
+              📁 Subir MP3
+            </label>
+            <input type="file" id="subir-audio-input" accept="audio/mpeg,audio/mp3,audio/m4a,audio/*" style="display: none;">
+          </div>
+          <small class="texto-ayuda">Puedes subir un archivo de audio MP3 local o pegar una ruta relativa/URL directa.</small>
+          <!-- Reproductor de prueba -->
+          <div id="audio-preview-wrap" style="display: none; margin-top: var(--espacio-s);">
+            <audio id="audio-preview" controls style="width: 100%; height: 40px;"></audio>
+          </div>
+        </div>
+
+        <!-- Autoría -->
+        <div class="campo">
+          <label for="autoria" class="etiqueta">Autoría <span class="requerido" aria-hidden="true">*</span></label>
+          <input type="text" id="autoria" name="autoria" class="entrada" required placeholder="Ej. Prof. Diego Toapanta / Suno AI">
+        </div>
+
+        <!-- Licencia -->
+        <div class="campo">
+          <label for="licencia" class="etiqueta">Licencia <span class="requerido" aria-hidden="true">*</span></label>
+          <select id="licencia" name="licencia" class="select" required>
+            <option value="Propia">Propia (derechos de autor reservados)</option>
+            <option value="CC BY">Creative Commons Reconocimiento (CC BY)</option>
+            <option value="CC BY-SA">Creative Commons CompartirIgual (CC BY-SA)</option>
+            <option value="Otra">Otra (especificar en descripción)</option>
+          </select>
+        </div>
+
+        <!-- Campo adicional si licencia es Otra -->
+        <div class="campo campo--completo" id="campo-otra-licencia" style="display: none;">
+          <label for="licencia-otra-desc" class="etiqueta">Descripción de la licencia <span class="requerido" aria-hidden="true">*</span></label>
+          <input type="text" id="licencia-otra-desc" class="entrada" placeholder="Especifica los términos de uso y derechos">
+        </div>
+
+        <!-- Letra sin sincronizar -->
+        <div class="campo campo--completo">
+          <label for="letra" class="etiqueta">Letra de la canción <span class="requerido" aria-hidden="true">*</span></label>
+          <textarea id="letra" name="letra" class="area-texto" rows="8" required placeholder="Escribe o pega aquí la letra completa de la canción..."></textarea>
+        </div>
+
+        <!-- Letra sincronizada LRC (opcional) -->
+        <div class="campo campo--completo">
+          <div class="fila" style="justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: var(--espacio-xs); gap: var(--espacio-xs);">
+            <label for="lrc" class="etiqueta" style="margin: 0;">
+              Letra sincronizada en formato LRC <span class="chip chip--pequeno">Opcional</span>
+            </label>
+            <div class="fila fila--xs" style="align-items: center; flex-wrap: wrap;">
+              <span id="lrc-contador-lineas" class="insignia insignia--advertencia" style="font-size: var(--tamano-xs);">0 marcas LRC</span>
+              <button type="button" id="btn-auto-lrc" class="btn btn--secundario btn--pequeno" title="Distribuye la letra automáticamente a lo largo de la canción">
+                ⚡ Generar marcas automáticas
+              </button>
+              <button type="button" id="btn-asistente-lrc" class="btn btn--primario btn--pequeno" title="Abre el asistente interactivo para marcar tiempos con el audio">
+                🎙️ Asistente en vivo
+              </button>
+            </div>
+          </div>
+          <textarea id="lrc" name="lrc" class="area-texto area-texto--mono" rows="10" placeholder="[00:12.30] Primera línea de la canción&#10;[00:18.50] Segunda línea sincronizada&#10;[00:24.00] Coro..."></textarea>
+          <small class="texto-ayuda">Cada línea sincronizada debe iniciar con <code>[mm:ss.xx]</code>. Puedes usar el <strong>Asistente en vivo</strong> para marcar tiempos mientras escuchas o <strong>Generar marcas automáticas</strong>.</small>
+        </div>
+      </div>
+
+      <!-- Acciones de guardado -->
+      <div class="form-acciones">
+        <a href="/paginas/canciones.html" class="btn btn--texto">Cancelar</a>
+        <button type="submit" id="btn-guardar" class="btn btn--primario">Guardar canción</button>
+      </div>
+    </form>
+
+    <!-- Modal accesible: Asistente de Sincronización LRC en vivo -->
+    <div id="modal-asistente-lrc" class="modal-fondo" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-asistente-titulo" style="max-width: 660px;">
+        <div class="modal-encabezado">
+          <h2 id="modal-asistente-titulo">🎙️ Asistente de Sincronización LRC</h2>
+          <button type="button" id="btn-cerrar-asistente" class="btn btn--texto btn--pequeno" aria-label="Cerrar modal">✕</button>
+        </div>
+        
+        <div class="modal-cuerpo">
+          <p style="font-size: var(--tamano-s); color: var(--texto-suave); margin-bottom: var(--espacio-m);">
+            Inicia el audio y presiona <strong>"⏱️ Marcar tiempo"</strong> (o la barra de <strong>Espacio</strong>) en el momento exacto en que comience a cantarse cada línea.
+          </p>
+
+          <!-- Barra de reproducción del modal -->
+          <div style="background: var(--fondo); padding: var(--espacio-s) var(--espacio-m); border-radius: var(--radio-m); margin-bottom: var(--espacio-m); display: flex; align-items: center; justify-content: space-between;">
+            <div class="fila fila--s" style="align-items: center;">
+              <button type="button" id="btn-modal-play" class="btn btn--primario btn--pequeno">▶ Reproducir</button>
+              <span id="modal-tiempo-actual" style="font-family: var(--fuente-mono); font-size: var(--tamano-s); color: var(--primario); font-weight: var(--peso-negrita);">00:00.00</span>
+            </div>
+            <span id="modal-progreso-lineas" class="chip chip--pequeno">Línea 0 de 0</span>
+          </div>
+
+          <!-- Caja del verso actual -->
+          <div style="background: rgba(0, 46, 69, 0.04); border: 2px dashed var(--primario); border-radius: var(--radio-l); padding: var(--espacio-l); text-align: center; margin-bottom: var(--espacio-m);">
+            <small style="text-transform: uppercase; color: var(--texto-suave); letter-spacing: 0.05em; font-weight: var(--peso-negrita); display: block; margin-bottom: var(--espacio-xs);">Línea a marcar:</small>
+            <p id="modal-verso-actual" style="font-size: var(--tamano-l); font-weight: var(--peso-negrita); color: var(--primario); min-height: 52px; margin: 0; display: flex; align-items: center; justify-content: center;">
+              Presiona "Reproducir" para comenzar
+            </p>
+            <div style="margin-top: var(--espacio-m); padding-top: var(--espacio-s); border-top: 1px solid var(--borde);">
+              <small style="color: var(--texto-suave);">Siguiente:</small>
+              <span id="modal-verso-siguiente" style="font-size: var(--tamano-s); color: var(--texto-suave); margin-left: var(--espacio-xs);">-</span>
+            </div>
+          </div>
+
+          <!-- Botón de acción principal -->
+          <button type="button" id="btn-marcar-verso" class="btn btn--primario" style="width: 100%; padding: var(--espacio-m); font-size: var(--tamano-m); margin-bottom: var(--espacio-m);">
+            ⏱️ Marcar tiempo de esta línea (Espacio)
+          </button>
+        </div>
+
+        <div class="modal-acciones" style="justify-content: space-between;">
+          <div class="fila fila--xs">
+            <button type="button" id="btn-retroceder-verso" class="btn btn--secundario btn--pequeno" title="Deshacer última marca">↩ Deshacer línea</button>
+            <button type="button" id="btn-reiniciar-asistente" class="btn btn--texto btn--pequeno">Reiniciar</button>
+          </div>
+          <button type="button" id="btn-aplicar-lrc" class="btn btn--exito btn--pequeno">Aplicar al editor ✓</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/js/modulos/editor-cancion.js"></script>
+</body>
+</html>

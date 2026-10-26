@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UNEMI · Guía de Estilos y Componentes</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <style>
+    /* Estilos específicos de maquetación para la página de muestra */
+    .muestra-paleta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--espacio-s);
+    }
+    .muestra-color {
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-m);
+      overflow: hidden;
+      background-color: var(--superficie);
+    }
+    .muestra-color__caja {
+      height: 60px;
+    }
+    .muestra-color__detalle {
+      padding: var(--espacio-xs) var(--espacio-s);
+      font-size: var(--tamano-xs);
+    }
+    .muestra-color__detalle strong {
+      display: block;
+      color: var(--primario);
+    }
+    .seccion-guia {
+      margin-top: var(--espacio-2xl);
+      padding-top: var(--espacio-l);
+      border-top: 1px solid var(--borde);
+    }
+    .layout-guia {
+      display: flex;
+      gap: var(--espacio-xl);
+      min-height: 80vh;
+      margin-top: var(--espacio-l);
+    }
+    .layout-guia .menu {
+      align-self: flex-start;
+      position: sticky;
+      top: calc(64px + var(--espacio-m));
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .contenido-guia {
+      flex: 1;
+      min-width: 0;
+      padding-bottom: var(--espacio-2xl);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado institucional -->
+  <header class="encabezado" role="banner">
+    <div class="contenedor encabezado__interior">
+      <div class="fila">
+        <button type="button" class="menu-alternar" id="btnMenu" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="menuLateral">
+          ☰
+        </button>
+        <a href="/paginas/guia-estilos.html" class="encabezado__marca">
+          <span>UNEMI</span>
+          <span class="insignia insignia--acento">Design System</span>
+        </a>
+      </div>
+      <nav class="encabezado__navegacion" aria-label="Navegación principal">
+        <a href="#botones" class="btn btn--texto btn--pequeno">Botones</a>
+        <a href="#formularios" class="btn btn--texto btn--pequeno">Formularios</a>
+        <a href="#componentes-interactivos" class="btn btn--primario btn--pequeno">Probar UI</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Disposición principal con menú lateral y contenido -->
+  <div class="contenedor layout-guia">
+    
+    <!-- Menú lateral navegable -->
+    <aside class="menu" id="menuLateral" aria-label="Navegación de secciones">
+      <div class="menu__grupo">Fundamentos</div>
+      <a href="#colores" class="menu__enlace activo">Paleta de Colores</a>
+      <a href="#tipografia" class="menu__enlace">Tipografía</a>
+      <a href="#botones" class="menu__enlace">Botones (.btn)</a>
+      <a href="#tarjetas" class="menu__enlace">Tarjetas (.tarjeta)</a>
+      <div class="menu__grupo">Formularios y Datos</div>
+      <a href="#formularios" class="menu__enlace">Campos (.campo)</a>
+      <a href="#alertas" class="menu__enlace">Alertas (.alerta)</a>
+      <a href="#tablas" class="menu__enlace">Tablas (.tabla)</a>
+      <div class="menu__grupo">Interactividad y Estados</div>
+      <a href="#insignias-chips" class="menu__enlace">Insignias y Chips</a>
+      <a href="#progreso" class="menu__enlace">Progreso (.progreso)</a>
+      <a href="#componentes-interactivos" class="menu__enlace">Modal y Avisos</a>
+      <a href="#estados" class="menu__enlace">Cargando y Vacío</a>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main id="contenido" class="contenido-guia">
+
+      <header class="pila pila--s" style="margin-top: var(--espacio-l); margin-bottom: var(--espacio-xl);">
+        <h1>Design System UNEMI</h1>
+        <p style="font-size: var(--tamano-l); color: var(--texto-suave);">
+          Catálogo documentado de tokens, estilos base y componentes accesibles (WCAG AA).
+        </p>
+      </header>
+
+      <!-- 1. Paleta de Colores -->
+      <section id="colores" class="seccion-guia">
+        <h2>1. Paleta de Colores</h2>
+        <p>Valores basados en el Manual de Identidad Corporativa UNEMI y neutrales propuestos con contraste accesible.</p>
+        <div class="muestra-paleta">
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--primario);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--primario</strong>
+              <small>#002E45</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--primario-oscuro);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--primario-oscuro</strong>
+              <small>#1C3247</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--secundario);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--secundario</strong>
+              <small>#264763</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--acento);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--acento</strong>
+              <small>#FF6900</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--exito);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--exito</strong>
+              <small>#1B7A43</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--advertencia);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--advertencia</strong>
+              <small>#B55300</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--error);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--error</strong>
+              <small>#B52626</small>
+            </div>
+          </div>
+          <div class="muestra-color">
+            <div class="muestra-color__caja" style="background-color: var(--info);"></div>
+            <div class="muestra-color__detalle">
+              <strong>--info</strong>
+              <small>#1470A8</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Tipografía -->
+      <section id="tipografia" class="seccion-guia">
+        <h2>2. Tipografía</h2>
+        <div class="tarjeta pila">
+          <h1>Titular H1 — Innovación Educativa</h1>
+          <h2>Titular H2 — Sistema de Aprendizaje</h2>
+          <h3>Titular H3 — Asignaturas y Módulos</h3>
+          <h4>Titular H4 — Retroalimentación y Tareas</h4>
+          <p>
+            Párrafo con texto base. Este ecosistema educativo aplica <a href="#tipografia">enlaces con foco visible accesible</a> para todos los dispositivos.
+          </p>
+          <small>Texto secundario / metadatos con contraste AA verificado sobre fondo blanco.</small>
+        </div>
+      </section>
+
+      <!-- 3. Botones -->
+      <section id="botones" class="seccion-guia">
+        <h2>3. Botones (.btn)</h2>
+        <p>Variantes con altura mínima de 44 px para objetivos táctiles accesibles.</p>
+        <div class="tarjeta pila">
+          <div class="fila">
+            <button type="button" class="btn btn--primario">Primario</button>
+            <button type="button" class="btn btn--secundario">Secundario</button>
+            <button type="button" class="btn btn--acento">Acento</button>
+            <button type="button" class="btn btn--peligro">Peligro</button>
+            <button type="button" class="btn btn--texto">Botón Texto</button>
+            <button type="button" class="btn btn--primario btn--pequeno">Pequeño</button>
+            <button type="button" class="btn btn--primario" disabled>Deshabilitado</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Tarjetas -->
+      <section id="tarjetas" class="seccion-guia">
+        <h2>4. Tarjetas (.tarjeta)</h2>
+        <div class="grid-auto">
+          <div class="tarjeta">
+            <h3 class="tarjeta__titulo">Tarjeta Estándar</h3>
+            <div class="tarjeta__subtitulo">Información académica</div>
+            <p>Módulo de contenido con sombra sutil y borde estructurado mediante tokens.</p>
+          </div>
+          <div class="tarjeta tarjeta--interactiva">
+            <h3 class="tarjeta__titulo">Tarjeta Interactiva</h3>
+            <div class="tarjeta__subtitulo">Pasa el cursor sobre ella</div>
+            <p>Se eleva suavemente con transición accesible para enfatizar interactividad.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Formularios y Campos -->
+      <section id="formularios" class="seccion-guia">
+        <h2>5. Formularios (.campo)</h2>
+        <form class="tarjeta pila" onsubmit="event.preventDefault();">
+          <div class="grid-auto">
+            <div class="campo">
+              <label for="campo-nombre">Nombre completo</label>
+              <input type="text" id="campo-nombre" placeholder="Ej. Juan Pérez" required>
+              <span class="campo__ayuda">Ingresa nombres y apellidos tal como constan en tu cédula.</span>
+            </div>
+            <div class="campo">
+              <label for="campo-carrera">Carrera / Programa</label>
+              <select id="campo-carrera">
+                <option value="">Selecciona una carrera...</option>
+                <option value="software">Ingeniería de Software</option>
+                <option value="ti">Tecnologías de la Información</option>
+                <option value="educacion">Educación Digital</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo campo--error">
+            <label for="campo-correo">Correo electrónico</label>
+            <input type="email" id="campo-correo" value="correo-invalido" aria-invalid="true">
+            <span class="campo__error" role="alert">⚠ El formato de correo no es válido.</span>
+          </div>
+          <div class="campo">
+            <label for="campo-mensaje">Observaciones</label>
+            <textarea id="campo-mensaje" placeholder="Escribe un comentario..."></textarea>
+          </div>
+          <div class="fila">
+            <button type="submit" class="btn btn--primario">Guardar Cambios</button>
+            <button type="reset" class="btn btn--secundario">Restablecer</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- 6. Alertas -->
+      <section id="alertas" class="seccion-guia">
+        <h2>6. Alertas (.alerta)</h2>
+        <div class="alerta alerta--info" role="status">
+          <div>
+            <strong>Información</strong>
+            Recuerda que las inscripciones al nuevo periodo académico finalizan este viernes.
+          </div>
+        </div>
+        <div class="alerta alerta--exito" role="status">
+          <div>
+            <strong>Operación exitosa</strong>
+            Tu actividad ha sido calificada y los puntos se acreditaron a tu perfil.
+          </div>
+        </div>
+        <div class="alerta alerta--advertencia" role="status">
+          <div>
+            <strong>Advertencia</strong>
+            El tiempo límite para completar el cuestionario restante es de 5 minutos.
+          </div>
+        </div>
+        <div class="alerta alerta--error" role="alert">
+          <div>
+            <strong>Error de conexión</strong>
+            No fue posible sincronizar el intento. Verifica tu conexión a internet.
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Tablas -->
+      <section id="tablas" class="seccion-guia">
+        <h2>7. Tablas (.tabla) con desplazamiento móvil</h2>
+        <div class="tabla-contenedor">
+          <table class="tabla" aria-label="Calificaciones de muestra">
+            <thead>
+              <tr>
+                <th>Asignatura</th>
+                <th>Docente</th>
+                <th>Unidad</th>
+                <th>Puntaje</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Programación Web</td>
+                <td>Ing. Carlos Mendoza</td>
+                <td>Unidad 1</td>
+                <td>95 / 100</td>
+                <td><span class="insignia insignia--exito">Aprobado</span></td>
+              </tr>
+              <tr>
+                <td>Bases de Datos</td>
+                <td>Dra. María Ramos</td>
+                <td>Unidad 2</td>
+                <td>88 / 100</td>
+                <td><span class="insignia insignia--exito">Aprobado</span></td>
+              </tr>
+              <tr>
+                <td>Redes y Conectividad</td>
+                <td>Mgs. Jorge Silva</td>
+                <td>Unidad 1</td>
+                <td>62 / 100</td>
+                <td><span class="insignia insignia--advertencia">En revisión</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 8. Insignias y Chips -->
+      <section id="insignias-chips" class="seccion-guia">
+        <h2>8. Insignias y Chips</h2>
+        <div class="tarjeta pila">
+          <div>
+            <h4>Insignias (.insignia)</h4>
+            <div class="fila" style="margin-top: var(--espacio-s);">
+              <span class="insignia">Por defecto</span>
+              <span class="insignia insignia--acento">UNEMI</span>
+              <span class="insignia insignia--exito">Completado</span>
+              <span class="insignia insignia--advertencia">Pendiente</span>
+              <span class="insignia insignia--error">Reprobado</span>
+              <span class="insignia insignia--info">En curso</span>
+            </div>
+          </div>
+          <div>
+            <h4>Chips de filtro (.chip)</h4>
+            <div class="fila" style="margin-top: var(--espacio-s);">
+              <button type="button" class="chip activo" aria-selected="true">Todos</button>
+              <button type="button" class="chip" aria-selected="false">Primer Semestre</button>
+              <button type="button" class="chip" aria-selected="false">Segundo Semestre</button>
+              <button type="button" class="chip" aria-selected="false">Prácticas</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Progreso -->
+      <section id="progreso" class="seccion-guia">
+        <h2>9. Progreso (.progreso)</h2>
+        <div class="tarjeta pila">
+          <div>
+            <div class="fila" style="justify-content: space-between; margin-bottom: var(--espacio-xs);">
+              <small>Avance de la Asignatura</small>
+              <small><strong>75%</strong></small>
+            </div>
+            <div class="progreso" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <span style="width: 75%;"></span>
+            </div>
+          </div>
+          <div>
+            <div class="fila" style="justify-content: space-between; margin-bottom: var(--espacio-xs);">
+              <small>Logro de Puntos Gamificados</small>
+              <small><strong>90%</strong></small>
+            </div>
+            <div class="progreso progreso--acento" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+              <span style="width: 90%;"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. Modales y Avisos Interactivos (conectados a ui.js) -->
+      <section id="componentes-interactivos" class="seccion-guia">
+        <h2>10. Modal y Avisos Interactivos (ui.js)</h2>
+        <p>Prueba la integración directa con el núcleo de interfaz <code>ui.js</code>.</p>
+        <div class="tarjeta pila">
+          <div class="fila">
+            <button type="button" class="btn btn--primario" id="btnAvisoExito">Probar Aviso Éxito</button>
+            <button type="button" class="btn btn--peligro" id="btnAvisoError">Probar Aviso Error</button>
+            <button type="button" class="btn btn--secundario" id="btnModal">Abrir Modal Accesible</button>
+            <button type="button" class="btn btn--acento" id="btnConfirmar">Probar Confirmación</button>
+          </div>
+          <div id="salidaInteraccion" class="alerta alerta--info" style="display: none;"></div>
+        </div>
+      </section>
+
+      <!-- 11. Estados: Cargando y Vacío -->
+      <section id="estados" class="seccion-guia">
+        <h2>11. Estados: Cargando (.cargando) y Vacío (.vacio)</h2>
+        <div class="pila">
+          <div class="fila">
+            <button type="button" class="btn btn--secundario" id="btnCargando">
+              Activar Indicador .cargando (2 segundos)
+            </button>
+          </div>
+          <div class="vacio">
+            <div class="vacio__icono">📂</div>
+            <h3 class="vacio__titulo">No hay actividades registradas</h3>
+            <p class="vacio__texto">Aún no se han publicado cuestionarios para este tema. Cuando tu docente suba contenidos, aparecerán aquí.</p>
+            <button type="button" class="btn btn--primario btn--pequeno">Explorar Catálogo</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Pie de página institucional -->
+  <footer class="pie" role="contentinfo">
+    <div class="contenedor pie__contenido">
+      <div>
+        <strong>Universidad Estatal de Milagro (UNEMI)</strong>
+        <p style="margin: 0; font-size: var(--tamano-xs); color: #bcd0dc;">
+          Ecosistema Educativo Digital · Guía de Componentes y Tokens de Diseño
+        </p>
+      </div>
+      <div>
+        <a href="https://www.unemi.edu.ec" target="_blank" rel="noreferrer">unemi.edu.ec ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script interactivo con ui.js -->
+  <script type="module">
+    import * as ui from '/js/nucleo/ui.js';
+
+    // Manejo de menú lateral en pantallas pequeñas
+    const btnMenu = document.getElementById('btnMenu');
+    const menuLateral = document.getElementById('menuLateral');
+    if (btnMenu && menuLateral) {
+      btnMenu.addEventListener('click', () => {
+        const abierto = menuLateral.classList.toggle('abierto');
+        btnMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+    }
+
+    // Chips seleccionables
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c => {
+          c.classList.remove('activo');
+          c.setAttribute('aria-selected', 'false');
+        });
+        chip.classList.add('activo');
+        chip.setAttribute('aria-selected', 'true');
+      });
+    });
+
+    const salida = document.getElementById('salidaInteraccion');
+
+    // Avisos
+    document.getElementById('btnAvisoExito')?.addEventListener('click', () => {
+      ui.aviso('Operación completada con éxito desde ui.js', 'exito');
+    });
+
+    document.getElementById('btnAvisoError')?.addEventListener('click', () => {
+      ui.aviso('Error de prueba generado desde ui.js', 'error');
+    });
+
+    // Modal
+    document.getElementById('btnModal')?.addEventListener('click', async () => {
+      const resp = await ui.modal({
+        titulo: 'Detalle de la Actividad',
+        contenido: '<p>Este diálogo posee <strong>foco atrapado</strong>, cierra con tecla <code>Escape</code> y es completamente accesible mediante teclado.</p>',
+        acciones: [
+          { texto: 'Cancelar', valor: 'cancelar', clase: 'btn--secundario' },
+          { texto: 'Entendido', valor: 'aceptar', clase: 'btn--primario' }
+        ]
+      });
+      if (salida) {
+        salida.style.display = 'flex';
+        salida.innerHTML = `<strong>Respuesta del Modal:</strong> Acción elegida: <code>${resp}</code>`;
+      }
+    });
+
+    // Confirmar
+    document.getElementById('btnConfirmar')?.addEventListener('click', async () => {
+      const acepto = await ui.confirmar('¿Estás seguro de que deseas enviar este formulario?');
+      if (salida) {
+        salida.style.display = 'flex';
+        salida.innerHTML = `<strong>Confirmación:</strong> El usuario respondió: <code>${acepto ? 'Sí (Aceptar)' : 'No (Cancelar)'}</code>`;
+      }
+    });
+
+    // Cargando
+    document.getElementById('btnCargando')?.addEventListener('click', () => {
+      ui.cargando(true);
+      setTimeout(() => {
+        ui.cargando(false);
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/* publico/css/modulos/privacidad.css · Estilos para el aviso de privacidad */
+.privacidad-contenedor {
+  max-width: 800px;
+  margin: var(--espacio-l) auto;
+}
+
+.privacidad-seccion {
+  margin-bottom: var(--espacio-l);
+}
+
+.privacidad-seccion h2 {
+  font-size: var(--tamano-l);
+  margin-bottom: var(--espacio-xs);
+  color: var(--primario);
+}
+
+.privacidad-seccion ul {
+  padding-left: var(--espacio-l);
+  margin-bottom: var(--espacio-m);
+}
+
+.privacidad-seccion li {
+  margin-bottom: var(--espacio-xs);
+  line-height: var(--interlineado-base);
+}

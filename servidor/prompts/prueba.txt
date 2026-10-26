@@ -1,0 +1,3 @@
+Responde únicamente con la palabra: OK
+### USUARIO
+Prueba de conexión con el servicio de IA.

@@ -1,0 +1,82 @@
+/* publico/css/modulos/editor-cancion.css · Estilos para el editor de canciones */
+
+.miga-editor {
+  margin-bottom: var(--espacio-m);
+}
+
+.cabecera-editor {
+  margin-bottom: var(--espacio-l);
+}
+
+.cabecera-editor__titulo {
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+  margin: 0 0 var(--espacio-xs) 0;
+}
+
+.cabecera-editor__descripcion {
+  color: var(--texto-suave);
+  margin: 0;
+  font-size: var(--tamano-m);
+}
+
+.form-cancion {
+  max-width: 860px;
+  margin: 0 auto var(--espacio-2xl) auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espacio-m);
+}
+
+.campo--completo {
+  grid-column: 1 / -1;
+}
+
+.requerido {
+  color: var(--error);
+  font-weight: var(--peso-negrita);
+}
+
+.texto-ayuda {
+  color: var(--texto-suave);
+  font-size: var(--tamano-xs);
+  margin-top: var(--espacio-xs);
+  display: block;
+}
+
+.area-texto--mono {
+  font-family: var(--fuente-mono);
+  font-size: var(--tamano-s);
+  line-height: var(--interlineado-base);
+  tab-size: 2;
+  white-space: pre;
+}
+
+.audio-subida-fila {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+}
+
+.audio-subida-fila .entrada {
+  flex-grow: 1;
+}
+
+.form-acciones {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-xl);
+  padding-top: var(--espacio-l);
+  border-top: 1px solid var(--borde);
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,29 @@
+Eres un diseñador instruccional experto y docente universitario. Tu tarea es generar términos técnicos y pedagógicos clave para el glosario formativo de un tema académico.
+
+REQUISITOS ESTRICTOS:
+1. Genera exactamente {{cantidad}} términos nuevos, relevantes y específicos para el tema.
+2. NO repitas ninguno de los términos existentes: {{existentes}}.
+3. Al menos {{minimoSeisLetras}} de los términos generados deben tener 6 letras o más (sin espacios ni guiones) para ser aptos para juegos de sopa de letras y crucigramas.
+4. Para cada término debes proporcionar:
+   - "termino": El concepto en mayúsculas o título, limpio (ej: "HEMOSTASIA").
+   - "definicion": Explicación clara, precisa y concisa (1 o 2 oraciones).
+   - "pista": Una ayuda nemotécnica o descripción breve sin revelar el término.
+   - "retroalimentacion": Comentario pedagógico que refuerce la importancia clínica o conceptual del término.
+5. Responde ÚNICAMENTE con una lista JSON de objetos con la siguiente estructura:
+[
+  {
+    "termino": "...",
+    "definicion": "...",
+    "pista": "...",
+    "retroalimentacion": "..."
+  }
+]
+No incluyas explicaciones antes o después del JSON.
+
+### USUARIO
+Asignatura: {{asignatura}} (Nivel: {{nivel}})
+Tema: {{tema}}
+Contenido base del tema:
+{{contenido}}
+
+Por favor, genera {{cantidad}} términos para este tema siguiendo todas las instrucciones.

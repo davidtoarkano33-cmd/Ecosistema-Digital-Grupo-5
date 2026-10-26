@@ -1,0 +1,344 @@
+/* publico/css/modulos/canciones.css · Estilos para el catálogo y reproductor de canciones */
+
+.seccion-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-l);
+}
+
+.seccion-cabecera__titulo {
+  margin: 0 0 var(--espacio-xs) 0;
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+}
+
+.seccion-cabecera__descripcion {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--tamano-m);
+}
+
+.filtros-canciones {
+  background: var(--superficie);
+  padding: var(--espacio-m);
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+  margin-bottom: var(--espacio-l);
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espacio-m);
+}
+
+/* Disposición general en dos columnas: Repertorio a la izquierda, Reproductor a la derecha */
+.layout-canciones {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--espacio-l);
+  align-items: start;
+  margin-bottom: var(--espacio-2xl);
+}
+
+/* Panel izquierdo: Lista de canciones */
+.panel-lista {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-m);
+  max-height: 680px;
+  overflow-y: auto;
+}
+
+.panel-lista__titulo {
+  font-size: var(--tamano-m);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  margin: 0 0 var(--espacio-s) 0;
+  padding-bottom: var(--espacio-xs);
+  border-bottom: 1px solid var(--borde);
+}
+
+.lista-canciones-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.cancion-item {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  padding: var(--espacio-s) var(--espacio-m);
+  border-radius: var(--radio-m);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: var(--fondo);
+  transition: all var(--transicion);
+  text-align: left;
+  width: 100%;
+}
+
+.cancion-item:hover {
+  background: var(--superficie);
+  border-color: var(--borde);
+  transform: translateX(2px);
+}
+
+.cancion-item--activa {
+  background: var(--primario);
+  color: var(--texto-inverso);
+  border-color: var(--primario);
+}
+
+.cancion-item--activa:hover {
+  background: var(--secundario);
+}
+
+.cancion-item__icono {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.cancion-item__info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.cancion-item__titulo {
+  font-size: var(--tamano-s);
+  font-weight: var(--peso-seminegrita);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cancion-item__tema {
+  font-size: var(--tamano-xs);
+  opacity: 0.8;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Panel derecho: Reproductor */
+.panel-reproductor {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-l);
+  box-shadow: var(--sombra-1);
+}
+
+.cancion-info-activa {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-l);
+  padding-bottom: var(--espacio-m);
+  border-bottom: 1px solid var(--borde);
+}
+
+.cancion-info-activa__icono {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radio-l);
+  background: linear-gradient(135deg, rgba(0, 46, 69, 0.08), rgba(255, 105, 0, 0.12));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.cancion-info-activa__textos {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.cancion-info-activa__titulo {
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  margin: 0 0 var(--espacio-xs) 0;
+}
+
+.cancion-info-activa__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-xs);
+  font-size: var(--tamano-xs);
+  color: var(--texto-suave);
+}
+
+/* Controles de audio */
+.reproductor-personalizado {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-m);
+  margin-bottom: var(--espacio-l);
+}
+
+.progreso-audio-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-m);
+}
+
+.tiempo-texto {
+  font-size: var(--tamano-xs);
+  font-family: var(--fuente-mono);
+  color: var(--texto-suave);
+  min-width: 42px;
+  text-align: center;
+}
+
+.progreso-barra-fondo {
+  flex-grow: 1;
+  height: 8px;
+  background: var(--borde);
+  border-radius: var(--radio-completo);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.progreso-barra-fondo:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+.progreso-barra-relleno {
+  height: 100%;
+  background: var(--acento);
+  border-radius: var(--radio-completo);
+  transition: width 0.1s linear;
+}
+
+.controles-audio-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+}
+
+.controles-audio-centro {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+}
+
+.btn--play {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radio-completo);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.btn--icono {
+  padding: var(--espacio-xs) var(--espacio-s);
+  min-width: 36px;
+  height: 36px;
+  border-radius: var(--radio-completo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.control-volumen {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+.slider-volumen {
+  width: 90px;
+  accent-color: var(--primario);
+  cursor: pointer;
+}
+
+/* Panel de Karaoke y Letra */
+.panel-letra-contenedor {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background: var(--superficie);
+  overflow: hidden;
+}
+
+.panel-letra-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espacio-s) var(--espacio-m);
+  background: var(--fondo);
+  border-bottom: 1px solid var(--borde);
+}
+
+.panel-letra-titulo {
+  font-size: var(--tamano-s);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  margin: 0;
+}
+
+.contenedor-karaoke {
+  padding: var(--espacio-l);
+  max-height: 340px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  font-size: var(--tamano-m);
+  line-height: 2;
+  text-align: center;
+}
+
+.letra-plana {
+  text-align: left;
+  white-space: pre-line;
+  color: var(--texto);
+  font-size: var(--tamano-base);
+  line-height: var(--interlineado-amplio);
+}
+
+.linea-karaoke {
+  padding: var(--espacio-xs) var(--espacio-s);
+  border-radius: var(--radio-s);
+  color: var(--texto-suave);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.linea-karaoke:hover {
+  background: rgba(0, 46, 69, 0.04);
+}
+
+.linea-karaoke--activa {
+  color: var(--acento);
+  font-weight: var(--peso-extranegrita);
+  font-size: 1.15em;
+  background: rgba(255, 105, 0, 0.08);
+  transform: scale(1.02);
+}
+
+@media (max-width: 850px) {
+  .layout-canciones {
+    grid-template-columns: 1fr;
+  }
+}

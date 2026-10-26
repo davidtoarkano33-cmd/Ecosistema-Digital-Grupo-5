@@ -1,0 +1,167 @@
+/* publico/css/modulos/editor-tema.css · Estilos para editor de ficha de tema y glosario */
+.tema-editor-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xl);
+}
+
+.tema-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: var(--espacio-m);
+}
+
+.tema-pestanas {
+  display: flex;
+  gap: var(--espacio-s);
+  border-bottom: 2px solid var(--borde);
+  margin-bottom: var(--espacio-l);
+}
+
+.pestana-btn {
+  padding: var(--espacio-s) var(--espacio-l);
+  font-weight: var(--peso-seminegrita);
+  color: var(--texto-suave);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  font-size: var(--tamano-s);
+}
+
+.pestana-btn.activa {
+  color: var(--primario);
+  border-bottom-color: var(--acento);
+}
+
+.lista-dinamica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  margin-top: var(--espacio-xs);
+}
+
+.item-dinamico {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  background-color: var(--fondo);
+  padding: var(--espacio-xs) var(--espacio-s);
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+}
+
+.item-dinamico input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--tamano-s);
+}
+
+.item-dinamico input:focus {
+  background-color: var(--superficie);
+}
+
+.recurso-item {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr auto auto;
+  gap: var(--espacio-s);
+  align-items: center;
+  background-color: var(--fondo);
+  padding: var(--espacio-s);
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+}
+
+@media (max-width: 768px) {
+  .recurso-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contador-palabras {
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--tamano-xs);
+  color: var(--texto-suave);
+  margin-top: 4px;
+}
+
+.contador-palabras.valido {
+  color: var(--exito);
+  font-weight: var(--peso-seminegrita);
+}
+
+.contador-palabras.invalido {
+  color: var(--advertencia);
+}
+
+.glosario-metricas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-m);
+  align-items: center;
+  margin-bottom: var(--espacio-l);
+  padding: var(--espacio-m);
+  background-color: var(--fondo);
+  border-radius: var(--radio-m);
+}
+
+.metrica-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metrica-card strong {
+  font-size: var(--tamano-xl);
+  color: var(--primario);
+}
+
+.metrica-card span {
+  font-size: var(--tamano-xs);
+  color: var(--texto-suave);
+}
+
+.propuestas-ia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-s);
+}
+
+.propuestas-ia__tabla {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.propuestas-ia__tabla table {
+  min-width: calc(var(--espacio-xl) * 20);
+}
+
+.propuestas-ia__tabla input[type="text"],
+.propuestas-ia__tabla textarea {
+  width: 100%;
+  min-width: calc(var(--espacio-xl) * 3);
+}
+
+.propuestas-ia__tabla textarea {
+  min-height: calc(var(--espacio-xl) * 2);
+  resize: vertical;
+}
+
+.propuesta-ia--repetida {
+  background-color: var(--fondo);
+}
+
+.propuesta-ia__estado {
+  display: block;
+  color: var(--advertencia);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-seminegrita);
+}

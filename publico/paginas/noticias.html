@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noticias</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/noticias.css">
+</head>
+<body>
+  <div id="plantilla"></div>
+
+  <main id="contenido" class="contenedor">
+    <!-- Encabezado de sección -->
+    <header class="seccion-cabecera">
+      <div class="seccion-cabecera__info">
+        <h1 class="seccion-cabecera__titulo">Noticias y Novedades</h1>
+        <p class="seccion-cabecera__descripcion">Mantente informado sobre eventos, logros, noticias institucionales y académicas.</p>
+      </div>
+      <div id="acciones-docente" class="seccion-cabecera__acciones" style="display: none;">
+        <a href="/paginas/editor-noticia.html" class="btn btn--primario">
+          <span>+</span> Nueva noticia
+        </a>
+      </div>
+    </header>
+
+    <!-- Barra de filtros -->
+    <section class="filtros-noticias card" aria-label="Filtros de noticias">
+      <div class="filtros-grid">
+        <div class="campo">
+          <label for="filtro-categoria" class="etiqueta">Categoría</label>
+          <select id="filtro-categoria" class="select">
+            <option value="">Todas las categorías</option>
+            <option value="Institucional">Institucional</option>
+            <option value="Académica">Académica</option>
+            <option value="Eventos">Eventos</option>
+            <option value="Logros">Logros</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="filtro-tema" class="etiqueta">Tema relacionado</label>
+          <select id="filtro-tema" class="select">
+            <option value="">Todos los temas</option>
+          </select>
+        </div>
+
+        <div class="campo campo--buscar">
+          <label for="filtro-buscar" class="etiqueta">Buscar por título o resumen</label>
+          <input type="search" id="filtro-buscar" class="entrada" placeholder="Escribe para buscar...">
+        </div>
+      </div>
+    </section>
+
+    <!-- Estado de carga -->
+    <div id="cargando-noticias" class="cargando">
+      <p style="margin-left: var(--espacio-s); color: var(--texto-suave);">Cargando noticias...</p>
+    </div>
+
+    <!-- Rejilla de noticias (9 por página) -->
+    <section id="contenedor-noticias" class="rejilla-noticias" aria-live="polite" style="display: none;">
+      <!-- Las tarjetas se generan dinámicamente -->
+    </section>
+
+    <!-- Estado vacío si no hay noticias -->
+    <div id="sin-noticias" class="vacio" style="display: none;">
+      <div class="vacio__icono">📰</div>
+      <h2 class="vacio__titulo">No hay noticias publicadas</h2>
+      <p class="vacio__texto">Actualmente no hay noticias disponibles con los filtros seleccionados.</p>
+    </div>
+
+    <!-- Paginación -->
+    <nav id="paginacion" class="paginacion" aria-label="Páginas de noticias" style="display: none;">
+      <button type="button" id="btn-pagina-anterior" class="btn btn--secundario btn--pequeno" disabled>
+        &larr; Anterior
+      </button>
+      <span id="info-pagina" class="paginacion__info">Página 1 de 1</span>
+      <button type="button" id="btn-pagina-siguiente" class="btn btn--secundario btn--pequeno" disabled>
+        Siguiente &rarr;
+      </button>
+    </nav>
+  </main>
+
+  <script type="module" src="/js/modulos/noticias.js"></script>
+</body>
+</html>
