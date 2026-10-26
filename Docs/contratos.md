@@ -117,7 +117,8 @@ alertas           estudianteId, docenteId, grupoId, regla, temaId, detalle,
 consumo-ia.jsonl  usuarioId, tarea, entrada, salida, ok, fecha
 preguntas         temaId, nivel(1-5), tipo(opcion|vf|completar), enunciado, opciones[],
                   correcta(índice | true/false | texto), retroalimentacion, origen, estado
-quiz-sesiones     usuarioId, temaId, nivel, preguntasIds[], respuestas{}, inicio, finalizada
+quiz-sesiones     usuarioId, temaId, nivel, preguntasIds[], respuestas{}, inicio, finalizada,
+                  fin, resultado{porcentaje, aprobado, aciertos, total}
 foros-hilos       asignaturaId, temaId, titulo, texto, autorId, fijado, cerrado, oculto,
                   ultimoMovimiento
 foros-respuestas  hiloId, texto, autorId, destacada, oculta

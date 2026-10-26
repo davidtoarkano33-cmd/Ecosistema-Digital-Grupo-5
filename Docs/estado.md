@@ -1,23 +1,26 @@
 # docs/estado.md · Estado del proyecto (máximo 30 líneas)
-Sprint terminado: S07 · Fecha: 2026-10-25 · Velocidad real: 3/3 tareas
+Sprint terminado: S08 · Fecha: 2026-10-25 · Velocidad real: 3/3 tareas
 
 ## Funciona
-- Servicio de IA: Gemini por `fetch` nativo, clave solo en servidor, límite diario, consumo sin textos, timeout, validación JSON y reintento.
-- Prueba administrativa de IA operativa con modelo configurable mediante `IA_MODELO`.
-- Generación de glosario: cantidad 5–20, propuestas editables, duplicados señalados y aprobación docente antes de guardar.
-- Glosario aprobado visible desde el tema y accesible directamente desde la asignatura; términos de IA identificados por origen.
-- Crucigrama: generador puro con 30 órdenes, 8–12 palabras cuando el glosario lo permite, cuadrícula recortada, pistas y teclado.
-- Crucigrama registra puntaje, errores, ayudas, duración, gamificación y resumen.
-- Alertas de actividades: 3 o más errores actualizan la alerta activa y vuelven a notificar al docente.
+- Banco docente de preguntas por tema y cinco niveles de Bloom, con creación manual, edición, contadores y propuestas IA aprobables.
+- Permisos y ganchos impiden que estudiantes lean preguntas o sesiones; cada docente solo gestiona sus asignaturas.
+- Tres temas disponen de 20 preguntas aprobadas por nivel: 300 preguntas conservadas también en la semilla.
+- Motor del quiz: progresión por nivel, preguntas no vistas, reutilización de las más antiguas y aviso diario por banco insuficiente.
+- Las respuestas se guardan una vez; el cliente nunca recibe soluciones antes de responder y completar usa texto normalizado.
+- La finalización calcula porcentaje, repaso, puntos, insignias, alertas y el máximo nivel aprobado.
+- Página estudiantil con cinco tarjetas, pregunta por turno, progreso, retroalimentación, reintento y resumen.
+- Cada nivel aprobado habilita diploma verificable; docentes tienen accesos para gestionar glosarios, preguntas y canciones.
 
 ## Decisiones y cambios respecto a docs/contratos.md
-- Proveedor elegido: Google Gemini; el modelo se mantiene exclusivamente en `.env` para poder sustituirlo sin cambiar código.
-- El glosario aprobado de temas publicados es visible para cualquier sesión; la edición continúa limitada al docente asignado y admin.
-- Las alertas activas se reutilizan con contador de reiteraciones para evitar duplicados en el panel.
+- Los niveles aprobados pueden repetirse para mejorar el porcentaje sin volver a bloquear la progresión.
+- `quiz-sesiones` conserva fecha de fin y resumen del resultado; se documentó en el contrato.
+- Los datos operativos siguen ignorados por Git; el banco inicial se versiona en `datos/semilla/preguntas.json`.
+- La plantilla del tutor quedó preparada pero inactiva hasta el sprint correspondiente.
 
 ## Problemas conocidos
-- La disponibilidad y cuota de Gemini dependen del proveedor; los fallos se devuelven de forma controlada sin detener el servidor.
-- Git no está instalado o disponible en `PATH` y esta carpeta aún no contiene `.git`.
+- La disponibilidad y cuota de Gemini dependen del proveedor; los fallos se controlan sin detener el servidor.
+- El tema “Abordaje inicial” tiene contenido fuente breve, por lo que algunas preguntas pueden resultar similares.
+- El historial Git comienza en Sprint 7; no existen cierres recuperables de los Sprints 0–6.
 
 ## Pendiente para el siguiente sprint
-- Sprint 8: banco de preguntas, motor del quiz y página del quiz con diplomas por nivel.
+- Ejecutar las tareas del Sprint 9 según la guía del producto.

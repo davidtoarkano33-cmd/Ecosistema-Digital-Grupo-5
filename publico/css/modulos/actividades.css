@@ -21,6 +21,15 @@
   gap: var(--espacio-l);
 }
 
+.actividades-ayuda {
+  margin-bottom: var(--espacio-l);
+}
+
+.actividades-ayuda p {
+  margin: var(--espacio-xs) 0 0;
+  color: var(--texto-suave);
+}
+
 .actividad-tarjeta {
   display: flex;
   flex-direction: column;
@@ -63,5 +72,8 @@
 }
 
 .actividad-tarjeta__accion {
-  align-self: flex-start;
+  display: flex;
+  align-self: stretch;
+  flex-wrap: wrap;
+  gap: var(--espacio-s);
 }
