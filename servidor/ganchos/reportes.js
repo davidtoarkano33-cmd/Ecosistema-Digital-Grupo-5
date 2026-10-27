@@ -13,6 +13,21 @@ function referenciaForo(valor) {
   return coincidencia ? { coleccion: coincidencia[1], id: coincidencia[2] } : null;
 }
 
+function referenciaMensaje(valor) {
+  const coincidencia = String(valor || '').match(/^(con_\d{6})\/(men_\d{6})$/);
+  return coincidencia ? { conversacionId: coincidencia[1], mensajeId: coincidencia[2] } : null;
+}
+
+async function validarAccesoMensaje(usuario, referencia) {
+  const [conversacion] = await almacen.buscar('conversaciones', { id: referencia.conversacionId });
+  if (!conversacion) rechazar('La conversación reportada no existe', 404);
+  if (!conversacion.participantes?.some(id => String(id) === String(usuario.id))) {
+    rechazar('No tienes acceso a este mensaje', 403);
+  }
+  const [mensaje] = await almacen.buscar(`mensajes/${referencia.conversacionId}`, { id: referencia.mensajeId });
+  if (!mensaje) rechazar('El mensaje reportado no existe', 404);
+}
+
 async function validarAccesoForo(usuario, referencia) {
   const [registro] = await almacen.buscar(referencia.coleccion, { id: referencia.id });
   if (!registro) rechazar('La publicación reportada no existe', 404);
@@ -45,10 +60,16 @@ export async function antesDeGuardar(datos, usuario, anterior) {
     return datos;
   }
 
-  if (datos.tipo !== 'foro') rechazar('Tipo de reporte no válido');
-  const referencia = referenciaForo(datos.referenciaId);
-  if (!referencia) rechazar('Referencia de foro no válida');
-  await validarAccesoForo(usuario, referencia);
+  if (!['foro', 'mensaje'].includes(datos.tipo)) rechazar('Tipo de reporte no válido');
+  if (datos.tipo === 'foro') {
+    const referencia = referenciaForo(datos.referenciaId);
+    if (!referencia) rechazar('Referencia de foro no válida');
+    await validarAccesoForo(usuario, referencia);
+  } else {
+    const referencia = referenciaMensaje(datos.referenciaId);
+    if (!referencia) rechazar('Referencia de mensaje no válida');
+    await validarAccesoMensaje(usuario, referencia);
+  }
   const motivo = String(datos.motivo || '').trim();
   if (!motivo) rechazar('El motivo es obligatorio');
   if (motivo.length > 1000) rechazar('El motivo no puede superar 1.000 caracteres');

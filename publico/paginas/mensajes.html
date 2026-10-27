@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/mensajes.css">
+  <title>Mensajes</title>
+</head>
+<body>
+  <div id="plantilla"></div>
+  <main id="contenido" class="contenedor mensajes">
+    <header class="mensajes__cabecera">
+      <div>
+        <h1>Mensajes</h1>
+        <p>Conversa de forma privada con docentes y compañeros autorizados.</p>
+      </div>
+      <button type="button" id="btn-nueva-conversacion" class="btn btn--primario">Nueva conversación</button>
+    </header>
+
+    <div class="mensajes__bandeja">
+      <section id="panel-conversaciones" class="mensajes__conversaciones" aria-labelledby="titulo-conversaciones">
+        <h2 id="titulo-conversaciones" class="mensajes__titulo-panel">Conversaciones</h2>
+        <div class="campo mensajes__busqueda">
+          <label for="buscar-conversacion">Buscar</label>
+          <input id="buscar-conversacion" type="search" placeholder="Nombre o mensaje" autocomplete="off">
+        </div>
+        <div id="lista-conversaciones" class="mensajes__lista-conversaciones" aria-live="polite"></div>
+      </section>
+
+      <section id="panel-chat" class="mensajes__chat" aria-labelledby="titulo-chat">
+        <header class="mensajes__chat-cabecera">
+          <button type="button" id="btn-volver" class="btn btn--secundario btn--pequeno mensajes__volver">← Volver</button>
+          <div>
+            <h2 id="titulo-chat">Selecciona una conversación</h2>
+            <span id="rol-contacto" class="texto-suave"></span>
+          </div>
+        </header>
+
+        <div id="historial-mensajes" class="mensajes__historial" aria-live="polite">
+          <div class="vacio">
+            <p class="vacio__texto">Selecciona una conversación o inicia una nueva.</p>
+          </div>
+        </div>
+
+        <form id="form-mensaje" class="mensajes__formulario" hidden>
+          <label for="texto-mensaje">Mensaje</label>
+          <textarea id="texto-mensaje" rows="3" maxlength="2000" placeholder="Escribe un mensaje..." required></textarea>
+          <div class="mensajes__formulario-pie">
+            <span id="contador-texto" class="texto-suave" aria-live="polite">0 / 2.000</span>
+            <button type="submit" class="btn btn--primario">Enviar</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/js/modulos/mensajes.js"></script>
+</body>
+</html>

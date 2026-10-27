@@ -9,6 +9,7 @@ export const MENU = [
   { texto: "Actividades", href: "/paginas/actividades.html", roles: ["estudiante", "docente"] },
   { texto: "Foros", href: "/paginas/foros.html", roles: ["sesion"] },
   { texto: "Agenda", href: "/paginas/agenda.html", roles: ["sesion"] },
+  { texto: "Mensajes", href: "/paginas/mensajes.html", roles: ["sesion"] },
   { texto: "Panel docente", href: "/paginas/panel-docente.html", roles: ["docente", "admin"] },
   { texto: "Contenidos", href: "/paginas/editor-contenidos.html", roles: ["docente", "admin"] },
   { texto: "Banco de preguntas", href: "/paginas/banco-preguntas.html", roles: ["docente", "admin"] },

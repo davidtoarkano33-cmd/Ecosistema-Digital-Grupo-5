@@ -198,5 +198,29 @@
     "escribir": [
       "sesion"
     ]
+  },
+  "conversaciones": {
+    "leer": [
+      "servidor"
+    ],
+    "escribir": [
+      "servidor"
+    ]
+  },
+  "mensajes": {
+    "leer": [
+      "servidor"
+    ],
+    "escribir": [
+      "servidor"
+    ]
+  },
+  "bloqueos": {
+    "leer": [
+      "servidor"
+    ],
+    "escribir": [
+      "servidor"
+    ]
   }
 }

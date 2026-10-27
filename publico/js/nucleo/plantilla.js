@@ -3,7 +3,7 @@ import { MENU } from './menu.js';
 import { usuarioActual, cerrar, exigirRol } from './sesion.js';
 import { registrarEvento } from './bitacora.js';
 import { aviso } from './ui.js';
-import { listar } from './api.js';
+import { listar, llamar } from './api.js';
 import { logrosDe } from './gamificacion.js';
 import { montarCampana } from './notificaciones.js';
 
@@ -52,7 +52,12 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
     const claseActivo = esActivo ? ' activo' : '';
     const ariaAttr = esActivo ? ' aria-current="page"' : '';
     const esNoticias = item.texto === 'Noticias' || item.href.includes('noticias.html');
-    const badgeHtml = esNoticias ? ` <span id="badge-noticias-no-leidas" class="insignia insignia--acento" style="display: none; margin-left: auto;"></span>` : '';
+    const esMensajes = item.texto === 'Mensajes' || item.href.includes('mensajes.html');
+    const badgeHtml = esNoticias
+      ? ` <span id="badge-noticias-no-leidas" class="insignia insignia--acento" style="display: none; margin-left: auto;"></span>`
+      : esMensajes
+        ? ` <span id="badge-mensajes-no-leidos" class="insignia insignia--acento" style="display: none; margin-left: auto;"></span>`
+        : '';
     return `<a href="${item.href}" class="menu__enlace${claseActivo}"${ariaAttr}><span>${item.texto}</span>${badgeHtml}</a>`;
   }).join('');
 
@@ -235,6 +240,23 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
     montarCampana().catch(err => {
       console.warn('No se pudo montar centro de notificaciones:', err);
     });
+
+    const actualizarMensajesNoLeidos = async () => {
+      if (document.hidden) return;
+      try {
+        const respuesta = await llamar('GET', '/api/mensajes/no-leidos');
+        const badge = document.getElementById('badge-mensajes-no-leidos');
+        const total = Number(respuesta.total) || 0;
+        if (badge) {
+          badge.textContent = total > 99 ? '99+' : total;
+          badge.style.display = total > 0 ? 'inline-flex' : 'none';
+        }
+      } catch {
+        // El contador no interrumpe la navegación.
+      }
+    };
+    actualizarMensajesNoLeidos();
+    setInterval(actualizarMensajesNoLeidos, 60000);
   }
 
   // 14. Montar Índice Deslizable de Secciones (Subtemas) de la página
@@ -384,4 +406,3 @@ export default {
   NOMBRE,
   montarPlantilla
 };
-
