@@ -1,26 +1,25 @@
 # docs/estado.md · Estado del proyecto (máximo 30 líneas)
-Sprint terminado: S08 · Fecha: 2026-10-25 · Velocidad real: 3/3 tareas
+Sprint terminado: S09 · Fecha: 2026-10-26 · Review aprobada
 
 ## Funciona
-- Banco docente de preguntas por tema y cinco niveles de Bloom, con creación manual, edición, contadores y propuestas IA aprobables.
-- Permisos y ganchos impiden que estudiantes lean preguntas o sesiones; cada docente solo gestiona sus asignaturas.
-- Tres temas disponen de 20 preguntas aprobadas por nivel: 300 preguntas conservadas también en la semilla.
-- Motor del quiz: progresión por nivel, preguntas no vistas, reutilización de las más antiguas y aviso diario por banco insuficiente.
-- Las respuestas se guardan una vez; el cliente nunca recibe soluciones antes de responder y completar usa texto normalizado.
-- La finalización calcula porcentaje, repaso, puntos, insignias, alertas y el máximo nivel aprobado.
-- Página estudiantil con cinco tarjetas, pregunta por turno, progreso, retroalimentación, reintento y resumen.
-- Cada nivel aprobado habilita diploma verificable; docentes tienen accesos para gestionar glosarios, preguntas y canciones.
+- Agenda personal, institucional y por grupo con vistas mensual, semanal y lista.
+- Fechas límite vinculadas a actividades muestran cumplimiento por estudiante.
+- Recordatorios internos y del navegador se emiten una vez y quedan registrados por usuario.
+- Alertas por fechas límite vencidas respetan los días de gracia y evitan duplicados por evento.
+- Foros por asignatura y tema con respuestas, moderación, destacados y reportes.
+- Panel administrativo de reportes para revisar y ocultar publicaciones.
+- Configuración administrativa de Gemini, consulta de modelos y prueba de conexión.
+- La clave de IA permanece únicamente en `.env`; nunca se guarda en datos versionables.
+- Menú, permisos y ganchos aplican los roles estudiante, docente y administrador.
 
 ## Decisiones y cambios respecto a docs/contratos.md
-- Los niveles aprobados pueden repetirse para mejorar el porcentaje sin volver a bloquear la progresión.
-- `quiz-sesiones` conserva fecha de fin y resumen del resultado; se documentó en el contrato.
-- Los datos operativos siguen ignorados por Git; el banco inicial se versiona en `datos/semilla/preguntas.json`.
-- La plantilla del tutor quedó preparada pero inactiva hasta el sprint correspondiente.
+- Las alertas vencidas guardan `referenciaId` para distinguir fechas límite del mismo tema.
+- Los eventos de día completo se almacenan en UTC y FullCalendar recibe un fin exclusivo.
+- Un evento docente sin grupo conserva alcance personal; solo “todos” es institucional.
 
 ## Problemas conocidos
-- La disponibilidad y cuota de Gemini dependen del proveedor; los fallos se controlan sin detener el servidor.
-- El tema “Abordaje inicial” tiene contenido fuente breve, por lo que algunas preguntas pueden resultar similares.
-- El historial Git comienza en Sprint 7; no existen cierres recuperables de los Sprints 0–6.
+- Los avisos nativos dependen del permiso y soporte de notificaciones del navegador.
+- La disponibilidad y cuota de Gemini dependen del proveedor externo.
 
 ## Pendiente para el siguiente sprint
-- Ejecutar las tareas del Sprint 9 según la guía del producto.
+- Ejecutar las tareas del Sprint 10 según la guía del producto.

@@ -1,0 +1,20 @@
+.foros { padding-block: var(--espacio-xl); }
+.foros__cabecera, .foros__barra-lista, .foros__meta, .foros__selectores {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--espacio-m);
+}
+.foros__cabecera { margin-bottom: var(--espacio-l); }
+.foros__cabecera p { color: var(--texto-suave); margin-bottom: 0; }
+.foros__filtros { margin-bottom: var(--espacio-l); }
+.foros__titulo-seccion { margin-top: 0; }
+.foros__selectores .campo { flex: 1; }
+.foros__barra-lista { margin-bottom: var(--espacio-m); }
+.foro-hilo { display: block; color: inherit; text-decoration: none; }
+.foro-hilo:hover { border-color: var(--primario); }
+.foro-hilo__titulo { margin: 0 0 var(--espacio-xs); }
+.foro-hilo__extracto { color: var(--texto-suave); margin: 0 0 var(--espacio-s); }
+.foros__meta { justify-content: flex-start; flex-wrap: wrap; color: var(--texto-suave); font-size: var(--tamano-s); }
+.foros__etiquetas { display: flex; flex-wrap: wrap; gap: var(--espacio-xs); margin-bottom: var(--espacio-s); }
+@media (max-width: 40rem) {
+  .foros__cabecera, .foros__selectores { align-items: stretch; flex-direction: column; }
+  .foros__cabecera .btn { width: 100%; }
+}

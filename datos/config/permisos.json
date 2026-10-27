@@ -76,6 +76,30 @@
       "servidor"
     ]
   },
+  "foros-hilos": {
+    "leer": [
+      "sesion"
+    ],
+    "escribir": [
+      "sesion"
+    ]
+  },
+  "foros-respuestas": {
+    "leer": [
+      "sesion"
+    ],
+    "escribir": [
+      "sesion"
+    ]
+  },
+  "reportes": {
+    "leer": [
+      "admin"
+    ],
+    "escribir": [
+      "sesion"
+    ]
+  },
   "progreso-temas": {
     "leer": [
       "propio",
@@ -165,6 +189,14 @@
     "escribir": [
       "docente",
       "admin"
+    ]
+  },
+  "agenda": {
+    "leer": [
+      "sesion"
+    ],
+    "escribir": [
+      "sesion"
     ]
   }
 }

@@ -4,5 +4,7 @@
   "limiteIADiario": 30,
   "limiteTutorDiario": 40,
   "chatEntreEstudiantes": true,
-  "alertasAdmin": false
+  "alertasAdmin": false,
+  "iaProveedor": "gemini",
+  "iaModelo": "gemini-3.5-flash-lite"
 }

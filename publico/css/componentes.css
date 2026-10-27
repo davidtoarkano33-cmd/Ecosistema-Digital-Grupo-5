@@ -1309,3 +1309,13 @@ body > .cargando {
   }
 }
 
+/* Acciones del panel de notificaciones */
+.panel-notificaciones__pie {
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.panel-notificaciones__pie .btn {
+  width: 100%;
+  font-size: var(--tamano-xs);
+}

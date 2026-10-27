@@ -56,6 +56,9 @@ export async function montarCampana() {
         </div>
 
         <footer class="panel-notificaciones__pie">
+          <button type="button" id="btn-activar-avisos" class="btn btn--secundario btn--pequeno">
+            Activar avisos del navegador
+          </button>
           <button type="button" id="btn-marcar-todas-leidas" class="btn btn--secundario btn--pequeno" style="width: 100%; font-size: var(--tamano-xs);">
             ✓ Marcar todas como leídas
           </button>
@@ -67,8 +70,39 @@ export async function montarCampana() {
   const btnCampana = document.getElementById('btn-campana');
   const panel = document.getElementById('panel-notificaciones');
   const badge = document.getElementById('badge-campana');
+  const btnActivarAvisos = document.getElementById('btn-activar-avisos');
   const btnMarcarTodas = document.getElementById('btn-marcar-todas-leidas');
   const lista = document.getElementById('lista-notificaciones');
+
+  function actualizarBotonAvisos() {
+    if (!btnActivarAvisos) return;
+    btnActivarAvisos.hidden = !('Notification' in window) || Notification.permission === 'granted';
+    if ('Notification' in window && Notification.permission === 'denied') {
+      btnActivarAvisos.textContent = 'Avisos bloqueados en el navegador';
+      btnActivarAvisos.disabled = true;
+    }
+  }
+
+  async function consultarRecordatorios() {
+    try {
+      const res = await llamar('GET', '/api/agenda/recordatorios');
+      const recordatorios = Array.isArray(res.recordatorios) ? res.recordatorios : [];
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+      recordatorios.forEach(recordatorio => {
+        const avisoNativo = new Notification(recordatorio.titulo || 'Recordatorio de agenda', {
+          body: recordatorio.mensaje || 'Tienes un evento pendiente.'
+        });
+        avisoNativo.addEventListener('click', () => {
+          window.focus();
+          window.location.href = recordatorio.enlace || '/paginas/agenda.html';
+          avisoNativo.close();
+        });
+      });
+    } catch {
+      // Ignorar errores en segundo plano
+    }
+  }
 
   async function actualizarContador() {
     // Solo consultar si la pestaña está visible
@@ -178,6 +212,23 @@ export async function montarCampana() {
     });
   }
 
+  if (btnActivarAvisos) {
+    actualizarBotonAvisos();
+    btnActivarAvisos.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (!('Notification' in window)) {
+        aviso('Este navegador no admite avisos del sistema', 'error');
+        return;
+      }
+      const permiso = await Notification.requestPermission();
+      actualizarBotonAvisos();
+      aviso(
+        permiso === 'granted' ? 'Avisos del navegador activados' : 'No se activaron los avisos del navegador',
+        permiso === 'granted' ? 'exito' : 'error'
+      );
+    });
+  }
+
   // Cerrar al hacer clic fuera
   document.addEventListener('click', (e) => {
     if (panelAbierto && contenedorCampana && !contenedorCampana.contains(e.target)) {
@@ -223,6 +274,7 @@ export async function montarCampana() {
   }
 
   // Primera consulta inmediata
+  await consultarRecordatorios();
   await actualizarContador();
 
   // Consulta periódica para mostrar pronto las alertas generadas en otras sesiones.
@@ -231,14 +283,14 @@ export async function montarCampana() {
   }
   intervaloConsulta = setInterval(() => {
     if (!document.hidden) {
-      actualizarContador();
+      consultarRecordatorios().then(actualizarContador);
     }
   }, 15000);
 
   // Escuchar cambio de visibilidad de la pestaña
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
-      actualizarContador();
+      consultarRecordatorios().then(actualizarContador);
     }
   });
 }

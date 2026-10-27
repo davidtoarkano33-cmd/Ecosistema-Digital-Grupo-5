@@ -145,7 +145,9 @@ export async function evaluarInactividad(grupoId) {
   if (!grupoId) return;
 
   const reglas = await almacen.leerConfig('reglas-alertas');
-  if (!reglas || !reglas.inactividad || reglas.inactividad.activa === false) {
+  const evaluarReglaInactividad = reglas?.inactividad && reglas.inactividad.activa !== false;
+  const evaluarReglaVencidas = reglas?.vencidas && reglas.vencidas.activa !== false;
+  if (!evaluarReglaInactividad && !evaluarReglaVencidas) {
     return;
   }
 
@@ -196,7 +198,7 @@ export async function evaluarInactividad(grupoId) {
       }
     }
 
-    if (diasSinActividad >= diasLimite) {
+    if (evaluarReglaInactividad && diasSinActividad >= diasLimite) {
       const u = mapaUsuarios.get(estId);
       const nombreEstudiante = u ? `${u.nombre || ''} ${u.apellido || ''}`.trim() : 'Estudiante';
 
@@ -211,13 +213,57 @@ export async function evaluarInactividad(grupoId) {
       });
     }
   }
+
+  if (evaluarReglaVencidas) {
+    const diasGracia = typeof reglas.vencidas.diasGracia === 'number' ? reglas.vencidas.diasGracia : 1;
+    const limiteVencimiento = ahora - diasGracia * 24 * 60 * 60 * 1000;
+    const [eventosAgenda, todosIntentos] = await Promise.all([
+      almacen.leer('agenda'),
+      almacen.leer('intentos')
+    ]);
+
+    const fechasVencidas = (eventosAgenda || []).filter(evento => {
+      if (!evento || evento.tipo !== 'fecha-limite') return false;
+      if (String(evento.grupoId) !== String(grupo.id)) return false;
+      if (!evento.actividad || !evento.temaId) return false;
+      const vencimiento = new Date(evento.fin || evento.inicio).getTime();
+      return Number.isFinite(vencimiento) && vencimiento < limiteVencimiento;
+    });
+
+    for (const evento of fechasVencidas) {
+      const fechaAsignacion = new Date(evento.fecha || evento.inicio).getTime();
+      for (const estId of estudiantesIds) {
+        const tieneIntento = (todosIntentos || []).some(intento => {
+          if (!intento || String(intento.usuarioId) !== estId) return false;
+          if (String(intento.actividad) !== String(evento.actividad)) return false;
+          if (String(intento.temaId) !== String(evento.temaId)) return false;
+          const fechaIntento = new Date(intento.fecha || 0).getTime();
+          return Number.isFinite(fechaIntento) && fechaIntento >= fechaAsignacion;
+        });
+        if (tieneIntento) continue;
+
+        const u = mapaUsuarios.get(estId);
+        const nombreEstudiante = u ? `${u.nombre || ''} ${u.apellido || ''}`.trim() : 'Estudiante';
+        await crearAlertaSiNoExiste({
+          estudianteId: estId,
+          docenteId,
+          grupoId: String(grupo.id),
+          regla: 'vencidas',
+          temaId: evento.temaId,
+          referenciaId: evento.id,
+          detalle: `No completó la actividad ${evento.actividad} de la fecha límite "${evento.titulo}" tras ${diasGracia} día(s) de gracia.`,
+          nombreEstudiante
+        });
+      }
+    }
+  }
 }
 
 /**
  * Crea o actualiza una alerta activa sin duplicarla en el panel.
  * Cada nueva detección vuelve a notificar al docente.
  */
-async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, temaId = null, detalle, nombreEstudiante }) {
+async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, temaId = null, referenciaId = null, detalle, nombreEstudiante }) {
   const todasAlertas = await almacen.leer('alertas');
 
   const existente = (todasAlertas || []).find(a =>
@@ -225,7 +271,8 @@ async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, 
     String(a.estudianteId) === String(estudianteId) &&
     a.regla === regla &&
     a.estado === 'activa' &&
-    (temaId ? String(a.temaId) === String(temaId) : true)
+    (temaId ? String(a.temaId) === String(temaId) : true) &&
+    (referenciaId ? String(a.referenciaId) === String(referenciaId) : true)
   );
 
   const ahora = new Date().toISOString();
@@ -245,6 +292,7 @@ async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, 
       grupoId: String(grupoId),
       regla,
       temaId: temaId ? String(temaId) : null,
+      referenciaId: referenciaId ? String(referenciaId) : null,
       detalle: String(detalle || ''),
       estado: 'activa',
       reiteraciones: 1

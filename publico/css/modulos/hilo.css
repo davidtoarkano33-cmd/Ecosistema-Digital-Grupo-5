@@ -1,0 +1,18 @@
+.hilo { padding-block: var(--espacio-xl); }
+.hilo__volver { display: inline-block; margin-bottom: var(--espacio-m); }
+.hilo__publicacion { position: relative; }
+.hilo__principal { border-inline-start: var(--espacio-xs) solid var(--primario); }
+.hilo__titulo { margin-top: 0; padding-right: var(--espacio-xl); }
+.hilo__contenido p:last-child { margin-bottom: 0; }
+.hilo__barra, .hilo__meta, .hilo__acciones, .hilo__paginacion {
+  display: flex; align-items: center; gap: var(--espacio-s); flex-wrap: wrap;
+}
+.hilo__barra { justify-content: space-between; margin: var(--espacio-xl) 0 var(--espacio-m); }
+.hilo__meta { color: var(--texto-suave); font-size: var(--tamano-s); margin-bottom: var(--espacio-m); }
+.foros__etiquetas { display: flex; flex-wrap: wrap; gap: var(--espacio-xs); margin-bottom: var(--espacio-s); }
+.hilo__acciones { justify-content: flex-end; margin-top: var(--espacio-m); }
+.hilo__respuesta--destacada { border-color: var(--acento); }
+.hilo__paginacion { justify-content: center; margin-top: var(--espacio-l); }
+.hilo__formulario { margin-top: var(--espacio-xl); }
+.hilo__cerrado { text-align: center; }
+@media (max-width: 32rem) { .hilo__acciones .btn { flex: 1; } }

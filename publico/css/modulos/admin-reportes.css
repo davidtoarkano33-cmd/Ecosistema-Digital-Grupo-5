@@ -1,0 +1,7 @@
+.reportes { padding-block: var(--espacio-xl); }
+.reportes__cabecera, .reportes__meta, .reportes__acciones { display: flex; align-items: center; gap: var(--espacio-m); flex-wrap: wrap; }
+.reportes__cabecera { justify-content: space-between; margin-bottom: var(--espacio-l); }
+.reportes__cabecera p, .reportes__meta { color: var(--texto-suave); }
+.reportes__publicacion { padding: var(--espacio-m); background: var(--fondo); border-radius: var(--radio-m); margin-block: var(--espacio-m); }
+.reportes__acciones { justify-content: flex-end; }
+@media (max-width: 32rem) { .reportes__cabecera { align-items: flex-start; flex-direction: column; } .reportes__acciones .btn { width: 100%; } }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/foros.css">
+  <title>Foros</title>
+</head>
+<body>
+  <div id="plantilla"></div>
+  <main id="contenido" class="contenedor foros">
+    <header class="foros__cabecera">
+      <div>
+        <h1>Foros académicos</h1>
+        <p>Comparte preguntas, ideas y experiencias con tu comunidad educativa.</p>
+      </div>
+      <button type="button" class="btn btn--primario" id="btn-nuevo-hilo">Nuevo hilo</button>
+    </header>
+
+    <section class="tarjeta foros__filtros" aria-labelledby="titulo-filtros">
+      <h2 id="titulo-filtros" class="foros__titulo-seccion">Explorar conversaciones</h2>
+      <div class="foros__selectores">
+        <div class="campo">
+          <label for="filtro-asignatura">Asignatura</label>
+          <select id="filtro-asignatura"></select>
+        </div>
+        <div class="campo">
+          <label for="filtro-tema">Tema (opcional)</label>
+          <select id="filtro-tema"><option value="">Todos los temas</option></select>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-hilos">
+      <div class="foros__barra-lista">
+        <h2 id="titulo-hilos">Conversaciones</h2>
+        <span id="contador-hilos" class="insignia insignia--info">0 hilos</span>
+      </div>
+      <div id="lista-hilos" class="pila pila--m" aria-live="polite"></div>
+    </section>
+  </main>
+  <script type="module" src="/js/modulos/foros.js"></script>
+</body>
+</html>

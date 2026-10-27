@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css"><link rel="stylesheet" href="/css/modulos/hilo.css">
+  <title>Conversación del foro</title>
+</head>
+<body>
+  <div id="plantilla"></div>
+  <main id="contenido" class="contenedor hilo">
+    <a href="/paginas/foros.html" class="hilo__volver">← Volver a foros</a>
+    <div id="hilo-principal" aria-live="polite"></div>
+    <section class="hilo__respuestas" aria-labelledby="titulo-respuestas">
+      <div class="hilo__barra"><h2 id="titulo-respuestas">Respuestas</h2><span id="cantidad-respuestas" class="insignia insignia--info">0</span></div>
+      <div id="lista-respuestas" class="pila pila--m"></div>
+      <nav id="paginacion" class="hilo__paginacion" aria-label="Páginas de respuestas"></nav>
+    </section>
+    <section id="seccion-responder" class="tarjeta hilo__formulario" aria-labelledby="titulo-responder">
+      <h2 id="titulo-responder">Responder</h2>
+      <form id="form-respuesta">
+        <div class="campo"><label for="texto-respuesta">Tu aporte</label><textarea id="texto-respuesta" maxlength="5000" rows="6" required></textarea><small class="campo__ayuda">Máximo 5.000 caracteres.</small></div>
+        <button type="submit" class="btn btn--primario">Publicar respuesta</button>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="/js/modulos/hilo.js"></script>
+</body>
+</html>
