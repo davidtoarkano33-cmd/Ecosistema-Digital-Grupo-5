@@ -1,6 +1,6 @@
 // publico/js/modulos/mensajes.js · Bandeja y conversación privada
 import { montarPlantilla } from '../nucleo/plantilla.js';
-import { llamar } from '../nucleo/api.js';
+import { llamar, listar, crear } from '../nucleo/api.js';
 import { usuarioActual } from '../nucleo/sesion.js';
 import * as ui from '../nucleo/ui.js';
 
@@ -18,6 +18,10 @@ const textoEl = document.getElementById('texto-mensaje');
 const contadorEl = document.getElementById('contador-texto');
 const btnNuevaEl = document.getElementById('btn-nueva-conversacion');
 const btnVolverEl = document.getElementById('btn-volver');
+const btnDifusionEl = document.getElementById('btn-difusion');
+const btnBloqueoEl = document.getElementById('btn-bloqueo');
+
+btnDifusionEl.hidden = usuario.rol !== 'docente';
 
 let conversaciones = [];
 let conversacionActiva = null;
@@ -54,6 +58,16 @@ function textoConEnlaces(texto) {
     posicion = coincidencia.index + url.length;
   }
   return html + ui.escapar(String(texto || '').slice(posicion));
+}
+
+function actualizarEstadoChat() {
+  if (!conversacionActiva) return;
+  const bloqueada = conversacionActiva.bloqueadoPorMi || conversacionActiva.bloqueadoPorContacto;
+  btnBloqueoEl.hidden = false;
+  btnBloqueoEl.textContent = conversacionActiva.bloqueadoPorMi ? 'Desbloquear' : 'Bloquear';
+  textoEl.disabled = bloqueada;
+  formEl.querySelector('[type="submit"]').disabled = bloqueada;
+  textoEl.placeholder = bloqueada ? 'No se pueden enviar mensajes mientras exista un bloqueo.' : 'Escribe un mensaje...';
 }
 
 function renderizarConversaciones() {
@@ -106,6 +120,7 @@ function renderizarMensajes({ mantenerPosicion = false } = {}) {
         <div class="mensajes__burbuja">
           <p>${textoConEnlaces(mensaje.texto)}</p>
           <span class="mensajes__hora">${ui.escapar(horaCorta(mensaje.fecha))}</span>
+          ${propio ? '' : `<button type="button" class="mensajes__reportar" data-reportar="${ui.escapar(mensaje.id)}">Reportar</button>`}
         </div>
       </div>`;
   }).join('');
@@ -115,6 +130,9 @@ function renderizarMensajes({ mantenerPosicion = false } = {}) {
     ${bloques || '<div class="vacio"><p class="vacio__texto">Aún no hay mensajes. ¡Inicia la conversación!</p></div>'}`;
 
   document.getElementById('btn-ver-anteriores')?.addEventListener('click', cargarAnteriores);
+  historialEl.querySelectorAll('[data-reportar]').forEach(boton => {
+    boton.addEventListener('click', () => reportarMensaje(boton.dataset.reportar));
+  });
   if (mantenerPosicion) {
     historialEl.scrollTop = historialEl.scrollHeight - alturaAnterior + desplazamientoAnterior;
   } else {
@@ -128,6 +146,7 @@ async function cargarConversaciones() {
     conversaciones = respuesta.conversaciones || [];
     if (conversacionActiva) {
       conversacionActiva = conversaciones.find(item => item.id === conversacionActiva.id) || conversacionActiva;
+      actualizarEstadoChat();
     }
     renderizarConversaciones();
   } catch (error) {
@@ -142,6 +161,7 @@ async function abrirConversacion(id) {
   tituloChatEl.textContent = nombreDe(seleccionada.otro);
   rolContactoEl.textContent = seleccionada.otro?.rol || '';
   formEl.hidden = false;
+  actualizarEstadoChat();
   bandeja.classList.add('mensajes__bandeja--chat');
   renderizarConversaciones();
 
@@ -154,6 +174,82 @@ async function abrirConversacion(id) {
     textoEl.focus();
   } catch (error) {
     ui.aviso(error.message || 'No se pudo abrir la conversación', 'error');
+  }
+}
+
+async function reportarMensaje(mensajeId) {
+  if (!conversacionActiva) return;
+  const caja = document.createElement('div');
+  caja.className = 'campo';
+  caja.innerHTML = '<label for="motivo-reporte-mensaje">Motivo del reporte</label><textarea id="motivo-reporte-mensaje" maxlength="1000" rows="5" required></textarea><small class="campo__ayuda">Explica por qué el mensaje debe ser revisado.</small>';
+  const aceptar = await ui.modal({
+    titulo: 'Reportar mensaje',
+    contenido: caja,
+    acciones: [
+      { texto: 'Cancelar', valor: false, clase: 'btn--secundario' },
+      { texto: 'Enviar reporte', valor: true, clase: 'btn--primario' }
+    ]
+  });
+  if (!aceptar) return;
+  const motivo = caja.querySelector('textarea').value.trim();
+  if (!motivo) return ui.aviso('Escribe el motivo del reporte.', 'error');
+  try {
+    await crear('reportes', {
+      tipo: 'mensaje',
+      referenciaId: `${conversacionActiva.id}/${mensajeId}`,
+      motivo
+    });
+    ui.aviso('Mensaje reportado para revisión.', 'exito');
+  } catch (error) {
+    ui.aviso(error.message || 'No se pudo enviar el reporte', 'error');
+  }
+}
+
+async function alternarBloqueo() {
+  if (!conversacionActiva?.otro?.id) return;
+  const desbloquear = conversacionActiva.bloqueadoPorMi;
+  const accion = desbloquear ? 'desbloquear' : 'bloquear';
+  if (!await ui.confirmar(`¿Deseas ${accion} a ${nombreDe(conversacionActiva.otro)}?`)) return;
+  try {
+    if (desbloquear) {
+      await llamar('DELETE', `/api/mensajes/bloquear/${encodeURIComponent(conversacionActiva.otro.id)}`);
+    } else {
+      await llamar('POST', '/api/mensajes/bloquear', { usuarioId: conversacionActiva.otro.id });
+    }
+    await cargarConversaciones();
+    ui.aviso(desbloquear ? 'Contacto desbloqueado.' : 'Contacto bloqueado.', 'exito');
+  } catch (error) {
+    ui.aviso(error.message || `No se pudo ${accion} el contacto`, 'error');
+  }
+}
+
+async function enviarDifusion() {
+  try {
+    const [grupos, asignaturas] = await Promise.all([listar('distributivo'), listar('asignaturas')]);
+    const propios = grupos.filter(grupo => String(grupo.docenteId) === String(usuario.id));
+    if (!propios.length) return ui.aviso('No tienes grupos asignados.', 'info');
+    const nombres = new Map(asignaturas.map(item => [String(item.id), item.nombre]));
+    const caja = document.createElement('div');
+    caja.innerHTML = `<div class="campo"><label for="grupo-difusion">Curso</label><select id="grupo-difusion">${propios.map(grupo => `<option value="${ui.escapar(grupo.id)}">${ui.escapar(nombres.get(String(grupo.asignaturaId)) || 'Asignatura')} · ${ui.escapar(grupo.paralelo || '')}</option>`).join('')}</select></div><div class="campo"><label for="texto-difusion">Mensaje</label><textarea id="texto-difusion" maxlength="2000" rows="6" required></textarea><small class="campo__ayuda">Se enviará a cada estudiante del grupo.</small></div>`;
+    const aceptar = await ui.modal({
+      titulo: 'Mensaje al curso',
+      contenido: caja,
+      acciones: [
+        { texto: 'Cancelar', valor: false, clase: 'btn--secundario' },
+        { texto: 'Enviar', valor: true, clase: 'btn--primario' }
+      ]
+    });
+    if (!aceptar) return;
+    const texto = caja.querySelector('#texto-difusion').value.trim();
+    if (!texto) return ui.aviso('Escribe el mensaje para el curso.', 'error');
+    const resultado = await llamar('POST', '/api/mensajes/difusion', {
+      grupoId: caja.querySelector('#grupo-difusion').value,
+      texto
+    });
+    await cargarConversaciones();
+    ui.aviso(`Mensaje enviado a ${resultado.enviados?.length || 0} estudiantes.`, 'exito');
+  } catch (error) {
+    ui.aviso(error.message || 'No se pudo enviar el mensaje al curso', 'error');
   }
 }
 
@@ -272,6 +368,8 @@ textoEl.addEventListener('keydown', evento => {
 
 buscarEl.addEventListener('input', renderizarConversaciones);
 btnNuevaEl.addEventListener('click', nuevaConversacion);
+btnDifusionEl.addEventListener('click', enviarDifusion);
+btnBloqueoEl.addEventListener('click', alternarBloqueo);
 btnVolverEl.addEventListener('click', () => bandeja.classList.remove('mensajes__bandeja--chat'));
 
 await cargarConversaciones();

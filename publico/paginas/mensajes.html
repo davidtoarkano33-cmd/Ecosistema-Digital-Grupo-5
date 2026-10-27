@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/componentes.css">
-  <link rel="stylesheet" href="/css/modulos/mensajes.css">
+  <link rel="stylesheet" href="/css/modulos/mensajes.css?v=3">
   <title>Mensajes</title>
 </head>
 <body>
@@ -17,7 +17,10 @@
         <h1>Mensajes</h1>
         <p>Conversa de forma privada con docentes y compañeros autorizados.</p>
       </div>
-      <button type="button" id="btn-nueva-conversacion" class="btn btn--primario">Nueva conversación</button>
+      <div class="mensajes__acciones-cabecera">
+        <button type="button" id="btn-difusion" class="btn btn--secundario" hidden>Mensaje al curso</button>
+        <button type="button" id="btn-nueva-conversacion" class="btn btn--primario">Nueva conversación</button>
+      </div>
     </header>
 
     <div class="mensajes__bandeja">
@@ -37,6 +40,7 @@
             <h2 id="titulo-chat">Selecciona una conversación</h2>
             <span id="rol-contacto" class="texto-suave"></span>
           </div>
+          <button type="button" id="btn-bloqueo" class="btn btn--secundario btn--pequeno" hidden>Bloquear</button>
         </header>
 
         <div id="historial-mensajes" class="mensajes__historial" aria-live="polite">
@@ -56,6 +60,6 @@
       </section>
     </div>
   </main>
-  <script type="module" src="/js/modulos/mensajes.js?v=2"></script>
+  <script type="module" src="/js/modulos/mensajes.js?v=3"></script>
 </body>
 </html>

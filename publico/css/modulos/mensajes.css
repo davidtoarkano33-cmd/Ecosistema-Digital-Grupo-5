@@ -4,6 +4,7 @@
 }
 
 .mensajes__cabecera,
+.mensajes__acciones-cabecera,
 .mensajes__chat-cabecera,
 .mensajes__formulario-pie,
 .mensajes__conversacion-superior {
@@ -114,6 +115,10 @@
   border-bottom: 1px solid var(--borde);
 }
 
+.mensajes__chat-cabecera #btn-bloqueo {
+  margin-left: auto;
+}
+
 .mensajes__volver {
   display: none;
 }
@@ -194,6 +199,20 @@
   opacity: .8;
 }
 
+.mensajes__reportar {
+  display: block;
+  margin-top: var(--espacio-xs);
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: var(--tamano-xs);
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: .9;
+}
+
 .mensajes__formulario {
   border-top: 1px solid var(--borde);
 }
@@ -236,6 +255,11 @@
 
   .mensajes__cabecera .btn {
     width: 100%;
+  }
+
+  .mensajes__acciones-cabecera {
+    width: 100%;
+    flex-direction: column;
   }
 
   .mensajes__bandeja {

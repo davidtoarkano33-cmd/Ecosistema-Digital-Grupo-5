@@ -3,5 +3,10 @@
 .reportes__cabecera { justify-content: space-between; margin-bottom: var(--espacio-l); }
 .reportes__cabecera p, .reportes__meta { color: var(--texto-suave); }
 .reportes__publicacion { padding: var(--espacio-m); background: var(--fondo); border-radius: var(--radio-m); margin-block: var(--espacio-m); }
+.reportes__contexto { display: grid; gap: var(--espacio-s); margin-block: var(--espacio-m); }
+.reportes__mensaje { padding: var(--espacio-s) var(--espacio-m); background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio-m); }
+.reportes__mensaje--reportado { border-color: var(--advertencia); background: var(--advertencia-fondo); }
+.reportes__mensaje p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.reportes__mensaje small { color: var(--texto-suave); }
 .reportes__acciones { justify-content: flex-end; }
 @media (max-width: 32rem) { .reportes__cabecera { align-items: flex-start; flex-direction: column; } .reportes__acciones .btn { width: 100%; } }

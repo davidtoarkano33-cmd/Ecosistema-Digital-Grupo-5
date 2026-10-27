@@ -164,9 +164,10 @@ router.get('/mensajes/contactos', async (req, res, next) => {
 
 router.get('/mensajes/conversaciones', async (req, res, next) => {
   try {
-    const [conversaciones, usuarios] = await Promise.all([
+    const [conversaciones, usuarios, bloqueos] = await Promise.all([
       almacen.leer('conversaciones'),
-      almacen.leer('usuarios')
+      almacen.leer('usuarios'),
+      almacen.leer('bloqueos')
     ]);
     const mapaUsuarios = new Map((usuarios || []).map(item => [String(item.id), item]));
     const mias = (conversaciones || []).filter(item =>
@@ -181,10 +182,18 @@ router.get('/mensajes/conversaciones', async (req, res, next) => {
         item && !item.oculto && String(item.autorId) !== String(req.usuario.id) && new Date(item.fecha).getTime() > leidoHasta
       ).length;
       const otro = mapaUsuarios.get(String(otroId));
+      const bloqueoPropio = (bloqueos || []).find(item =>
+        String(item?.usuarioId) === String(req.usuario.id) && String(item?.bloqueadoId) === String(otroId)
+      );
+      const bloqueoAjeno = (bloqueos || []).some(item =>
+        String(item?.usuarioId) === String(otroId) && String(item?.bloqueadoId) === String(req.usuario.id)
+      );
       return {
         ...conversacion,
         otro: otro ? usuarioPublico(otro) : null,
-        noLeidos
+        noLeidos,
+        bloqueadoPorMi: Boolean(bloqueoPropio),
+        bloqueadoPorContacto: bloqueoAjeno
       };
     }));
 
