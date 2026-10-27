@@ -34,6 +34,12 @@ export const ACTIVIDADES = [
     texto: "Canciones del tema",
     descripcion: "Aprende con música",
     href: "/paginas/canciones.html"
+  },
+  {
+    id: "tutor",
+    texto: "Tutor IA",
+    descripcion: "Resuelve dudas razonando",
+    href: "/paginas/tutor.html"
   }
 ];
 

@@ -4,12 +4,65 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import fs from 'node:fs/promises';
 import { ejecutarTarea, obtenerConfigIA, guardarConfigIA, probarConexionApi, listarModelosIA } from '../ia.js';
+import * as almacen from '../almacen.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PREPARADORES_DIR = path.join(__dirname, '..', 'preparadores');
 
 const router = Router();
+const colasConsultasTutor = new Map();
+
+async function registrarConsultaTutor(usuarioId, temaId) {
+  const dia = new Date().toISOString().slice(0, 10);
+  const clave = `${usuarioId}/${temaId}/${dia}`;
+  const anterior = colasConsultasTutor.get(clave) || Promise.resolve();
+  const siguiente = anterior.catch(() => {}).then(async () => {
+    const registros = await almacen.leer('consultas-tutor');
+    const existente = (registros || []).find(item =>
+      String(item?.usuarioId) === String(usuarioId) &&
+      String(item?.temaId) === String(temaId) &&
+      item?.dia === dia
+    );
+    if (existente) {
+      await almacen.actualizar('consultas-tutor', existente.id, {
+        mensajes: Math.max(0, Number(existente.mensajes) || 0) + 1
+      });
+      return;
+    }
+    await almacen.agregar('consultas-tutor', {
+      usuarioId: String(usuarioId),
+      temaId: String(temaId),
+      dia,
+      mensajes: 1
+    });
+  });
+  colasConsultasTutor.set(clave, siguiente);
+  try {
+    await siguiente;
+  } finally {
+    if (colasConsultasTutor.get(clave) === siguiente) colasConsultasTutor.delete(clave);
+  }
+}
+
+async function registrarHistorialTutor(usuarioId, temaId, pregunta, respuesta) {
+  const ajustes = await almacen.leerConfig('ajustes');
+  const dias = Math.max(1, Number(ajustes.retencionHistorialTutorDias) || 90);
+  const limite = Date.now() - dias * 24 * 60 * 60 * 1000;
+  const registros = await almacen.leer('historial-tutor');
+  for (const registro of registros || []) {
+    if (new Date(registro?.fecha || 0).getTime() < limite) {
+      await almacen.eliminar('historial-tutor', registro.id);
+    }
+  }
+  await almacen.agregar('historial-tutor', {
+    usuarioId: String(usuarioId),
+    temaId: String(temaId),
+    pregunta: String(pregunta || '').slice(0, 1000),
+    respuesta: String(respuesta || '').slice(0, 700),
+    revisionAutorizada: true
+  });
+}
 
 // GET /ia/modelos (solo admin) → retorna la lista de modelos de Gemini soportados o en vivo
 router.get('/ia/modelos', async (req, res) => {
@@ -118,6 +171,17 @@ router.get('/ia/prueba', async (req, res) => {
   }
 });
 
+router.delete('/ia/tutor/historial', async (req, res) => {
+  try {
+    if (!req.usuario) return res.status(401).json({ error: 'Sesión no iniciada' });
+    const registros = await almacen.buscar('historial-tutor', { usuarioId: req.usuario.id });
+    for (const registro of registros) await almacen.eliminar('historial-tutor', registro.id);
+    return res.json({ eliminados: registros.length });
+  } catch (err) {
+    return res.status(err.estado || 500).json({ error: err.message || 'No se pudo borrar el historial' });
+  }
+});
+
 // POST /ia/:tarea (con sesión)
 router.post('/ia/:tarea', async (req, res) => {
   try {
@@ -166,6 +230,20 @@ router.post('/ia/:tarea', async (req, res) => {
     const formato = (esGeneracion || tarea === 'evaluar-rol') ? 'json' : 'texto';
 
     const resultado = await ejecutarTarea(tarea, datosPrompt, usuario, { formato });
+
+    if (tarea === 'tutor') {
+      const respuesta = Array.from(String(resultado || '').trim()).slice(0, 700).join('');
+      await registrarConsultaTutor(usuario.id, req.body?.temaId);
+      if (req.body?.permitirRevision === true) {
+        await registrarHistorialTutor(
+          usuario.id,
+          req.body?.temaId,
+          datosPrompt.pregunta,
+          respuesta
+        );
+      }
+      return res.json({ respuesta });
+    }
 
     return res.json(resultado);
   } catch (err) {

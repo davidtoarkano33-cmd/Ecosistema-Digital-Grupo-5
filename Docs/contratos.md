@@ -72,12 +72,13 @@ Gamif.    POST /api/intentos · GET /api/logros/:usuarioId ("yo" permitido)
 Certif.   GET /api/certificados/estado · POST /api/certificados
           GET /api/certificados/verificar/:codigo (sin sesión)
 Resumen   GET /api/resumen/estudiante/:id ("yo") · GET /api/resumen/grupo/:grupoId
-          GET /api/resumen/tutor/:grupoId
+          GET /api/resumen/tutor/:grupoId[?incluirHistorial=1]
 Notif.    GET /api/notificaciones · POST /api/notificaciones
           POST /api/notificaciones/:id/leida · POST /api/notificaciones/leidas
 Alertas   GET /api/alertas?grupoId= → { alertas, mensajesApoyo }
 IA        POST /api/ia/:tarea   tareas: generar-glosario, generar-preguntas, generar-escenario,
-          tutor, rol-simulacion, evaluar-rol · GET /api/ia/prueba (admin)
+          tutor, rol-simulacion, evaluar-rol · DELETE /api/ia/tutor/historial
+          GET /api/ia/prueba (admin)
 Quiz      GET /api/quiz/estado?temaId= · POST /api/quiz/iniciar · POST /api/quiz/responder
           POST /api/quiz/finalizar
 Agenda    GET /api/agenda/recordatorios
@@ -131,6 +132,7 @@ conversaciones    participantes[], ultimo{texto, fecha, autorId}, leidoHasta{usu
 mensajes/<convId> autorId, texto, oculto
 bloqueos          usuarioId, bloqueadoId
 consultas-tutor   usuarioId, temaId, dia, mensajes
+historial-tutor   usuarioId, temaId, pregunta, respuesta, revisionAutorizada
 simulaciones      temaId, titulo, modo(escenarios|rol), estado, escenaInicial,
                   escenas[{id, texto, imagen,
                            opciones[{texto, destino, puntos, consecuencia}]}],
@@ -141,7 +143,7 @@ simulaciones      temaId, titulo, modo(escenarios|rol), estado, escenaInicial,
 permisos.json            { "<col>": { "leer": [...], "escribir": [...] } }
                          valores: publico, sesion, estudiante, docente, admin, propio, servidor
 ajustes.json             nombrePlataforma, maxSubidaMB, limiteIADiario, limiteTutorDiario,
-                         chatEntreEstudiantes, alertasAdmin
+                         retencionHistorialTutorDias, chatEntreEstudiantes, alertasAdmin
 reglas-gamificacion.json puntos, bonoSinErrores, unicas, requiereAprobado, maxDiario,
                          limiteIntentosHora, quiz{...}, certificado{...}   (Anexo A)
 reglas-alertas.json      promedioBajo, erroresActividad, fallosQuiz, inactividad, vencidas,

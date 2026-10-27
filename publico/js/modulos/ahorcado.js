@@ -47,7 +47,7 @@ async function iniciarModulo() {
     const glosario = await listar('glosario', { temaId: tema.id });
     terminosGlosario = (glosario || []).filter(item => {
       const limpio = normalizar(item.termino || '');
-      return limpio.length === 6 && !limpio.includes(' ');
+      return limpio.length >= 4 && limpio.length <= 14 && !limpio.includes(' ');
     });
   } catch (err) {
     console.error('Error al cargar glosario:', err);
@@ -60,8 +60,8 @@ async function iniciarModulo() {
       contenido.innerHTML = `
         <div class="tarjeta vacio">
           <div class="vacio__icono">📖</div>
-          <h2 class="vacio__titulo">Sin términos de 6 letras</h2>
-          <p class="vacio__texto">El tema <strong>${escapar(tema.titulo)}</strong> no cuenta con términos de exactamente 6 letras en su glosario para jugar al Ahorcado.</p>
+          <h2 class="vacio__titulo">Sin términos disponibles</h2>
+          <p class="vacio__texto">El tema <strong>${escapar(tema.titulo)}</strong> no cuenta con términos completos de una sola palabra para jugar al Ahorcado.</p>
           <div class="fila fila--s" style="justify-content: center; margin-top: var(--espacio-m);">
             <a href="/paginas/tema.html?id=${encodeURIComponent(tema.id)}" class="btn btn--primario">Ir al Tema</a>
             <a href="/paginas/ahorcado.html" class="btn btn--secundario">Elegir otro tema</a>
@@ -106,7 +106,7 @@ async function iniciarModulo() {
   function renderizarTablero() {
     if (!contenido) return;
 
-    const casillasHtml = Array.from({ length: 6 }).map((_, i) => {
+    const casillasHtml = Array.from({ length: palabraSecreta.length }).map((_, i) => {
       const letra = palabraSecreta[i];
       const descubierta = letrasAdivinadas.has(letra);
       return `
@@ -155,10 +155,10 @@ async function iniciarModulo() {
           </div>
 
           <div class="ahorcado-pista">
-            <strong>Pista:</strong> ${escapar(terminoActual.pista || 'Descubre la palabra de 6 letras.')}
+            <strong>Pista:</strong> ${escapar(terminoActual.pista || `Descubre la palabra de ${palabraSecreta.length} letras.`)}
           </div>
 
-          <div class="ahorcado-palabra" role="group" aria-label="Palabra de 6 letras">
+          <div class="ahorcado-palabra" role="group" aria-label="Palabra de ${palabraSecreta.length} letras">
             ${casillasHtml}
           </div>
 
@@ -216,7 +216,7 @@ async function iniciarModulo() {
       }
 
       // Actualizar casillas
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < palabraSecreta.length; i++) {
         if (palabraSecreta[i] === letra) {
           const casilla = document.getElementById(`casilla-${i}`);
           if (casilla) {
@@ -267,7 +267,7 @@ async function iniciarModulo() {
     });
 
     // Revelar la palabra en las casillas
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < palabraSecreta.length; i++) {
       const casilla = document.getElementById(`casilla-${i}`);
       if (casilla) {
         const letraReal = palabraSecreta[i];

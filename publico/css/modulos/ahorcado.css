@@ -145,11 +145,13 @@
   color: var(--primario);
 }
 
-/* Casillas de la palabra de 6 letras */
+/* Casillas de palabras completas */
 .ahorcado-palabra {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--espacio-s);
   justify-content: center;
+  width: 100%;
   margin: var(--espacio-m) 0;
 }
 

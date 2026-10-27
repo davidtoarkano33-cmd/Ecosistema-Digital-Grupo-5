@@ -5,11 +5,13 @@ import { aviso, escapar, cargando } from '../nucleo/ui.js';
 import { parametro, formatoBasico } from '../nucleo/util.js';
 import { ACTIVIDADES } from '../nucleo/catalogo-actividades.js';
 import { registrarIntento } from '../nucleo/gamificacion.js';
+import { usuarioActual } from '../nucleo/sesion.js';
 
 await montarPlantilla({ titulo: "Tema", roles: ["estudiante", "docente", "admin"] });
 
 const temaId = parametro('id');
 const contenido = document.getElementById('contenido');
+const usuario = usuarioActual();
 
 function obtenerEmbedVideoUrl(url) {
   if (!url) return null;
@@ -225,7 +227,7 @@ if (!temaId) {
     if (Array.isArray(ACTIVIDADES) && ACTIVIDADES.length > 0) {
       actividadesHtml = `
         <div class="actividades-grid">
-          ${ACTIVIDADES.map(act => `
+          ${ACTIVIDADES.filter(act => act.id !== 'tutor' || usuario?.rol === 'estudiante').map(act => `
             <a href="${escapar(act.href)}?temaId=${encodeURIComponent(tema.id)}" class="actividad-card">
               <div>
                 <strong style="color: var(--primario); font-size: var(--tamano-m);">${escapar(act.texto)}</strong>
@@ -270,8 +272,20 @@ if (!temaId) {
           ${migasHtml}
           <div class="fila fila--m" style="justify-content: space-between; align-items: center; margin-top: var(--espacio-m); flex-wrap: wrap; gap: var(--espacio-m);">
             <h1 class="tarjeta__titulo" style="margin: 0; font-size: var(--tamano-xl);">${escapar(tema.titulo)}</h1>
-            <div id="contenedor-btn-revisado">
-              ${botonRevisadoHtml}
+            <div class="fila fila--s" style="flex-wrap: wrap;">
+              ${usuario?.rol === 'estudiante' ? `
+                <a href="/paginas/tutor.html?temaId=${encodeURIComponent(tema.id)}" class="btn btn--secundario tema-tutor">
+                  <img src="/recursos/tutor-socratico.png" alt="" class="tema-tutor__avatar">
+                  <span class="tema-tutor__texto">
+                    <span>¿Tienes preguntas?</span>
+                    <strong>Aquí está tu tutor socrático</strong>
+                    <span>Mi nombre es Canelo</span>
+                  </span>
+                </a>
+              ` : ''}
+              <div id="contenedor-btn-revisado">
+                ${botonRevisadoHtml}
+              </div>
             </div>
           </div>
         </div>

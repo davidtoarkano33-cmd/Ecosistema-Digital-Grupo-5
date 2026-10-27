@@ -1,6 +1,7 @@
 // publico/js/nucleo/gamificacion.js · Gestión de intentos, logros y recompensas en navegador
 import { llamar } from './api.js';
 import { aviso, modal, escapar } from './ui.js';
+import { cambiarEstado } from './avatar.js';
 
 /**
  * Registra un intento de actividad en el servidor y procesa logros obtenidos
@@ -40,6 +41,10 @@ export async function mostrarLogros(resultado) {
 
   // 3. Modal de celebración por cada insignia nueva desbloqueada
   if (Array.isArray(resultado.insigniasNuevas) && resultado.insigniasNuevas.length > 0) {
+    if (document.querySelector('.avatar-guia')) {
+      cambiarEstado('celebrando');
+      setTimeout(() => cambiarEstado('reposo'), 3000);
+    }
     for (const ins of resultado.insigniasNuevas) {
       const icono = ins.icono || '🏆';
       const nombre = ins.nombre || 'Insignia';

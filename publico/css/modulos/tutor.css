@@ -1,0 +1,176 @@
+/* publico/css/modulos/tutor.css · Conversación socrática por tema */
+.tutor { padding-block: var(--espacio-l); }
+
+.tutor__cabecera,
+.tutor__formulario-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+}
+
+.tutor__identidad {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+}
+
+.tutor__retrato {
+  flex: 0 0 var(--espacio-2xl);
+  width: var(--espacio-2xl);
+  height: var(--espacio-2xl);
+  border: 1px solid var(--acento);
+  border-radius: var(--radio-completo);
+  object-fit: cover;
+}
+
+.tutor__cabecera h1,
+.tutor__cabecera p,
+.tutor__iniciadores h2 { margin: 0; }
+
+.tutor__etiqueta {
+  color: var(--primario);
+  font-weight: var(--peso-seminegrita);
+}
+
+.tutor__subtema {
+  color: var(--texto-suave);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-seminegrita);
+}
+
+.tutor__iniciadores { margin-block: var(--espacio-l); }
+.tutor__iniciadores h2 { margin-bottom: var(--espacio-s); font-size: var(--tamano-m); }
+.tutor__chips { display: flex; flex-wrap: wrap; gap: var(--espacio-s); }
+
+.tutor__chip {
+  padding: var(--espacio-s) var(--espacio-m);
+  border: 1px solid var(--primario);
+  border-radius: var(--radio-l);
+  color: var(--primario);
+  background: var(--superficie);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tutor__chip:hover,
+.tutor__chip:focus-visible { color: var(--texto-inverso); background: var(--primario); }
+.tutor__chip:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+
+.tutor__chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  background: var(--superficie);
+  box-shadow: var(--sombra-1);
+}
+
+.tutor__historial {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--espacio-m);
+  overflow-y: auto;
+  padding: var(--espacio-l);
+  background: var(--fondo);
+}
+
+.tutor__fila {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--espacio-s);
+}
+
+.tutor__fila--estudiante { flex-direction: row-reverse; }
+
+.tutor__avatar {
+  flex: 0 0 var(--espacio-xl);
+  width: var(--espacio-xl);
+  height: var(--espacio-xl);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-completo);
+  background: var(--superficie);
+  object-fit: cover;
+}
+
+.tutor__avatar--iniciales {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-inverso);
+  background: var(--secundario);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
+}
+
+.tutor__burbuja {
+  max-width: 78%;
+  padding: var(--espacio-s) var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  color: var(--texto);
+  background: var(--superficie);
+  overflow-wrap: anywhere;
+}
+
+.tutor__fila--estudiante .tutor__burbuja {
+  border-color: var(--primario);
+  color: var(--texto-inverso);
+  background: var(--primario);
+}
+
+.tutor__fila--estudiante .tutor__burbuja p {
+  color: var(--texto-inverso);
+}
+
+.tutor__burbuja p,
+.tutor__burbuja ul { margin-block: 0 var(--espacio-xs); }
+.tutor__burbuja :last-child { margin-bottom: 0; }
+
+.tutor__pensando {
+  margin: 0;
+  padding: var(--espacio-s) var(--espacio-l);
+  color: var(--texto-suave);
+  background: var(--fondo);
+  font-style: italic;
+}
+
+.tutor__formulario { padding: var(--espacio-m); border-top: 1px solid var(--borde); }
+.tutor__formulario textarea { display: block; width: 100%; margin-block: var(--espacio-xs) var(--espacio-s); resize: vertical; }
+.tutor__formulario small { color: var(--texto-suave); }
+
+.tutor__privacidad {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-xs);
+  margin-bottom: var(--espacio-s);
+  padding: var(--espacio-s);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background: var(--fondo);
+}
+
+.tutor__consentimiento {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-s);
+  color: var(--texto);
+  font-size: var(--tamano-s);
+}
+
+.tutor__consentimiento input { margin-top: var(--espacio-xs); }
+
+@media (max-width: 40rem) {
+  .tutor__cabecera,
+  .tutor__formulario-pie { align-items: stretch; flex-direction: column; }
+  .tutor__cabecera .btn,
+  .tutor__formulario-pie .btn,
+  .tutor__chip { width: 100%; }
+  .tutor__burbuja { max-width: 90%; }
+  .tutor__identidad { align-items: flex-start; }
+}

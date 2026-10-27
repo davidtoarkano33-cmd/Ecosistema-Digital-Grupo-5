@@ -6,6 +6,7 @@ import { aviso } from './ui.js';
 import { listar, llamar } from './api.js';
 import { logrosDe } from './gamificacion.js';
 import { montarCampana } from './notificaciones.js';
+import { montarAvatar, decir } from './avatar.js';
 
 export const NOMBRE = "Ecosistema Educativo";
 
@@ -261,6 +262,13 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
 
   // 14. Montar Índice Deslizable de Secciones (Subtemas) de la página
   montarIndiceSeccionesGlobal(titulo);
+
+  const contenidoAvatar = document.querySelector('[data-avatar]');
+  const instruccionesAvatar = contenidoAvatar?.dataset.avatar?.trim();
+  if (instruccionesAvatar) {
+    montarAvatar();
+    decir(instruccionesAvatar);
+  }
 }
 
 /**

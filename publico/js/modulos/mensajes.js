@@ -7,6 +7,7 @@ import * as ui from '../nucleo/ui.js';
 await montarPlantilla({ titulo: 'Mensajes', roles: ['sesion'] });
 
 const usuario = usuarioActual();
+let perfilActual = usuario;
 const bandeja = document.querySelector('.mensajes__bandeja');
 const listaEl = document.getElementById('lista-conversaciones');
 const buscarEl = document.getElementById('buscar-conversacion');
@@ -31,6 +32,23 @@ let cargandoNuevos = false;
 
 function nombreDe(contacto) {
   return contacto ? `${contacto.nombre || ''} ${contacto.apellido || ''}`.trim() : 'Usuario no disponible';
+}
+
+function inicialesDe(persona) {
+  return [persona?.nombre, persona?.apellido]
+    .filter(Boolean)
+    .map(valor => String(valor).trim().charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toLocaleUpperCase('es');
+}
+
+function avatarDe(persona, clase = '') {
+  const nombre = nombreDe(persona);
+  if (persona?.foto) {
+    return `<img src="${ui.escapar(persona.foto)}" alt="Foto de ${ui.escapar(nombre)}" class="mensajes__avatar ${clase}">`;
+  }
+  return `<span class="mensajes__avatar mensajes__avatar--iniciales ${clase}" aria-label="${ui.escapar(nombre)}">${ui.escapar(inicialesDe(persona) || '?')}</span>`;
 }
 
 function horaCorta(fecha) {
@@ -87,13 +105,16 @@ function renderizarConversaciones() {
     const noLeidos = Number(item.noLeidos) || 0;
     return `
       <button type="button" class="mensajes__conversacion${activa}" data-id="${ui.escapar(item.id)}">
-        <span class="mensajes__conversacion-superior">
-          <span class="mensajes__conversacion-nombre">${ui.escapar(nombreDe(item.otro))}</span>
-          <span class="mensajes__conversacion-hora">${ui.escapar(horaCorta(item.ultimo?.fecha || item.fecha))}</span>
-        </span>
-        <span class="mensajes__conversacion-superior">
-          <span class="mensajes__conversacion-ultimo">${ui.escapar(item.ultimo?.texto || 'Sin mensajes todavía')}</span>
-          ${noLeidos ? `<span class="insignia insignia--acento" aria-label="${noLeidos} mensajes no leídos">${noLeidos > 99 ? '99+' : noLeidos}</span>` : ''}
+        ${avatarDe(item.otro, 'mensajes__avatar--bandeja')}
+        <span class="mensajes__conversacion-contenido">
+          <span class="mensajes__conversacion-superior">
+            <span class="mensajes__conversacion-nombre">${ui.escapar(nombreDe(item.otro))}</span>
+            <span class="mensajes__conversacion-hora">${ui.escapar(horaCorta(item.ultimo?.fecha || item.fecha))}</span>
+          </span>
+          <span class="mensajes__conversacion-superior">
+            <span class="mensajes__conversacion-ultimo">${ui.escapar(item.ultimo?.texto || 'Sin mensajes todavía')}</span>
+            ${noLeidos ? `<span class="insignia insignia--acento" aria-label="${noLeidos} mensajes no leídos">${noLeidos > 99 ? '99+' : noLeidos}</span>` : ''}
+          </span>
         </span>
       </button>`;
   }).join('');
@@ -115,8 +136,10 @@ function renderizarMensajes({ mantenerPosicion = false } = {}) {
       : '';
     diaAnterior = clave;
     const propio = String(mensaje.autorId) === String(usuario.id);
+    const autor = propio ? perfilActual : conversacionActiva.otro;
     return `${separador}
       <div class="mensajes__fila-mensaje${propio ? ' mensajes__fila-mensaje--propio' : ''}" data-mensaje-id="${ui.escapar(mensaje.id)}">
+        ${avatarDe(autor)}
         <div class="mensajes__burbuja">
           <p>${textoConEnlaces(mensaje.texto)}</p>
           <span class="mensajes__hora">${ui.escapar(horaCorta(mensaje.fecha))}</span>
@@ -143,10 +166,16 @@ function renderizarMensajes({ mantenerPosicion = false } = {}) {
 async function cargarConversaciones() {
   try {
     const respuesta = await llamar('GET', `/api/mensajes/conversaciones?_=${Date.now()}`);
+    const fotoPropiaAnterior = perfilActual?.foto || '';
+    const fotoContactoAnterior = conversacionActiva?.otro?.foto || '';
+    perfilActual = respuesta.usuario || perfilActual;
     conversaciones = respuesta.conversaciones || [];
     if (conversacionActiva) {
       conversacionActiva = conversaciones.find(item => item.id === conversacionActiva.id) || conversacionActiva;
       actualizarEstadoChat();
+      if (fotoPropiaAnterior !== (perfilActual?.foto || '') || fotoContactoAnterior !== (conversacionActiva.otro?.foto || '')) {
+        renderizarMensajes({ mantenerPosicion: true });
+      }
     }
     renderizarConversaciones();
   } catch (error) {

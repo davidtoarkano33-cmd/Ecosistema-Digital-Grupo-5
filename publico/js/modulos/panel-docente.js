@@ -12,7 +12,9 @@ const contenido = document.getElementById('contenido');
 let gruposDisponibles = [];
 let grupoActualId = null;
 let datosGrupoActual = null;
+let datosTutorActual = null;
 let instanciaGrafico = null;
+let instanciaGraficoTutor = null;
 let columnaOrden = 'nombre';
 let ordenAsc = true;
 
@@ -57,7 +59,13 @@ async function cargarDatosGrupo(grupoId) {
   if (!grupoId) return;
   cargando(true);
   try {
-    datosGrupoActual = await llamar('GET', `/api/resumen/grupo/${grupoId}`);
+    [datosGrupoActual, datosTutorActual] = await Promise.all([
+      llamar('GET', `/api/resumen/grupo/${encodeURIComponent(grupoId)}`),
+      llamar('GET', `/api/resumen/tutor/${encodeURIComponent(grupoId)}?incluirHistorial=1`)
+    ]);
+    if (!Object.hasOwn(datosTutorActual || {}, 'historial')) {
+      aviso('El servidor está desactualizado. Reinícialo para habilitar la revisión del historial del tutor.', 'advertencia');
+    }
     renderizarTodo();
   } catch (err) {
     console.error('Error al cargar resumen del grupo:', err);
@@ -65,6 +73,86 @@ async function cargarDatosGrupo(grupoId) {
   } finally {
     cargando(false);
   }
+}
+
+function renderizarGraficoTutor(porTema) {
+  const canvas = document.getElementById('grafico-uso-tutor');
+  if (!canvas) return;
+  if (instanciaGraficoTutor) instanciaGraficoTutor.destroy();
+
+  const principales = [...(porTema || [])]
+    .filter(item => Number(item.consultas) > 0)
+    .sort((a, b) => Number(b.consultas) - Number(a.consultas))
+    .slice(0, 5);
+
+  if (!principales.length) {
+    canvas.parentElement.innerHTML = '<div class="vacio"><p class="vacio__texto">Aún no hay consultas al tutor en este grupo.</p></div>';
+    instanciaGraficoTutor = null;
+    return;
+  }
+
+  /* global Chart */
+  instanciaGraficoTutor = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: principales.map(item => item.titulo || 'Tema'),
+      datasets: [{
+        label: 'Consultas',
+        data: principales.map(item => Number(item.consultas) || 0),
+        backgroundColor: COLOR_PRIMARIO,
+        hoverBackgroundColor: COLOR_ACENTO,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: { precision: 0, color: COLOR_TEXTO_SUAVE },
+          grid: { color: COLOR_BORDE }
+        },
+        y: {
+          ticks: { color: COLOR_TEXTO_SUAVE },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+async function abrirHistorialTutor(usuarioId, nombre) {
+  const registros = (datosTutorActual?.historial || [])
+    .filter(item => String(item.usuarioId) === String(usuarioId));
+  const contenedor = document.createElement('div');
+  contenedor.className = 'panel-tutor-historial';
+  contenedor.innerHTML = registros.length
+    ? registros.map(item => `
+        <article class="panel-tutor-intercambio">
+          <header>
+            <strong>${escapar(item.tema || 'Tema')}</strong>
+            <span>${escapar(item.fecha ? fechaCorta(item.fecha) : '')}</span>
+          </header>
+          <div class="panel-tutor-mensaje panel-tutor-mensaje--estudiante">
+            <strong>Estudiante</strong>
+            <p>${escapar(item.pregunta || '')}</p>
+          </div>
+          <div class="panel-tutor-mensaje panel-tutor-mensaje--tutor">
+            <strong>Canelo</strong>
+            <p>${escapar(item.respuesta || '')}</p>
+          </div>
+        </article>
+      `).join('')
+    : '<div class="vacio"><p class="vacio__texto">Este estudiante no ha autorizado conversaciones para revisión.</p></div>';
+  await modal({
+    titulo: `Historial del tutor: ${nombre}`,
+    contenido: contenedor,
+    acciones: [{ texto: 'Cerrar', valor: true, clase: 'btn--secundario' }]
+  });
 }
 
 // 3. Renderizar gráfico de barras por tema
@@ -568,6 +656,29 @@ function renderizarTodo() {
   `).join('');
 
   const estudiantesOrdenados = ordenarEstudiantes(datosGrupoActual ? datosGrupoActual.estudiantes : []);
+  const consultasEstudiantes = [...(datosTutorActual?.porEstudiante || [])]
+    .sort((a, b) => Number(b.consultas) - Number(a.consultas) || String(a.nombre).localeCompare(String(b.nombre), 'es'));
+  const historialPorEstudiante = new Map();
+  for (const item of datosTutorActual?.historial || []) {
+    const clave = String(item.usuarioId);
+    historialPorEstudiante.set(clave, (historialPorEstudiante.get(clave) || 0) + 1);
+  }
+  const filasTutorHtml = consultasEstudiantes.length
+    ? consultasEstudiantes.map(item => {
+        const compartidos = historialPorEstudiante.get(String(item.id)) || 0;
+        return `
+        <tr>
+          <td>${escapar(item.nombre || 'Estudiante')}</td>
+          <td><strong>${Number(item.consultas) || 0}</strong></td>
+          <td>
+            <button type="button" class="btn btn--texto btn--pequeno btn-historial-tutor" data-id="${escapar(item.id)}" data-nombre="${escapar(item.nombre || 'Estudiante')}" ${compartidos ? '' : 'disabled'}>
+              Ver historial (${compartidos})
+            </button>
+          </td>
+        </tr>
+      `;
+      }).join('')
+    : '<tr><td colspan="3">No hay estudiantes en este grupo.</td></tr>';
 
   let filasEstudiantesHtml = '';
   if (estudiantesOrdenados.length === 0) {
@@ -649,6 +760,30 @@ function renderizarTodo() {
         </div>
       </section>
 
+      <section class="panel-grafico-bloque" aria-labelledby="titulo-uso-tutor">
+        <header class="panel-grafico-cabecera">
+          <h2 id="titulo-uso-tutor" class="panel-grafico-titulo">Uso del tutor</h2>
+          <p class="panel-grafico-descripcion">Consultas acumuladas y conversaciones autorizadas por el estudiante para revisión educativa.</p>
+        </header>
+        <div class="panel-tutor-grid">
+          <div>
+            <h3 class="panel-tutor-subtitulo">Cinco temas más consultados</h3>
+            <div class="panel-grafico-lienzo panel-grafico-lienzo--tutor">
+              <canvas id="grafico-uso-tutor" aria-label="Gráfico horizontal de temas más consultados al tutor"></canvas>
+            </div>
+          </div>
+          <div>
+            <h3 class="panel-tutor-subtitulo">Consultas por estudiante</h3>
+            <div class="tabla-contenedor panel-tutor-tabla">
+              <table class="tabla">
+                <thead><tr><th>Estudiante</th><th>Consultas</th><th>Revisión autorizada</th></tr></thead>
+                <tbody>${filasTutorHtml}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Tabla de estudiantes ordenable -->
       <section class="panel-tabla-bloque" aria-labelledby="titulo-tabla-estudiantes">
         <header class="panel-tabla-cabecera">
@@ -704,6 +839,10 @@ function renderizarTodo() {
   if (btnExportar) {
     btnExportar.addEventListener('click', exportarCsv);
   }
+
+  document.querySelectorAll('.btn-historial-tutor').forEach(boton => {
+    boton.addEventListener('click', () => abrirHistorialTutor(boton.dataset.id, boton.dataset.nombre));
+  });
 
   // Ordenamiento de tabla por clic en encabezados
   const encabezados = document.querySelectorAll('.th-ordenable');
@@ -769,6 +908,7 @@ function renderizarTodo() {
   if (datosGrupoActual && datosGrupoActual.porTema) {
     renderizarGraficoTemas(datosGrupoActual.porTema);
   }
+  renderizarGraficoTutor(datosTutorActual?.porTema || []);
 }
 
 // Inicialización

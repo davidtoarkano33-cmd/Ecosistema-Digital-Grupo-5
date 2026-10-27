@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutor IA · Ecosistema Educativo</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/componentes.css">
+  <link rel="stylesheet" href="/css/modulos/tutor.css?v=3">
+</head>
+<body>
+  <div id="plantilla"></div>
+  <main id="contenido" class="contenedor tutor" data-avatar="Escribe una duda sobre el subtema. Canelo te orientará mediante preguntas para que construyas la respuesta.">
+    <header class="tutor__cabecera">
+      <div class="tutor__identidad">
+        <img src="/recursos/tutor-socratico.png" alt="Canelo, tutor socrático" class="tutor__retrato">
+        <div>
+          <p class="tutor__etiqueta">Tutor socrático</p>
+          <p class="tutor__subtema">Subtema</p>
+          <h1 id="titulo-tema">Preparando el tema…</h1>
+          <p>No te preocupes, Canelo te orientará…</p>
+        </div>
+      </div>
+      <button type="button" id="btn-nueva" class="btn btn--secundario">Nueva conversación</button>
+    </header>
+
+    <section class="tutor__iniciadores" aria-labelledby="titulo-iniciadores">
+      <h2 id="titulo-iniciadores">Puedes comenzar con una pregunta</h2>
+      <div id="preguntas-guia" class="tutor__chips"></div>
+    </section>
+
+    <section class="tutor__chat" aria-label="Conversación con el tutor">
+      <div id="historial-tutor" class="tutor__historial" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <p id="tutor-pensando" class="tutor__pensando" role="status" aria-live="polite" hidden>El tutor está pensando…</p>
+      <form id="form-tutor" class="tutor__formulario">
+        <label for="mensaje-tutor">Tu pregunta</label>
+        <textarea id="mensaje-tutor" rows="3" maxlength="1000" placeholder="Escribe tu duda sobre el tema…" required></textarea>
+        <div class="tutor__privacidad">
+          <label class="tutor__consentimiento" for="permitir-revision-tutor">
+            <input type="checkbox" id="permitir-revision-tutor">
+            <span>Permitir que mi docente y los administradores revisen esta conversación para evaluar la calidad de Canelo.</span>
+          </label>
+          <small>No incluyas nombres completos, datos clínicos identificables ni información privada.</small>
+          <button type="button" id="btn-borrar-historial-tutor" class="btn btn--texto btn--pequeno">Borrar mi historial compartido</button>
+        </div>
+        <div class="tutor__formulario-pie">
+          <small>Enter envía · Mayús + Enter crea una línea nueva</small>
+          <button type="submit" class="btn btn--primario">Enviar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="/js/modulos/tutor.js?v=3"></script>
+</body>
+</html>

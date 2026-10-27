@@ -65,6 +65,9 @@
 }
 
 .mensajes__conversacion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
   width: 100%;
   padding: var(--espacio-m);
   border: 0;
@@ -74,6 +77,11 @@
   text-align: left;
   cursor: pointer;
   font: inherit;
+}
+
+.mensajes__conversacion-contenido {
+  min-width: 0;
+  flex: 1;
 }
 
 .mensajes__conversacion:hover,
@@ -155,12 +163,40 @@
 
 .mensajes__fila-mensaje {
   display: flex;
+  align-items: flex-end;
   justify-content: flex-start;
+  gap: var(--espacio-s);
   margin-bottom: var(--espacio-s);
 }
 
 .mensajes__fila-mensaje--propio {
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.mensajes__avatar {
+  flex: 0 0 var(--espacio-xl);
+  width: var(--espacio-xl);
+  height: var(--espacio-xl);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-completo);
+  background: var(--superficie);
+  object-fit: cover;
+}
+
+.mensajes__avatar--bandeja {
+  flex-basis: var(--espacio-2xl);
+  width: var(--espacio-2xl);
+  height: var(--espacio-2xl);
+}
+
+.mensajes__avatar--iniciales {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-inverso);
+  background: var(--secundario);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-negrita);
 }
 
 .mensajes__burbuja {

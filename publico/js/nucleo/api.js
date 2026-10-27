@@ -43,12 +43,14 @@ export async function llamar(metodo, ruta, cuerpo) {
     }
   }
 
-  if (json && typeof json === 'object' && json.error) {
-    throw new Error(json.error);
+  if (!res.ok) {
+    const error = new Error((json && typeof json === 'object' && json.error) || `Error HTTP ${res.status}`);
+    error.estado = res.status;
+    throw error;
   }
 
-  if (!res.ok) {
-    throw new Error((json && typeof json === 'object' && json.error) || `Error HTTP ${res.status}`);
+  if (json && typeof json === 'object' && json.error) {
+    throw new Error(json.error);
   }
 
   return json;

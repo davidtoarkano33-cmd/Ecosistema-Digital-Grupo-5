@@ -1,26 +1,27 @@
 # docs/estado.md · Estado del proyecto (máximo 30 líneas)
-Sprint terminado: S10 · Fecha: 2026-10-26 · Review aprobada
+Sprint terminado: S11 · Fecha: 2026-10-27 · Review validada
 
 ## Funciona
-- Mensajería privada entre contactos autorizados según rol, grupos y configuración institucional.
-- Conversaciones con historial paginado, enlaces seguros, lectura y contador de no leídos.
-- Los mensajes nuevos aparecen en menos de cinco segundos mientras la pestaña está visible.
-- La interfaz se adapta a una sola columna en celular y permite volver a la bandeja.
-- Docentes pueden difundir un mensaje a todos los estudiantes de uno de sus grupos.
-- Los usuarios pueden bloquear, desbloquear y reportar mensajes recibidos.
-- Los bloqueos se aplican en ambos sentidos y el servidor impide nuevos envíos.
-- Administradores revisan el mensaje reportado y los cinco anteriores como contexto.
-- Moderación permite ocultar el mensaje, desactivar al autor o descartar el reporte.
-- Permisos, límites de envío y escape de texto se aplican en el servidor y navegador.
+- Tutor IA socrático por tema con acceso validado, contexto curricular, historial reciente y límite diario.
+- La interfaz del tutor ofrece preguntas guía, chat accesible, límite 429 y conversaciones nuevas en memoria.
+- Canelo aparece como identidad del tutor y avatar guía en tutor y juegos, con voz, estados y movimiento reducido.
+- Silenciar y ocultar se recuerdan; un control permite volver a mostrar a Canelo tras recargar.
+- El tutor cambia a pensando durante la consulta, habla al responder y celebra insignias nuevas.
+- El panel docente muestra los cinco temas más consultados y las consultas por estudiante.
+- El historial textual requiere autorización del estudiante y solo lo revisan su docente de grupo o un admin.
+- El estudiante puede revocar futuras autorizaciones y borrar todo su historial compartido.
+- Mensajería muestra avatares actuales del emisor y receptor; los cambios de foto se reflejan al recargar.
+- Ahorcado admite palabras de 4 a 14 letras y el glosario semilla fue corregido al español.
 
-## Decisiones y cambios respecto a docs/contratos.md
-- Las conversaciones informan si el bloqueo pertenece al usuario o al contacto para controlar la interfaz.
-- El sondeo usa control de caché y solapa un segundo para no perder mensajes con fechas cercanas.
-- Ocultar o desactivar desde moderación también marca el reporte como resuelto.
+## Decisiones y cambios respecto al contrato
+- Por decisión del Product Owner se añadió revisión educativa opcional del historial, con retención de 90 días.
+- Se documentaron la consulta con historial, su borrado, la colección historial-tutor y la retención configurable.
+- Canelo usa una imagen dentro del SVG del avatar para conservar una sola pieza visual y sus estados CSS.
 
 ## Problemas conocidos
-- La actualización en vivo usa sondeo cada cuatro segundos, no conexiones persistentes.
-- Las notificaciones del navegador dependen del permiso concedido por el usuario.
+- Las conversaciones previas a la autorización no se almacenan ni pueden recuperarse.
+- La voz depende de speechSynthesis y de las voces en español instaladas en el navegador.
+- Los registros vencidos se filtran al consultar y se eliminan físicamente al guardar un nuevo historial.
 
-## Pendiente para el siguiente sprint
-- Ejecutar las tareas del Sprint 11 según la guía del producto.
+## Pendiente
+- Ningún pendiente bloqueante para cerrar el Sprint 11.

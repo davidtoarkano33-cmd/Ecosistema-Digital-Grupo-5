@@ -98,6 +98,68 @@
   height: 280px;
 }
 
+.panel-tutor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-l);
+}
+
+.panel-tutor-subtitulo {
+  margin-bottom: var(--espacio-s);
+  color: var(--primario);
+  font-size: var(--tamano-m);
+}
+
+.panel-tutor-tabla {
+  max-height: calc(var(--espacio-2xl) * 6);
+  overflow-y: auto;
+}
+
+.panel-tutor-tabla .tabla {
+  margin: 0;
+}
+
+.panel-tutor-historial {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+  max-height: calc(var(--espacio-2xl) * 10);
+  overflow-y: auto;
+}
+
+.panel-tutor-intercambio {
+  padding: var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background: var(--fondo);
+}
+
+.panel-tutor-intercambio header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-s);
+  color: var(--texto-suave);
+  font-size: var(--tamano-xs);
+}
+
+.panel-tutor-mensaje {
+  margin-top: var(--espacio-s);
+  padding: var(--espacio-s) var(--espacio-m);
+  border-radius: var(--radio-m);
+  background: var(--superficie);
+}
+
+.panel-tutor-mensaje--estudiante { border-left: 3px solid var(--primario); }
+.panel-tutor-mensaje--tutor { border-left: 3px solid var(--acento); }
+.panel-tutor-mensaje p { margin: var(--espacio-xs) 0 0; white-space: pre-wrap; }
+
+@media (max-width: 48rem) {
+  .panel-tutor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Tabla de estudiantes y ordenamiento */
 .panel-tabla-bloque {
   background-color: var(--superficie);

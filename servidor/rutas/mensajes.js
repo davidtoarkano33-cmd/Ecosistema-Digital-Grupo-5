@@ -198,7 +198,11 @@ router.get('/mensajes/conversaciones', async (req, res, next) => {
     }));
 
     resultado.sort((a, b) => new Date(b.ultimo?.fecha || b.fecha || 0) - new Date(a.ultimo?.fecha || a.fecha || 0));
-    res.json({ conversaciones: resultado });
+    const perfilActual = mapaUsuarios.get(String(req.usuario.id)) || req.usuario;
+    res.json({
+      conversaciones: resultado,
+      usuario: usuarioPublico(perfilActual)
+    });
   } catch (error) {
     next(error);
   }

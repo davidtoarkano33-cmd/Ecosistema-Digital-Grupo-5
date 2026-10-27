@@ -451,4 +451,99 @@ router.get('/resumen/grupo/:grupoId', async (req, res) => {
   }
 });
 
+// 3. GET /resumen/tutor/:grupoId (docente del grupo o admin)
+router.get('/resumen/tutor/:grupoId', async (req, res) => {
+  try {
+    const usuario = req.usuario;
+    if (!usuario) return res.status(401).json({ error: 'Sesión no iniciada' });
+
+    const [grupos, usuarios, unidades, temas, consultas] = await Promise.all([
+      almacen.leer('distributivo'),
+      almacen.leer('usuarios'),
+      almacen.leer('unidades'),
+      almacen.leer('temas'),
+      almacen.leer('consultas-tutor')
+    ]);
+    const grupo = (grupos || []).find(item => item && String(item.id) === String(req.params.grupoId));
+    if (!grupo) return res.status(404).json({ error: 'Grupo no encontrado' });
+
+    const autorizado = usuario.rol === 'admin' || (
+      usuario.rol === 'docente' && String(grupo.docenteId) === String(usuario.id)
+    );
+    if (!autorizado) {
+      return res.status(403).json({ error: 'Solo el docente del grupo o el administrador pueden ver este resumen' });
+    }
+
+    const estudiantesIds = new Set((grupo.estudiantes || []).map(String));
+    const unidadesIds = new Set((unidades || [])
+      .filter(item => item && String(item.asignaturaId) === String(grupo.asignaturaId) && item.visible !== false)
+      .map(item => String(item.id)));
+    const temasGrupo = (temas || []).filter(item =>
+      item && unidadesIds.has(String(item.unidadId)) && item.estado === 'publicado'
+    );
+    const temasIds = new Set(temasGrupo.map(item => String(item.id)));
+    const porTema = new Map(temasGrupo.map(item => [String(item.id), {
+      temaId: item.id,
+      titulo: item.titulo || 'Sin título',
+      consultas: 0
+    }]));
+    const mapaUsuarios = new Map((usuarios || []).map(item => [String(item.id), item]));
+    const porEstudiante = new Map([...estudiantesIds].map(id => {
+      const estudiante = mapaUsuarios.get(id) || {};
+      return [id, {
+        id: estudiante.id || id,
+        nombre: [estudiante.nombre, estudiante.apellido].filter(Boolean).join(' ') || 'Estudiante',
+        consultas: 0
+      }];
+    }));
+
+    for (const consulta of consultas || []) {
+      const usuarioId = String(consulta?.usuarioId || '');
+      const temaId = String(consulta?.temaId || '');
+      if (!estudiantesIds.has(usuarioId) || !temasIds.has(temaId)) continue;
+      const cantidad = Math.max(0, Number(consulta.mensajes) || 0);
+      porTema.get(temaId).consultas += cantidad;
+      porEstudiante.get(usuarioId).consultas += cantidad;
+    }
+
+    let historial = [];
+    if (req.query.incluirHistorial === '1') {
+      const [registros, ajustes] = await Promise.all([
+        almacen.leer('historial-tutor'),
+        almacen.leerConfig('ajustes')
+      ]);
+      const diasRetencion = Math.max(1, Number(ajustes.retencionHistorialTutorDias) || 90);
+      const fechaLimite = Date.now() - diasRetencion * 24 * 60 * 60 * 1000;
+      const mapaTemas = new Map(temasGrupo.map(item => [String(item.id), item]));
+      historial = (registros || [])
+        .filter(item =>
+          item?.revisionAutorizada === true &&
+          new Date(item.fecha || 0).getTime() >= fechaLimite &&
+          estudiantesIds.has(String(item.usuarioId)) &&
+          temasIds.has(String(item.temaId))
+        )
+        .map(item => ({
+          id: item.id,
+          usuarioId: item.usuarioId,
+          estudiante: porEstudiante.get(String(item.usuarioId))?.nombre || 'Estudiante',
+          temaId: item.temaId,
+          tema: mapaTemas.get(String(item.temaId))?.titulo || 'Tema',
+          pregunta: item.pregunta,
+          respuesta: item.respuesta,
+          fecha: item.fecha
+        }))
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    }
+
+    return res.json({
+      porTema: [...porTema.values()],
+      porEstudiante: [...porEstudiante.values()],
+      historial
+    });
+  } catch (err) {
+    console.error('Error en GET /resumen/tutor/:grupoId:', err);
+    return res.status(err.estado || 500).json({ error: err.message || 'Error interno del servidor' });
+  }
+});
+
 export default router;

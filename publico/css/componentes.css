@@ -1319,3 +1319,66 @@ body > .cargando {
   width: 100%;
   font-size: var(--tamano-xs);
 }
+
+/* Avatar guía */
+.avatar-guia {
+  position: fixed;
+  right: var(--espacio-m);
+  bottom: var(--espacio-m);
+  z-index: 90;
+  width: calc(var(--espacio-2xl) * 2.5);
+  padding: var(--espacio-s);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  background: var(--superficie);
+  box-shadow: var(--sombra-3);
+}
+
+.avatar-guia__svg { display: block; width: 100%; overflow: visible; }
+.avatar-guia__marco { fill: var(--acento); stroke: var(--primario); stroke-width: 4; }
+.avatar-guia__canelo { transform-box: fill-box; transform-origin: center; }
+.avatar-guia__globo {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  width: calc(var(--espacio-2xl) * 5);
+  margin-bottom: var(--espacio-s);
+  padding: var(--espacio-s) var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  color: var(--texto);
+  background: var(--superficie);
+  box-shadow: var(--sombra-2);
+  font-size: var(--tamano-s);
+}
+
+.avatar-guia__acciones { display: flex; justify-content: center; gap: var(--espacio-xs); }
+.avatar-guia__acciones button { padding: var(--espacio-xs); border: 0; color: var(--primario); background: transparent; font: inherit; font-size: var(--tamano-xs); cursor: pointer; }
+.avatar-guia__acciones button:focus-visible { outline: 2px solid var(--info); outline-offset: 2px; }
+.avatar-guia-restaurar {
+  position: fixed;
+  right: var(--espacio-m);
+  bottom: var(--espacio-m);
+  z-index: 90;
+  padding: var(--espacio-s) var(--espacio-m);
+  border: 1px solid var(--primario);
+  border-radius: var(--radio-completo);
+  color: var(--texto-inverso);
+  background: var(--primario);
+  box-shadow: var(--sombra-2);
+  font: inherit;
+  font-size: var(--tamano-xs);
+  cursor: pointer;
+}
+.avatar-guia-restaurar:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+.avatar-guia--hablando .avatar-guia__canelo { animation: avatar-hablar var(--transicion) infinite alternate; }
+.avatar-guia--pensando .avatar-guia__canelo { animation: avatar-pensar 1s ease-in-out infinite alternate; }
+.avatar-guia--celebrando .avatar-guia__svg { animation: avatar-salto .5s ease-in-out infinite alternate; }
+
+@keyframes avatar-hablar { to { transform: scale(1.05); } }
+@keyframes avatar-pensar { to { transform: rotate(4deg); } }
+@keyframes avatar-salto { to { transform: translateY(calc(var(--espacio-xs) * -1)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-guia, .avatar-guia * { animation: none !important; transition: none !important; }
+}

@@ -3,6 +3,7 @@
   "maxSubidaMB": 10,
   "limiteIADiario": 30,
   "limiteTutorDiario": 40,
+  "retencionHistorialTutorDias": 90,
   "chatEntreEstudiantes": true,
   "alertasAdmin": false,
   "iaProveedor": "gemini",

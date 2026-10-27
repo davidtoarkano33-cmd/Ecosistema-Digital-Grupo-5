@@ -7,6 +7,27 @@
   margin: 0 auto;
 }
 
+.tema-tutor {
+  gap: var(--espacio-s);
+  text-align: left;
+}
+
+.tema-tutor__avatar {
+  flex: 0 0 var(--espacio-2xl);
+  width: var(--espacio-2xl);
+  height: var(--espacio-2xl);
+  border: 1px solid var(--acento);
+  border-radius: var(--radio-completo);
+  object-fit: cover;
+}
+
+.tema-tutor__texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: var(--interlineado-ajustado);
+}
+
 .tema-migas {
   display: flex;
   align-items: center;
