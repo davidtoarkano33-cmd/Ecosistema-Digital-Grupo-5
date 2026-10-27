@@ -124,7 +124,7 @@ function renderizarMensajes({ mantenerPosicion = false } = {}) {
 
 async function cargarConversaciones() {
   try {
-    const respuesta = await llamar('GET', '/api/mensajes/conversaciones');
+    const respuesta = await llamar('GET', `/api/mensajes/conversaciones?_=${Date.now()}`);
     conversaciones = respuesta.conversaciones || [];
     if (conversacionActiva) {
       conversacionActiva = conversaciones.find(item => item.id === conversacionActiva.id) || conversacionActiva;
@@ -191,7 +191,8 @@ async function cargarNuevos() {
   cargandoNuevos = true;
   try {
     const ultimo = mensajes[mensajes.length - 1];
-    const query = ultimo ? `?desde=${encodeURIComponent(ultimo.fecha)}` : '';
+    const desde = ultimo ? new Date(new Date(ultimo.fecha).getTime() - 1000).toISOString() : '';
+    const query = `?${desde ? `desde=${encodeURIComponent(desde)}&` : ''}_=${Date.now()}`;
     const respuesta = await llamar('GET', `/api/mensajes/${encodeURIComponent(conversacionActiva.id)}${query}`);
     const existentes = new Set(mensajes.map(item => item.id));
     const nuevos = (respuesta.mensajes || []).filter(item => !existentes.has(item.id));
@@ -288,4 +289,9 @@ document.addEventListener('visibilitychange', () => {
     cargarConversaciones();
     cargarNuevos();
   }
+});
+
+window.addEventListener('focus', () => {
+  cargarConversaciones();
+  cargarNuevos();
 });
