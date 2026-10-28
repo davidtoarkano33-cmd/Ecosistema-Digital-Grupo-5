@@ -1,0 +1,335 @@
+[
+  {
+    "id": "sim_000001",
+    "temaId": "tem_000001",
+    "titulo": "Abordaje inicial de emergencias: Banco de dilemas clínicos",
+    "modo": "escenarios",
+    "estado": "publicado",
+    "aleatorizar": 4,
+    "escenaInicial": "D_1",
+    "fecha": "2026-10-27T00:00:00.000Z",
+    "textoFinal": "¡Simulación completada con éxito! Has resuelto la serie de dilemas clínicos aplicando los principios sistemáticos del protocolo ABCDE y la priorización prehospitalaria.",
+    "banco": [
+      {
+        "id": "B01",
+        "texto": "1. Seguridad en la escena: Llegas a una avenida concurrida donde un motociclista yace en el suelo tras derrapar. Hay restos de gasolina sobre el asfalto y el tráfico no ha sido desviado.",
+        "opciones": [
+          {
+            "texto": "Asegurar el perímetro con conos y señalización, verificar que no haya riesgo de incendio y colocarte guantes y gafas antes de ingresar.",
+            "puntos": 10,
+            "consecuencia": "Correcto. La seguridad del equipo y de la escena es la regla primaria e innegociable antes de cualquier contacto con el paciente."
+          },
+          {
+            "texto": "Correr directamente hacia el motociclista sin señalizar para no perder tiempo en la atención.",
+            "puntos": -5,
+            "consecuencia": "Peligro grave. Ingresar a una escena no asegurada pone en riesgo mortal al personal de emergencias por atropellamiento o ignición."
+          }
+        ]
+      },
+      {
+        "id": "B02",
+        "texto": "2. Control cervical en trauma (A): El paciente está inconsciente y emite ruidos respiratorios roncos. Tiene el casco puesto y sospechas mecanismo de lesión cervical de alta energía.",
+        "opciones": [
+          {
+            "texto": "Aplicar control cervical manual bimanual en posición neutra y realizar tracción mandibular para abrir la vía aérea.",
+            "puntos": 10,
+            "consecuencia": "Excelente. La tracción mandibular permeabiliza la vía aérea sin movilizar las vértebras cervicales, protegiendo la médula espinal."
+          },
+          {
+            "texto": "Realizar maniobra de hiperextensión de cabeza y elevación de mentón tradicional.",
+            "puntos": -5,
+            "consecuencia": "Inadecuado en trauma. La hiperextensión cervical puede seccionar o comprimir la médula espinal ante fracturas vertebrales inestables."
+          }
+        ]
+      },
+      {
+        "id": "B03",
+        "texto": "3. Secreciones en vía aérea (A): Al abrir la boca del paciente politraumatizado observas restos de vómito y sangre espesa que amenazan con broncoaspiración.",
+        "opciones": [
+          {
+            "texto": "Aspirar con cánula rígida tipo Yankauer durante un máximo de 10 a 15 segundos bajo visión directa.",
+            "puntos": 10,
+            "consecuencia": "Correcto. El aspirador rígido elimina fluidos orofaríngeos rápidamente sin generar hipoxia prolongada."
+          },
+          {
+            "texto": "Iniciar ventilación a presión positiva inmediatamente con bolsa-mascarilla sobre el vómito.",
+            "puntos": -5,
+            "consecuencia": "Error crítico. Ventilar sobre secreciones empuja el vómito hacia la tráquea y los pulmones, causando neumonitis química grave."
+          }
+        ]
+      },
+      {
+        "id": "B04",
+        "texto": "4. Dispositivo orofaríngeo (A): El paciente está en coma profundo (Glasgow 4) sin reflejo nauseoso ni tusígeno y su lengua ocluye la retrofaringe.",
+        "opciones": [
+          {
+            "texto": "Medir una cánula orofaríngea (Guedel) desde la comisura labial hasta el lóbulo de la oreja e insertarla adecuadamente.",
+            "puntos": 10,
+            "consecuencia": "Impecable. El tamaño adecuado mantiene la base de la lengua separada de la pared faríngea posterior."
+          },
+          {
+            "texto": "Introducir la cánula más grande disponible ejerciendo presión enérgica contra el paladar.",
+            "puntos": -5,
+            "consecuencia": "Traumático. Una cánula de tamaño inadecuado empuja la epiglotis contra la laringe y produce laringoespasmo o hemorragia."
+          }
+        ]
+      },
+      {
+        "id": "B05",
+        "texto": "5. Asimetría torácica y disnea (B): El paciente presenta respiración superficial a 34 rpm, ingurgitación yugular y ausencia de ruidos respiratorios en el hemitórax derecho.",
+        "opciones": [
+          {
+            "texto": "Sospechar neumotórax a tensión, administrar oxígeno de inmediato a alto flujo y preparar descompresión torácica y traslado de emergencia.",
+            "puntos": 10,
+            "consecuencia": "Acierto vital. Reconoces el neumotórax a tensión antes de que cause colapso hemodinámico por restricción del retorno venoso."
+          },
+          {
+            "texto": "Asumir que es una contusión muscular simple y vendar el hemitórax apretando con gasa.",
+            "puntos": -10,
+            "consecuencia": "Error fatal. Restringir el tórax y omitir el neumotórax a tensión conduce a paro cardiorrespiratorio por shock obstructivo."
+          }
+        ]
+      },
+      {
+        "id": "B06",
+        "texto": "6. Bradipnea severa (B): Tras un traumatismo craneoencefálico, el paciente respira apenas 6 veces por minuto con coloración azulada en los labios.",
+        "opciones": [
+          {
+            "texto": "Ventilar con dispositivo bolsa-válvula-mascarilla con reservorio conectado a oxígeno a 15 L/min a razón de 1 ventilación cada 5 a 6 segundos.",
+            "puntos": 10,
+            "consecuencia": "Muy bien. La frecuencia de 6 rpm es insuficiente para la vida; el soporte ventilatorio asistido corrige la hipoxemia crítica."
+          },
+          {
+            "texto": "Colocar una cánula nasal a 2 L/min y esperar a que el paciente despierte por sí solo.",
+            "puntos": -5,
+            "consecuencia": "Insuficiente. Una cánula a bajo flujo no aporta volumen tidal ante hipoventilación severa o apnea inminente."
+          }
+        ]
+      },
+      {
+        "id": "B07",
+        "texto": "7. Tórax inestable o volet costal (B): Observas un segmento del tórax anterior que se hunde en la inspiración y protruye en la espiración con crepitación ósea.",
+        "opciones": [
+          {
+            "texto": "Optimizar la oxigenoterapia, asistir la ventilación para proveer presión positiva interna y estabilizar el segmento manualmente con apósito suave.",
+            "puntos": 10,
+            "consecuencia": "Excelente. La presión positiva expande los alvéolos colapsados por la contusión pulmonar subyacente."
+          },
+          {
+            "texto": "Fijar sacos de arena pesados sobre el tórax para inmovilizar las costillas.",
+            "puntos": -5,
+            "consecuencia": "Contraindicado. Colocar peso sobre el tórax incrementa el trabajo respiratorio y empeora la hipoventilación."
+          }
+        ]
+      },
+      {
+        "id": "B08",
+        "texto": "8. Neumotórax abierto (B): Hay una herida penetrante de 3 cm en hemitórax izquierdo por donde se escucha succión de aire y burbujeo en cada respiración.",
+        "opciones": [
+          {
+            "texto": "Colocar un parche torácico valvulado o apósito oclusivo fijado en 3 lados para permitir la salida de aire e impedir su entrada.",
+            "puntos": 10,
+            "consecuencia": "Protocolo exacto. El sello de tres puntas crea un mecanismo valvular que previene la transformación en neumotórax a tensión."
+          },
+          {
+            "texto": "Sellar los 4 costados herméticamente con cinta adhesiva sin mecanismo de escape.",
+            "puntos": -5,
+            "consecuencia": "Peligro inminente. El cierre de 4 puntas sin válvula retiene el aire dentro del espacio pleural y genera neumotórax a tensión."
+          }
+        ]
+      },
+      {
+        "id": "B09",
+        "texto": "9. Hemorragia exanguinante masiva (X/C): Encuentras una fractura abierta en el muslo con sangre roja rutilante que brota en chorro pulsátil continuo.",
+        "opciones": [
+          {
+            "texto": "Colocar inmediatamente un torniquete de extremidad 5 a 7 cm por encima de la herida, ajustar hasta el cese del sangrado y rotular la hora.",
+            "puntos": 10,
+            "consecuencia": "Decisión prioritaria. El sangrado exanguinante (X) precede a la vía aérea; el torniquete precoz salva la vida evitando el shock hemorrágico irreversible."
+          },
+          {
+            "texto": "Aplicar presión superficial con una servilleta y continuar revisando pupilas.",
+            "puntos": -10,
+            "consecuencia": "Retraso mortal. El shock hipovolémico por exanguinación arterial puede causar la muerte en menos de 3 minutos."
+          }
+        ]
+      },
+      {
+        "id": "B10",
+        "texto": "10. Hipoperfusión y shock temprano (C): El paciente tiene piel pálida, fría y sudorosa; pulso radial filiforme a 130 lpm y llenado capilar de 4 segundos.",
+        "opciones": [
+          {
+            "texto": "Reconocer shock circulatorio (C), colocar al paciente en decúbito supino, prevenir hipotermia y coordinar traslado inmediato.",
+            "puntos": 10,
+            "consecuencia": "Correcto. La taquicardia y el retardo capilar son signos tempranos de hipoperfusión tisular sistémica."
+          },
+          {
+            "texto": "Hacer que el paciente se ponga de pie y camine para estimular la circulación sanguínea.",
+            "puntos": -10,
+            "consecuencia": "Grave negligencia. La bipedestación en hipovolemia desata un síncope inmediato y disminuye la perfusión cerebral y coronaria."
+          }
+        ]
+      },
+      {
+        "id": "B11",
+        "texto": "11. Sospecha de fractura pélvica (C): Tras atropellamiento, el paciente refiere dolor inguinal insoportable. Hay hipotensión (PA 85/50) y acortamiento de extremidad.",
+        "opciones": [
+          {
+            "texto": "Colocar un cinturón o faja pélvica a la altura de los trocánteres mayores y evitar compresiones pélvicas repetidas.",
+            "puntos": 10,
+            "consecuencia": "Acierto crucial. La fijación pélvica cierra el anillo pélvico reduciendo el espacio retroperitoneal donde pueden acumularse litros de sangre."
+          },
+          {
+            "texto": "Presionar con fuerza ambas crestas ilíacas hacia adentro y hacia abajo varias veces para comprobar si cruje.",
+            "puntos": -5,
+            "consecuencia": "Contraindicado. La palpación repetida rompe coágulos incipientes y reactiva hemorragias masivas retroperitoneales."
+          }
+        ]
+      },
+      {
+        "id": "B12",
+        "texto": "12. Amputación traumática de dedos (C): El paciente sufrió avulsión de dos dedos de la mano izquierda en maquinaria agrícola. El muñón sangra moderadamente.",
+        "opciones": [
+          {
+            "texto": "Controlar el sangrado del muñón con vendaje compresivo; envolver los dedos en gasa estéril húmeda, introducirlos en bolsa plástica y colocarlos sobre hielo.",
+            "puntos": 10,
+            "consecuencia": "Excelente técnica. El enfriamiento indirecto preserva los tejidos viables sin congelarlos directamente ni dañarlos por inmersión en agua."
+          },
+          {
+            "texto": "Sumergir los dedos directamente en un vaso con agua corriente tibia y jabón.",
+            "puntos": -5,
+            "consecuencia": "Error destructivo. El agua acelera la maceración celular y el calor agota las reservas metabólicas del tejido amputado."
+          }
+        ]
+      },
+      {
+        "id": "B13",
+        "texto": "13. Escala de Coma de Glasgow (D): El paciente abre los ojos solo al estímulo doloroso (2), emite gemidos incomprensibles (2) y flexiona las extremidades retirándolas del dolor (4).",
+        "opciones": [
+          {
+            "texto": "Calcular puntaje de Glasgow 8, identificar riesgo inminente de pérdida de reflejos protectores de vía aérea y preparar traslado con prioridad máxima.",
+            "puntos": 10,
+            "consecuencia": "Precisión clínica. Un Glasgow menor o igual a 8 define trauma craneoencefálico grave y requiere protección prioritaria de vía aérea."
+          },
+          {
+            "texto": "Asignar Glasgow 14 y permitir que el paciente duerma sin vigilarlo.",
+            "puntos": -5,
+            "consecuencia": "Subestimación grave. El paciente está en coma; descuidar la vigilancia puede derivar en apnea desapercibida."
+          }
+        ]
+      },
+      {
+        "id": "B14",
+        "texto": "14. Asimetría pupilar o anisocoria (D): Al examinar los ojos con linterna médica, la pupila derecha mide 6 mm y no responde a la luz, mientras la izquierda mide 3 mm y es reactiva.",
+        "opciones": [
+          {
+            "texto": "Sospechar herniación uncal por hipertensión intracraneal expansiva aguda, mantener cabecera neutra a 30° si la camilla lo permite y alertar al hospital receptor.",
+            "puntos": 10,
+            "consecuencia": "Diagnóstico de alto valor. La anisocoria aguda con midriasis unilateral es signo de alarma de compresión del tercer par craneal."
+          },
+          {
+            "texto": "Asumir que el paciente tomó gotas oftálmicas y restarle importancia al hallazgo.",
+            "puntos": -5,
+            "consecuencia": "Descuido inaceptable. En contexto de trauma, una midriasis no reactiva es una emergencia neuroquirúrgica inmediata."
+          }
+        ]
+      },
+      {
+        "id": "B15",
+        "texto": "15. Alteración del estado mental sin causa obvia (D): Encuentras a una conductora confusa y diaforética tras un choque leve sin lesiones externas notorias.",
+        "opciones": [
+          {
+            "texto": "Medir glucometría capilar como parte de la fase D para descartar hipoglucemia como causa primaria o contribuyente del incidente.",
+            "puntos": 10,
+            "consecuencia": "Criterio clínico ejemplar. La hipoglucemia imita el déficit neurológico y puede haber causado el siniestro de tránsito."
+          },
+          {
+            "texto": "Administrar un calmante oral de inmediato asumiendo que solo sufre una crisis de pánico.",
+            "puntos": -5,
+            "consecuencia": "Peligroso. Administrar fármacos sin descartar glucosa baja o trauma cerebral puede ocultar el cuadro o provocar paro respiratorio."
+          }
+        ]
+      },
+      {
+        "id": "B16",
+        "texto": "16. Prevención de la tríada de la muerte (E): El paciente fue rescatado de una cuneta con lluvia, ropa empapada y temperatura corporal de 34.5 °C.",
+        "opciones": [
+          {
+            "texto": "Retirar con corte seguro la ropa mojada, secar la piel, colocar mantas térmicas aluminizadas y calentar la cabina asistencial.",
+            "puntos": 10,
+            "consecuencia": "Protección fundamental. La hipotermia desencadena coagulopatía y acidosis (la tríada letal del trauma); el recalentamiento pasivo es mandatorio."
+          },
+          {
+            "texto": "Dejar al paciente con la ropa mojada puesta para no incomodarlo.",
+            "puntos": -5,
+            "consecuencia": "Agravamiento crítico. La ropa fría extrae calor por conducción 25 veces más rápido que el aire seco, profundizando la coagulopatía."
+          }
+        ]
+      },
+      {
+        "id": "B17",
+        "texto": "17. Retiro coordinado de casco de motocicleta (A/E): El motociclista requiere manejo invasivo de vía aérea y el casco dificulta la colocación de collarín cervical.",
+        "opciones": [
+          {
+            "texto": "Realizar la maniobra entre dos operadores: uno estabiliza la columna cervical desde abajo mientras el segundo expande los lados y retira el casco en línea recta.",
+            "puntos": 10,
+            "consecuencia": "Técnica estándar ATLS/PHTLS. El retiro bimanual en tándem minimiza cualquier flexión o rotación en la unión craneocervical."
+          },
+          {
+            "texto": "Jalar el casco enérgicamente con un solo rescatista mientras la cabeza del paciente oscila en el aire.",
+            "puntos": -10,
+            "consecuencia": "Iatrogenia grave. La tracción desalineada de un solo rescatista causa desplazamiento traumático de fracturas vertebrales."
+          }
+        ]
+      },
+      {
+        "id": "B18",
+        "texto": "18. Exposición y log-roll (E): Necesitas inspeccionar el dorso de la víctima para descartar heridas penetrantes o deformidades espinales antes de empaquetar.",
+        "opciones": [
+          {
+            "texto": "Ejecutar giro en bloque (log-roll) coordinado exclusivamente bajo la cuenta del operador que sujeta la cabeza, palpando cada apófisis espinosa.",
+            "puntos": 10,
+            "consecuencia": "Coordinación perfecta. El eje cabeza-cuello-tronco gira como una sola unidad rígida, garantizando la integridad medular."
+          },
+          {
+            "texto": "Doblar al paciente por la cintura hacia adelante para observar la espalda.",
+            "puntos": -10,
+            "consecuencia": "Maniobra prohibida en trauma. Flexionar el tronco rompe la alineación neutral y puede ocasionar parálisis definitiva."
+          }
+        ]
+      },
+      {
+        "id": "B19",
+        "texto": "19. Decisión de traslado prioritario: El paciente politraumatizado tiene taquicardia persistente, abdomen en tabla y fractura expuesta de fémur.",
+        "opciones": [
+          {
+            "texto": "Iniciar traslado de emergencia inmediato ('cargar y llevar') limitando el tiempo en escena a menos de 10 minutos con intervenciones críticas en ruta.",
+            "puntos": 10,
+            "consecuencia": "Decisión quirúrgica certera. En trauma con hemorragia interna la 'hora dorada' exige trasladar sin demora hacia el cirujano de trauma."
+          },
+          {
+            "texto": "Permanecer 35 minutos en el lugar colocando férulas neumáticas y redactando la historia clínica completa.",
+            "puntos": -10,
+            "consecuencia": "Demora mortal. El retraso en escena ante hemorragias internas agota el tiempo fisiológico del paciente."
+          }
+        ]
+      },
+      {
+        "id": "B20",
+        "texto": "20. Reevaluación continua en ruta: Durante el traslado en ambulancia, el paciente que estaba quejándose comienza a responder con balbuceos y su respiración cae a 8 rpm.",
+        "opciones": [
+          {
+            "texto": "Reanudar de inmediato la secuencia ABCDE desde la letra A: verificar permeabilidad de vía aérea, asistir la ventilación y chequear pulso carotídeo.",
+            "puntos": 10,
+            "consecuencia": "Principio maestro del soporte vital. Ante cualquier cambio clínico o deterioro, se reinicia el algoritmo ABCDE completo de inmediato."
+          },
+          {
+            "texto": "Ignorar el cambio asumiendo que el paciente simplemente está cansado por el viaje.",
+            "puntos": -10,
+            "consecuencia": "Falta muy grave. La depresión respiratoria no detectada desemboca en hipoxia cerebral y paro cardiorrespiratorio en camino."
+          }
+        ]
+      }
+    ]
+  }
+]

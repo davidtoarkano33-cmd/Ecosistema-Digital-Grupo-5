@@ -1,0 +1,284 @@
+/* publico/css/modulos/simulador.css · Estilos del motor de simulación de escenarios */
+
+.simulador-contenedor {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.simulador-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-l);
+  padding-bottom: var(--espacio-s);
+  border-bottom: 1px solid var(--borde);
+}
+
+.simulador-cabecera__info {
+  flex: 1 1 250px;
+}
+
+.simulador-cabecera__titulo {
+  font-size: var(--tamano-xl);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  margin: 0 0 var(--espacio-xs) 0;
+}
+
+.simulador-cabecera__metas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+.simulador-marcador {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-xs) var(--espacio-m);
+  font-weight: var(--peso-seminegrita);
+  color: var(--secundario);
+}
+
+.simulador-marcador__valor {
+  font-size: var(--tamano-l);
+  color: var(--primario);
+}
+
+.simulador-escena {
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-xl);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: var(--espacio-l);
+}
+
+.simulador-escena__imagen-wrap {
+  margin-bottom: var(--espacio-l);
+  border-radius: var(--radio-m);
+  overflow: hidden;
+  max-height: 360px;
+  background-color: var(--fondo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simulador-escena__imagen {
+  width: 100%;
+  height: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.simulador-escena__texto {
+  font-size: var(--tamano-m);
+  line-height: 1.6;
+  color: var(--texto);
+  margin-bottom: var(--espacio-xl);
+}
+
+.simulador-escena__texto p {
+  margin-bottom: var(--espacio-m);
+}
+
+.simulador-escena__texto p:last-child {
+  margin-bottom: 0;
+}
+
+.simulador-opciones-titulo {
+  font-size: var(--tamano-s);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--peso-seminegrita);
+  color: var(--texto-suave);
+  margin-bottom: var(--espacio-s);
+}
+
+.simulador-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-l);
+}
+
+.simulador-opcion-btn {
+  text-align: left;
+  padding: var(--espacio-m);
+  font-size: var(--tamano-m);
+  line-height: 1.4;
+  white-space: normal;
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+  background-color: var(--superficie);
+  color: var(--texto);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.simulador-opcion-btn:hover:not(:disabled) {
+  border-color: var(--primario);
+  background-color: var(--fondo);
+  transform: translateX(4px);
+}
+
+.simulador-opcion-btn:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+.simulador-opcion-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.simulador-opcion-btn--seleccionada {
+  border-color: var(--primario);
+  background-color: var(--info-fondo);
+  font-weight: var(--peso-seminegrita);
+}
+
+.simulador-paso-siguiente {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--espacio-l);
+  padding-top: var(--espacio-m);
+  border-top: 1px solid var(--borde);
+}
+
+/* Informe final */
+.simulador-informe {
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-xl);
+}
+
+.simulador-informe__resumen {
+  text-align: center;
+  padding: var(--espacio-l);
+  border-radius: var(--radio-m);
+  background-color: var(--fondo);
+  margin-bottom: var(--espacio-xl);
+}
+
+.simulador-informe__puntaje-grande {
+  font-size: var(--tamano-3xl);
+  font-weight: var(--peso-negrita);
+  color: var(--primario);
+  margin-bottom: var(--espacio-xs);
+}
+
+.simulador-informe__subtitulo {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+.simulador-recorrido-titulo {
+  font-size: var(--tamano-l);
+  font-weight: var(--peso-seminegrita);
+  color: var(--primario);
+  margin-bottom: var(--espacio-m);
+}
+
+.simulador-recorrido-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+  margin-bottom: var(--espacio-xl);
+}
+
+.simulador-paso-card {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-m);
+  background-color: var(--superficie);
+}
+
+.simulador-paso-card__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--espacio-xs);
+}
+
+.simulador-paso-card__num {
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-seminegrita);
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.simulador-paso-card__puntos {
+  font-weight: var(--peso-seminegrita);
+  font-size: var(--tamano-s);
+}
+
+.simulador-paso-card__puntos--positivo {
+  color: var(--exito);
+}
+
+.simulador-paso-card__puntos--negativo {
+  color: var(--error);
+}
+
+.simulador-paso-card__decision {
+  font-weight: var(--peso-seminegrita);
+  color: var(--primario);
+  margin-bottom: var(--espacio-xs);
+}
+
+.simulador-paso-card__consecuencia {
+  font-size: var(--tamano-s);
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+.simulador-acciones-finales {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-m);
+}
+
+.rol-simulacion, .rol-chat, .rol-informe, .rol-informe__criterios { display: grid; gap: var(--espacio-m); }
+.rol-caso h2, .rol-caso h3, .rol-caso p, .rol-informe h2, .rol-informe h3, .rol-informe p { margin-block: var(--espacio-xs); }
+.rol-chat__historial { display: grid; gap: var(--espacio-s); max-height: calc(var(--espacio-2xl) * 8); overflow-y: auto; padding: var(--espacio-s); }
+.rol-mensaje { max-width: 85%; padding: var(--espacio-s) var(--espacio-m); border-radius: var(--radio-m); background: var(--fondo); border: 1px solid var(--borde); }
+.rol-mensaje--estudiante { justify-self: end; background: var(--info-fondo); }
+.rol-chat__form { display: flex; flex-direction: column; gap: var(--espacio-s); }
+.rol-chat__acciones { display: flex; justify-content: flex-end; gap: var(--espacio-s); }
+.rol-informe__criterios section { padding: var(--espacio-m); border: 1px solid var(--borde); border-radius: var(--radio-m); }
+
+@media (max-width: 480px) {
+  .simulador-escena {
+    padding: var(--espacio-m);
+  }
+
+  .simulador-cabecera {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .simulador-marcador {
+    align-self: flex-start;
+  }
+
+  .simulador-acciones-finales {
+    flex-direction: column;
+  }
+
+  .simulador-acciones-finales .btn {
+    width: 100%;
+  }
+}

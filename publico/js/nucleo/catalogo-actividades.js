@@ -40,6 +40,12 @@ export const ACTIVIDADES = [
     texto: "Tutor IA",
     descripcion: "Resuelve dudas razonando",
     href: "/paginas/tutor.html"
+  },
+  {
+    id: "simulador",
+    texto: "Simulador",
+    descripcion: "Practica situaciones reales",
+    href: "/paginas/simulaciones.html"
   }
 ];
 

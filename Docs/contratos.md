@@ -77,7 +77,7 @@ Notif.    GET /api/notificaciones · POST /api/notificaciones
           POST /api/notificaciones/:id/leida · POST /api/notificaciones/leidas
 Alertas   GET /api/alertas?grupoId= → { alertas, mensajesApoyo }
 IA        POST /api/ia/:tarea   tareas: generar-glosario, generar-preguntas, generar-escenario,
-          tutor, rol-simulacion, evaluar-rol · DELETE /api/ia/tutor/historial
+          generar-rol, tutor, rol-simulacion, evaluar-rol · DELETE /api/ia/tutor/historial
           GET /api/ia/prueba (admin)
 Quiz      GET /api/quiz/estado?temaId= · POST /api/quiz/iniciar · POST /api/quiz/responder
           POST /api/quiz/finalizar

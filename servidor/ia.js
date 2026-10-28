@@ -350,26 +350,78 @@ function generarRespuestaSimulada(tarea, datos = {}, formato = 'json') {
   if (tarea === 'generar-escenario') {
     return {
       titulo: 'Escenario educativo contextual',
-      escenaInicial: 1,
+      escenaInicial: 'E1',
       escenas: [
         {
-          id: 1,
+          id: 'E1',
           texto: 'Se presenta un dilema práctico donde debes decidir la mejor estrategia de abordaje.',
           opciones: [
             {
               texto: 'Analizar los antecedentes antes de tomar una decisión',
-              destino: 2,
+              destino: 'E2',
               puntos: 10,
-              consecuencia: 'Has seguido un criterio analítico y metódico.'
+              consecuencia: 'Reconoces los datos principales y puedes continuar con una decisión fundamentada.'
+            },
+            {
+              texto: 'Actuar de inmediato con la primera solución disponible',
+              destino: 'E4',
+              puntos: -5,
+              consecuencia: 'La respuesta apresurada omite información importante y produce un resultado incompleto.'
             }
           ]
         },
         {
-          id: 2,
-          texto: 'La decisión fundamentada ha generado un resultado óptimo en el caso simulado.',
+          id: 'E2',
+          texto: 'El análisis revela dos maneras posibles de aplicar el contenido del tema.',
+          opciones: [
+            {
+              texto: 'Aplicar el procedimiento completo y verificar el resultado',
+              destino: 'E5',
+              puntos: 10,
+              consecuencia: 'La aplicación ordenada permite alcanzar el objetivo de aprendizaje.'
+            },
+            {
+              texto: 'Aplicar solo una parte del procedimiento',
+              destino: 'E3',
+              puntos: 0,
+              consecuencia: 'La intervención parcial ayuda, pero no resuelve todos los elementos del caso.'
+            }
+          ]
+        },
+        {
+          id: 'E3',
+          texto: 'El caso termina con oportunidades claras de mejora para un nuevo intento.',
+          opciones: []
+        },
+        {
+          id: 'E4',
+          texto: 'La decisión permite resolver el caso, aunque quedan aspectos que deben reforzarse.',
+          opciones: []
+        },
+        {
+          id: 'E5',
+          texto: 'La decisión fundamentada genera un resultado óptimo en el caso simulado.',
           opciones: []
         }
       ]
+    };
+  }
+
+  if (tarea === 'generar-rol') {
+    return {
+      titulo: 'Práctica de comunicación clínica',
+      personaje: {
+        nombre: 'Diego',
+        descripcion: 'Paciente consciente, ansioso y colaborador cuando recibe explicaciones claras.',
+        contexto: 'Atención inicial en un entorno prehospitalario con recursos limitados.',
+        objetivo: 'Comunicarse con respeto, obtener información relevante y explicar las intervenciones.'
+      },
+      rubrica: [
+        { criterio: 'Comunicación', descripcion: 'Se presenta, escucha y explica con claridad.', puntos: 10 },
+        { criterio: 'Valoración', descripcion: 'Obtiene información pertinente sin retrasar la atención.', puntos: 10 },
+        { criterio: 'Decisión', descripcion: 'Propone acciones coherentes con el objetivo del caso.', puntos: 10 }
+      ],
+      maxTurnos: 8
     };
   }
 
@@ -377,10 +429,10 @@ function generarRespuestaSimulada(tarea, datos = {}, formato = 'json') {
     return {
       puntaje: 90,
       maximo: 100,
-      criterios: {
-        'Pertinencia': 90,
-        'Argumentación': 90
-      },
+      criterios: [
+        { criterio: 'Pertinencia', puntos: 45, comentario: 'La respuesta se mantuvo vinculada con el objetivo de la práctica.' },
+        { criterio: 'Argumentación', puntos: 45, comentario: 'Las decisiones se explicaron con fundamentos claros.' }
+      ],
       comentarioGeneral: 'Buen desenvolvimiento contextual y justificación sólida en la toma de decisiones.'
     };
   }

@@ -16,6 +16,9 @@ function gestionDeActividad(id) {
   if (id === 'canciones') {
     return { texto: 'Gestionar canciones', href: '/paginas/canciones.html' };
   }
+  if (id === 'simulador') {
+    return { texto: 'Gestionar casos', href: '/paginas/simulaciones.html' };
+  }
   return { texto: 'Editar glosarios', href: '/paginas/editor-contenidos.html' };
 }
 
@@ -27,7 +30,8 @@ function obtenerIconoActividad(id) {
     case 'crucigrama': return '✏️';
     case 'quiz': return '❓';
     case 'canciones': return '🎵';
-    case 'simulacion': return '🎭';
+    case 'simulacion':
+    case 'simulador': return '🎭';
     default: return '🎮';
   }
 }

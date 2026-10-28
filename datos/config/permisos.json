@@ -238,5 +238,14 @@
     "escribir": [
       "servidor"
     ]
+  },
+  "simulaciones": {
+    "leer": [
+      "sesion"
+    ],
+    "escribir": [
+      "docente",
+      "admin"
+    ]
   }
 }

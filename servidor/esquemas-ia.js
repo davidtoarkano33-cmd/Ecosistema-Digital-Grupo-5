@@ -37,16 +37,38 @@ export function validarEsquema(tarea, datos) {
       // { titulo, escenaInicial, escenas }
       if (typeof datos !== 'object' || Array.isArray(datos)) return false;
       if (typeof datos.titulo !== 'string' || !datos.titulo.trim()) return false;
-      if (datos.escenaInicial === undefined) return false;
-      if (!Array.isArray(datos.escenas) || datos.escenas.length === 0) return false;
-      return true;
+      if (typeof datos.escenaInicial !== 'string' || !datos.escenaInicial.trim()) return false;
+      if (!Array.isArray(datos.escenas) || datos.escenas.length < 5 || datos.escenas.length > 10) return false;
+      return datos.escenas.every(escena =>
+        escena &&
+        typeof escena.id === 'string' && escena.id.trim().length > 0 &&
+        typeof escena.texto === 'string' && escena.texto.trim().length > 0 &&
+        Array.isArray(escena.opciones) && escena.opciones.length <= 4 &&
+        escena.opciones.every(opcion =>
+          opcion &&
+          typeof opcion.texto === 'string' && opcion.texto.trim().length > 0 &&
+          typeof opcion.destino === 'string' && opcion.destino.trim().length > 0 &&
+          Number.isFinite(opcion.puntos) && opcion.puntos >= -10 && opcion.puntos <= 10 &&
+          typeof opcion.consecuencia === 'string' && opcion.consecuencia.trim().length > 0
+        )
+      );
+    }
+
+    case 'generar-rol': {
+      if (typeof datos !== 'object' || Array.isArray(datos) || typeof datos.titulo !== 'string' || !datos.titulo.trim()) return false;
+      const personaje = datos.personaje;
+      if (!personaje || !['nombre', 'descripcion', 'contexto', 'objetivo'].every(campo => typeof personaje[campo] === 'string' && personaje[campo].trim())) return false;
+      if (!Array.isArray(datos.rubrica) || datos.rubrica.length < 3 || datos.rubrica.length > 5) return false;
+      if (!datos.rubrica.every(item => item && typeof item.criterio === 'string' && item.criterio.trim() && typeof item.descripcion === 'string' && item.descripcion.trim() && Number.isInteger(item.puntos) && item.puntos > 0)) return false;
+      return Number.isInteger(datos.maxTurnos) && datos.maxTurnos >= 4 && datos.maxTurnos <= 12;
     }
 
     case 'evaluar-rol': {
       // { puntaje, maximo, criterios, comentarioGeneral }
       if (typeof datos !== 'object' || Array.isArray(datos)) return false;
       if (typeof datos.puntaje !== 'number' || typeof datos.maximo !== 'number') return false;
-      if (!datos.criterios || typeof datos.criterios !== 'object') return false;
+      if (!Array.isArray(datos.criterios) || datos.criterios.length === 0) return false;
+      if (!datos.criterios.every(item => item && typeof item.criterio === 'string' && typeof item.puntos === 'number' && typeof item.comentario === 'string')) return false;
       if (typeof datos.comentarioGeneral !== 'string') return false;
       return true;
     }

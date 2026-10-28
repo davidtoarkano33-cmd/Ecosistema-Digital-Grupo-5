@@ -1,27 +1,28 @@
 # docs/estado.md · Estado del proyecto (máximo 30 líneas)
-Sprint terminado: S11 · Fecha: 2026-10-27 · Review validada
+Sprint terminado: S12 · Fecha: 2026-10-28 · Sprint Review validada
 
 ## Funciona
-- Tutor IA socrático por tema con acceso validado, contexto curricular, historial reciente y límite diario.
-- La interfaz del tutor ofrece preguntas guía, chat accesible, límite 429 y conversaciones nuevas en memoria.
-- Canelo aparece como identidad del tutor y avatar guía en tutor y juegos, con voz, estados y movimiento reducido.
-- Silenciar y ocultar se recuerdan; un control permite volver a mostrar a Canelo tras recargar.
-- El tutor cambia a pensando durante la consulta, habla al responder y celebra insignias nuevas.
-- El panel docente muestra los cinco temas más consultados y las consultas por estudiante.
-- El historial textual requiere autorización del estudiante y solo lo revisan su docente de grupo o un admin.
-- El estudiante puede revocar futuras autorizaciones y borrar todo su historial compartido.
-- Mensajería muestra avatares actuales del emisor y receptor; los cambios de foto se reflejan al recargar.
-- Ahorcado admite palabras de 4 a 14 letras y el glosario semilla fue corregido al español.
+- El catálogo agrupa simulaciones por tema y distingue escenarios ramificados y prácticas de rol.
+- El motor de escenarios recorre decisiones, muestra consecuencias, calcula puntaje e informa el recorrido final.
+- La vista previa no registra intentos ni modifica puntos o logros.
+- Docentes y administradores crean borradores, editan escenas, imágenes, opciones, destinos y consecuencias.
+- La publicación valida destinos, alcanzabilidad, escenas finales, ciclos, consecuencias y límites de puntos.
+- El mapa indentado permite revisar visualmente las rutas antes de publicar.
+- Gemini genera borradores de escenarios de 5 a 10 escenas usando el contenido autorizado del tema.
+- Gemini también genera personaje, contexto, objetivo, rúbrica y turnos para prácticas de rol.
+- El modo rol conversa con el personaje, limita turnos y anima al avatar al pensar y hablar.
+- La evaluación de rol entrega puntos por criterio, comentario general y registra el intento del estudiante.
+- Los preparadores verifican acceso, limitan el historial y no aceptan instrucciones desde el navegador.
+- El servidor vuelve a validar escenarios y prácticas de rol antes de publicarlos.
 
 ## Decisiones y cambios respecto al contrato
-- Por decisión del Product Owner se añadió revisión educativa opcional del historial, con retención de 90 días.
-- Se documentaron la consulta con historial, su borrado, la colección historial-tutor y la retención configurable.
-- Canelo usa una imagen dentro del SVG del avatar para conservar una sola pieza visual y sus estados CSS.
+- Se añadió la tarea generar-rol para ofrecer creación asistida también en el editor del modo rol.
+- Los borradores generados por IA nunca se guardan hasta que el docente pulsa Guardar.
+- Las escenas finales se representan sin opciones; las escenas de decisión requieren de 2 a 4.
 
 ## Problemas conocidos
-- Las conversaciones previas a la autorización no se almacenan ni pueden recuperarse.
-- La voz depende de speechSynthesis y de las voces en español instaladas en el navegador.
-- Los registros vencidos se filtran al consultar y se eliminan físicamente al guardar un nuevo historial.
+- Las respuestas de conversación y evaluación dependen de la disponibilidad y configuración del proveedor IA.
+- La voz del avatar depende de speechSynthesis y de las voces en español instaladas en el navegador.
 
 ## Pendiente
-- Ningún pendiente bloqueante para cerrar el Sprint 11.
+- Ningún pendiente bloqueante para cerrar el Sprint 12.
