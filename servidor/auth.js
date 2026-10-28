@@ -15,7 +15,7 @@ async function purgarSesionesVencidas() {
   }
 }
 
-purgarSesionesVencidas();
+await purgarSesionesVencidas();
 
 export async function cargarUsuario(req, res, next) {
   req.usuario = null;
@@ -39,14 +39,15 @@ export async function cargarUsuario(req, res, next) {
       return next();
     }
 
-    if (new Date(sesion.expira) <= new Date()) {
+    const expiraMs = Date.parse(sesion.expira);
+    if (!Number.isFinite(expiraMs) || expiraMs <= Date.now()) {
       return next();
     }
 
     const usuarios = await almacen.buscar('usuarios', { id: sesion.usuarioId });
     const usuario = usuarios[0];
 
-    if (!usuario || usuario.activo === false) {
+    if (!usuario || usuario.activo !== true) {
       return next();
     }
 
