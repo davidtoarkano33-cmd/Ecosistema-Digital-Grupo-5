@@ -309,6 +309,110 @@ router.post('/admin/usuarios/:id/restablecer', exigirRol('admin'), async (req, r
   }
 });
 
+// DELETE /admin/usuarios/:id/datos (admin) · Elimina la cuenta y sus datos vinculados
+router.delete('/admin/usuarios/:id/datos', exigirRol('admin'), async (req, res, next) => {
+  try {
+    const id = String(req.params.id || '');
+    if (id === String(req.usuario.id)) {
+      return res.status(403).json({ error: 'No puedes eliminar tu propia cuenta' });
+    }
+
+    const [usuario] = await almacen.buscar('usuarios', { id });
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    const grupos = await almacen.leer('distributivo');
+    if (grupos.some(grupo => String(grupo?.docenteId) === id)) {
+      return res.status(409).json({
+        error: 'Reasigna o elimina primero los grupos donde este usuario figura como docente'
+      });
+    }
+
+    const coleccionesPorUsuario = {
+      sesiones: ['usuarioId'],
+      agenda: ['propietarioId'],
+      alertas: ['estudianteId', 'docenteId'],
+      bloqueos: ['usuarioId', 'bloqueadoId'],
+      certificados: ['usuarioId'],
+      'consultas-tutor': ['usuarioId'],
+      'historial-tutor': ['usuarioId'],
+      intentos: ['usuarioId'],
+      'lecturas-noticias': ['usuarioId'],
+      logros: ['usuarioId'],
+      notificaciones: ['usuarioId'],
+      'progreso-temas': ['usuarioId'],
+      'quiz-sesiones': ['usuarioId'],
+      reportes: ['reportadoPor']
+    };
+    let eliminados = 0;
+
+    for (const [coleccion, campos] of Object.entries(coleccionesPorUsuario)) {
+      const lista = await almacen.leer(coleccion);
+      const conservados = lista.filter(item => !campos.some(campo => String(item?.[campo]) === id));
+      eliminados += lista.length - conservados.length;
+      if (conservados.length !== lista.length) await almacen.escribir(coleccion, conservados);
+    }
+
+    const hilos = await almacen.leer('foros-hilos');
+    const hilosEliminados = new Set(hilos.filter(item => String(item?.autorId) === id).map(item => String(item.id)));
+    const hilosConservados = hilos.filter(item => !hilosEliminados.has(String(item?.id)));
+    eliminados += hilos.length - hilosConservados.length;
+    if (hilosConservados.length !== hilos.length) await almacen.escribir('foros-hilos', hilosConservados);
+
+    const respuestas = await almacen.leer('foros-respuestas');
+    const respuestasConservadas = respuestas.filter(item =>
+      String(item?.autorId) !== id && !hilosEliminados.has(String(item?.hiloId))
+    );
+    eliminados += respuestas.length - respuestasConservadas.length;
+    if (respuestasConservadas.length !== respuestas.length) {
+      await almacen.escribir('foros-respuestas', respuestasConservadas);
+    }
+
+    const noticias = await almacen.leer('noticias');
+    const noticiasEliminadas = new Set(noticias.filter(item => String(item?.autorId) === id).map(item => String(item.id)));
+    const noticiasConservadas = noticias.filter(item => !noticiasEliminadas.has(String(item?.id)));
+    eliminados += noticias.length - noticiasConservadas.length;
+    if (noticiasConservadas.length !== noticias.length) await almacen.escribir('noticias', noticiasConservadas);
+    if (noticiasEliminadas.size) {
+      const lecturas = await almacen.leer('lecturas-noticias');
+      const lecturasConservadas = lecturas.filter(item => !noticiasEliminadas.has(String(item?.noticiaId)));
+      eliminados += lecturas.length - lecturasConservadas.length;
+      if (lecturasConservadas.length !== lecturas.length) {
+        await almacen.escribir('lecturas-noticias', lecturasConservadas);
+      }
+    }
+
+    const conversaciones = await almacen.leer('conversaciones');
+    const conversacionesEliminadas = conversaciones.filter(item =>
+      Array.isArray(item?.participantes) && item.participantes.some(participante => String(participante) === id)
+    );
+    const conversacionesConservadas = conversaciones.filter(item => !conversacionesEliminadas.includes(item));
+    eliminados += conversacionesEliminadas.length;
+    if (conversacionesEliminadas.length) {
+      await almacen.escribir('conversaciones', conversacionesConservadas);
+      for (const conversacion of conversacionesEliminadas) {
+        await almacen.escribir(`mensajes/${conversacion.id}`, []);
+      }
+    }
+
+    const gruposActualizados = grupos.map(grupo => ({
+      ...grupo,
+      estudiantes: Array.isArray(grupo?.estudiantes)
+        ? grupo.estudiantes.filter(estudianteId => String(estudianteId) !== id)
+        : grupo?.estudiantes
+    }));
+    if (grupos.some(grupo => Array.isArray(grupo?.estudiantes) && grupo.estudiantes.some(estudianteId => String(estudianteId) === id))) {
+      await almacen.escribir('distributivo', gruposActualizados);
+    }
+
+    await almacen.eliminar('usuarios', id);
+    res.json({ ok: true, eliminados: eliminados + 1 });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // POST /eventos
 router.post('/eventos', async (req, res, next) => {
   try {

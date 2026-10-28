@@ -60,3 +60,10 @@
   color: var(--primario);
   letter-spacing: 1px;
 }
+
+.acciones-usuario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--espacio-xs);
+}

@@ -146,9 +146,16 @@ if (contenido) {
             </label>
           </td>
           <td style="text-align: right;">
-            <button type="button" class="btn btn--secundario btn--pequeno btn-restablecer-clave" data-id="${escapar(u.id)}" data-nombre="${escapar(u.nombre)} ${escapar(u.apellido)}">
-              Restablecer clave
-            </button>
+            <div class="acciones-usuario">
+              <button type="button" class="btn btn--secundario btn--pequeno btn-restablecer-clave" data-id="${escapar(u.id)}" data-nombre="${escapar(u.nombre)} ${escapar(u.apellido)}">
+                Restablecer clave
+              </button>
+              ${esYo ? '' : `
+                <button type="button" class="btn btn--peligro btn--pequeno btn-eliminar-usuario" data-id="${escapar(u.id)}" data-nombre="${escapar(u.nombre)} ${escapar(u.apellido)}">
+                  Eliminar usuario y datos
+                </button>
+              `}
+            </div>
           </td>
         </tr>
       `;
@@ -242,6 +249,29 @@ if (contenido) {
           });
         } catch (err) {
           aviso(err.message || 'Error al restablecer contraseña', 'error');
+        }
+      });
+    });
+
+    // Eliminar definitivamente la cuenta y sus datos vinculados
+    cuerpoTabla.querySelectorAll('.btn-eliminar-usuario').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const nombre = btn.dataset.nombre;
+        const confirmado = await confirmar(
+          `¿Eliminar definitivamente a ${nombre} y todos sus datos? Esta acción no se puede deshacer.`
+        );
+        if (!confirmado) return;
+
+        btn.disabled = true;
+        try {
+          const respuesta = await llamar('DELETE', `/api/admin/usuarios/${encodeURIComponent(id)}/datos`);
+          usuarios = usuarios.filter(item => String(item.id) !== String(id));
+          renderizarTabla();
+          aviso(`Usuario y datos eliminados (${respuesta.eliminados || 1} registros).`, 'exito');
+        } catch (err) {
+          btn.disabled = false;
+          aviso(err.message || 'No se pudo eliminar el usuario', 'error');
         }
       });
     });
