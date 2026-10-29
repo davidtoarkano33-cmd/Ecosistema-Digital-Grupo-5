@@ -1,1 +1,101 @@
-[{"id":"usu_000001","nombre":"Admin","apellido":"Sistema","correo":"admin@demo.ec","rol":"admin","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000002","nombre":"Carlos","apellido":"Docente","correo":"docente1@demo.ec","rol":"docente","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000003","nombre":"Elena","apellido":"Docente","correo":"docente2@demo.ec","rol":"docente","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000004","nombre":"Mateo","apellido":"Estudiante","correo":"estudiante1@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000005","nombre":"Sofia","apellido":"Estudiante","correo":"estudiante2@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000006","nombre":"Lucas","apellido":"Estudiante","correo":"estudiante3@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000007","nombre":"Valeria","apellido":"Estudiante","correo":"estudiante4@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000008","nombre":"Joaquin","apellido":"Estudiante","correo":"estudiante5@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"},{"id":"usu_000009","nombre":"Camila","apellido":"Estudiante","correo":"estudiante6@demo.ec","rol":"estudiante","activo":true,"foto":null,"consentimiento":{"aceptado":true,"fecha":"2026-10-24T00:00:00.000Z"},"fecha":"2026-10-24T00:00:00.000Z"}]
+[
+  {
+    "id": "usu_000001",
+    "nombre": "Admin",
+    "apellido": "Sistema",
+    "correo": "admin@demo.ec",
+    "rol": "admin",
+    "activo": true,
+    "foto": "/recursos/perfiles/admin-sistema.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000002",
+    "nombre": "Carlos",
+    "apellido": "Docente",
+    "correo": "docente1@demo.ec",
+    "rol": "docente",
+    "activo": true,
+    "foto": "/recursos/perfiles/carlos-docente.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000003",
+    "nombre": "Elena",
+    "apellido": "Docente",
+    "correo": "docente2@demo.ec",
+    "rol": "docente",
+    "activo": true,
+    "foto": "/recursos/perfiles/elena-docente.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000004",
+    "nombre": "Mateo",
+    "apellido": "Estudiante",
+    "correo": "estudiante1@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/mateo-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000005",
+    "nombre": "Sofia",
+    "apellido": "Estudiante",
+    "correo": "estudiante2@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/sofia-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000006",
+    "nombre": "Lucas",
+    "apellido": "Estudiante",
+    "correo": "estudiante3@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/lucas-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000007",
+    "nombre": "Valeria",
+    "apellido": "Estudiante",
+    "correo": "estudiante4@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/valeria-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000008",
+    "nombre": "Joaquin",
+    "apellido": "Estudiante",
+    "correo": "estudiante5@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/joaquin-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "usu_000009",
+    "nombre": "Camila",
+    "apellido": "Estudiante",
+    "correo": "estudiante6@demo.ec",
+    "rol": "estudiante",
+    "activo": true,
+    "foto": "/recursos/perfiles/camila-estudiante.jpg",
+    "consentimiento": { "aceptado": true, "fecha": "2026-10-24T00:00:00.000Z" },
+    "fecha": "2026-10-24T00:00:00.000Z"
+  }
+]
