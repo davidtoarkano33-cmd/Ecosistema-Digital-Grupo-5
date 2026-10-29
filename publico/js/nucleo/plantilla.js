@@ -59,6 +59,9 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
     const claseActivo = esActivo ? ' activo' : '';
     const claseDestacado = item.destacado ? ' menu__enlace--destacado' : '';
     const ariaAttr = esActivo ? ' aria-current="page"' : '';
+    const destinoAttr = item.nuevaPestana
+      ? ` target="_blank" rel="noopener noreferrer" aria-label="${item.texto} (abre en una pestaña nueva)"`
+      : '';
     const esNoticias = item.texto === 'Noticias' || item.href.includes('noticias.html');
     const esMensajes = item.texto === 'Mensajes' || item.href.includes('mensajes.html');
     const badgeHtml = esNoticias
@@ -69,7 +72,7 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
     const iconoHtml = item.icono
       ? `<svg class="menu__icono" aria-hidden="true" focusable="false"><use href="/recursos/iconos-navegacion.svg#${item.icono}"></use></svg>`
       : '';
-    return `<a href="${item.href}" class="menu__enlace${claseDestacado}${claseActivo}"${ariaAttr}>${iconoHtml}<span>${item.texto}</span>${badgeHtml}</a>`;
+    return `<a href="${item.href}" class="menu__enlace${claseDestacado}${claseActivo}"${ariaAttr}${destinoAttr}>${iconoHtml}<span>${item.texto}</span>${badgeHtml}</a>`;
   }).join('');
 
   // 5. Bloque de autenticación para el encabezado

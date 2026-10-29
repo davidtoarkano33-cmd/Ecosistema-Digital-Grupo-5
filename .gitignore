@@ -11,3 +11,6 @@ datos/respaldos/
 !datos/semilla/**
 
 publico/recursos/subidas/
+
+# Respaldos finales generados localmente
+/Ecosistema_Educativo_Respaldo_Final_*.zip

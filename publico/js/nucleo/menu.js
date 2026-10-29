@@ -12,6 +12,7 @@ export const MENU = [
   { texto: "Contenidos", icono: "contenidos", href: "/paginas/editor-contenidos.html", roles: ["docente", "admin"] },
   { texto: "Distributivo", icono: "distributivo", href: "/paginas/distributivo.html", roles: ["admin"] },
   { texto: "Foros", icono: "foros", href: "/paginas/foros.html", roles: ["sesion"] },
+  { texto: "Glosario general", icono: "glosario", href: "/recursos/documentos/glosario-general-semiologia-atencion-prehospitalaria.pdf", roles: ["publico"], nuevaPestana: true },
   { texto: "Mensajes", icono: "mensajes", href: "/paginas/mensajes.html", roles: ["sesion"] },
   { texto: "Mi perfil", icono: "perfil", href: "/paginas/perfil.html", roles: ["sesion"] },
   { texto: "Mi progreso", icono: "progreso", href: "/paginas/mi-progreso.html", roles: ["estudiante"] },

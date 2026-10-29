@@ -18,7 +18,7 @@ ui.js        aviso(texto, tipo = "info" | "exito" | "error") · confirmar(texto)
              cargando(bool) · escapar(texto) · limpiar(html)
 util.js      normalizar(texto) · barajar(lista) · fechaLarga(iso) · fechaRelativa(iso)
              parametro(nombre) · formatoBasico(texto) → HTML seguro
-menu.js      MENU = [{ texto, icono, href, roles, destacado? }]
+menu.js      MENU = [{ texto, icono, href, roles, destacado?, nuevaPestana? }]
              roles: publico | sesion | estudiante | docente | admin
 plantilla.js montarPlantilla({ titulo, roles }) → encabezado, menú filtrado y pie; exige rol
 sesion.js    registrar(datos) · iniciar(correo, clave) · cerrar() · token() · exigirRol(roles)
