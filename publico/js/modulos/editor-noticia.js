@@ -98,7 +98,7 @@ if (contenido) {
             <span class="insignia insignia--acento" id="prev-destacada" style="display: none;">⭐ Destacada</span>
           </div>
 
-          <img src="/recursos/subidas/placeholder.jpg" alt="" class="noticia-preview-img" id="prev-imagen" style="display: none;">
+          <img alt="" class="noticia-preview-img" id="prev-imagen" style="display: none;">
 
           <div>
             <h2 class="tarjeta__titulo" style="font-size: var(--tamano-l); margin: 0;" id="prev-titulo">

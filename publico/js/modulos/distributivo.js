@@ -204,7 +204,6 @@ if (contenido) {
           `).join('') || '<p class="campo__ayuda">No hay docentes activos disponibles.</p>'}
         </div>
       </fieldset>
-      </div>
 
       <div class="campo">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--espacio-xs);">

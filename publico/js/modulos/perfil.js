@@ -11,6 +11,26 @@ await montarPlantilla({ titulo: "Mi Perfil", roles: ["sesion"] });
 
 const usuario = usuarioActual();
 const contenido = document.getElementById('contenido');
+const MANUALES_POR_ROL = {
+  estudiante: {
+    titulo: 'Manual del estudiante',
+    descripcion: 'Consulta cómo estudiar asignaturas, realizar actividades, usar Canelo y revisar tu progreso.',
+    archivo: '/recursos/manuales/manual-estudiante.pdf',
+    descarga: 'manual-estudiante.pdf'
+  },
+  docente: {
+    titulo: 'Manual del docente',
+    descripcion: 'Consulta cómo gestionar contenidos, actividades, simulaciones y seguimiento académico.',
+    archivo: '/recursos/manuales/manual-docente.pdf',
+    descarga: 'manual-docente.pdf'
+  },
+  admin: {
+    titulo: 'Manual del administrador',
+    descripcion: 'Consulta cómo administrar usuarios, asignaturas, distributivo, reportes y configuración.',
+    archivo: '/recursos/manuales/manual-admin.pdf',
+    descarga: 'manual-administrador.pdf'
+  }
+};
 
 if (contenido && usuario) {
   // Cargar datos completos del perfil
@@ -32,6 +52,7 @@ if (contenido && usuario) {
   }
 
   const iniciales = `${(datosPerfil.nombre || '').charAt(0)}${(datosPerfil.apellido || '').charAt(0)}`.toUpperCase() || 'U';
+  const manualRol = MANUALES_POR_ROL[datosPerfil.rol];
 
   const avatarHtml = datosPerfil.foto
     ? `<img src="${escapar(datosPerfil.foto)}" alt="Foto de perfil" class="perfil-avatar" id="img-avatar">`
@@ -110,6 +131,22 @@ if (contenido && usuario) {
           </button>
         </form>
       </section>
+
+      ${manualRol ? `
+        <section class="tarjeta perfil-manual" aria-labelledby="titulo-manual-rol">
+          <div class="perfil-manual__contenido">
+            <span class="insignia insignia--info">Guía de uso</span>
+            <h2 class="perfil-manual__titulo" id="titulo-manual-rol">${escapar(manualRol.titulo)}</h2>
+            <p class="perfil-manual__descripcion">${escapar(manualRol.descripcion)}</p>
+          </div>
+          <a href="${escapar(manualRol.archivo)}"
+             download="${escapar(manualRol.descarga)}"
+             class="btn btn--primario perfil-manual__descarga"
+             aria-label="Descargar ${escapar(manualRol.titulo)} en PDF">
+            Descargar manual
+          </a>
+        </section>
+      ` : ''}
     </div>
 
     <!-- Sección de logros (se completa en el Sprint 5) -->

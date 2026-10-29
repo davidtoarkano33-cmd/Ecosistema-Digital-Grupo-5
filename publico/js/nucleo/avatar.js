@@ -232,7 +232,6 @@ function responderNavegacion(consulta) {
 function cambiarEnvio(activo) {
   enviando = activo;
   cambiarEstado(activo ? 'pensando' : 'reposo');
-  cambiarEstado(activo ? 'pensando' : 'reposo');
   const estado = avatar.querySelector('.canelo-chat__estado');
   const entrada = avatar.querySelector('.canelo-chat__entrada');
   const boton = avatar.querySelector('.canelo-chat__enviar');
@@ -348,7 +347,7 @@ export function montarAvatar() {
         <button type="button" class="avatar-guia__voz">${vozActiva ? 'Silenciar voz' : 'Activar voz'}</button>
       </footer>
     </section>
-    <button type="button" class="avatar-guia__lanzador" aria-controls="canelo-chat" aria-expanded="false">
+    <button type="button" class="avatar-guia__lanzador" aria-controls="canelo-chat" aria-expanded="false" aria-label="Preguntar a Canelo">
       ${dibujoAvatar()}
       <span>Pregunta a Canelo</span>
     </button>

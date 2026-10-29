@@ -1,28 +1,29 @@
-# docs/estado.md · Estado del proyecto (máximo 30 líneas)
-Sprint terminado: S12 · Fecha: 2026-10-28 · Sprint Review validada
+# Docs/estado.md · Estado del proyecto (máximo 30 líneas)
+Sprint terminado: S13 · Fecha: 2026-10-29 · Sprint Review con Product Owner validada
 
 ## Funciona
-- El catálogo agrupa simulaciones por tema y distingue escenarios ramificados y prácticas de rol.
-- El motor de escenarios recorre decisiones, muestra consecuencias, calcula puntaje e informa el recorrido final.
-- La vista previa no registra intentos ni modifica puntos o logros.
-- Docentes y administradores crean borradores, editan escenas, imágenes, opciones, destinos y consecuencias.
-- La publicación valida destinos, alcanzabilidad, escenas finales, ciclos, consecuencias y límites de puntos.
-- El mapa indentado permite revisar visualmente las rutas antes de publicar.
-- Gemini genera borradores de escenarios de 5 a 10 escenas usando el contenido autorizado del tema.
-- Gemini también genera personaje, contexto, objetivo, rúbrica y turnos para prácticas de rol.
-- El modo rol conversa con el personaje, limita turnos y anima al avatar al pensar y hablar.
-- La evaluación de rol entrega puntos por criterio, comentario general y registra el intento del estudiante.
-- Los preparadores verifican acceso, limitan el historial y no aceptan instrucciones desde el navegador.
-- El servidor vuelve a validar escenarios y prácticas de rol antes de publicarlos.
+- La autenticación purga sesiones vencidas y rechaza fechas inválidas, cuentas inexistentes, inactivas o no habilitadas.
+- El administrador elimina usuarios y sus datos vinculados con protecciones para la cuenta propia y grupos asignados.
+- El distributivo admite varios docentes por grupo y conserva compatibilidad con `docenteId`.
+- Los permisos, alertas, foros, mensajes, agenda y resúmenes reconocen a todos los docentes asignados.
+- El editor propone con IA unidades y temas de una asignatura usando contexto validado por el servidor.
+- La nueva interfaz incorpora imágenes educativas, navegación con iconos, créditos y autoría administrable.
+- Canelo ofrece ayuda de navegación y tutoría socrática; el estudiante dispone de acceso dorado en el menú.
+- Notificaciones, índice global, Canelo y menú lateral se adaptan a teléfonos desde 360 px.
+- Los manuales de estudiante, docente y administrador están documentados y descargables en PDF desde Mi perfil.
+- Se crearon guiones, resultados y tablero de defectos para la verificación del Sprint 13.
 
 ## Decisiones y cambios respecto al contrato
-- Se añadió la tarea generar-rol para ofrecer creación asistida también en el editor del modo rol.
-- Los borradores generados por IA nunca se guardan hasta que el docente pulsa Guardar.
-- Las escenas finales se representan sin opciones; las escenas de decisión requieren de 2 a 4.
+- `distributivo` añade `docentesIds`; `docenteId` conserva el primer docente para compatibilidad.
+- El contenido sugerido por IA no sustituye la validación ni el guardado explícito del usuario.
+- El tutor continúa limitado a temas publicados y autorizados; no se habilitaron temas libres sin contexto académico.
+- Los manuales PDF se publican como recursos estáticos y Mi perfil selecciona el correspondiente al rol.
 
 ## Problemas conocidos
-- Las respuestas de conversación y evaluación dependen de la disponibilidad y configuración del proveedor IA.
-- La voz del avatar depende de speechSynthesis y de las voces en español instaladas en el navegador.
+- Quedan 34 de 37 pruebas prioritarias E2E pendientes; no se registraron fallos bloqueantes en las ejecutadas.
+- La prueba de los manuales con una persona externa está pendiente por falta de participante.
+- `DEF-001` y `DEF-002` continúan registrados en el tablero de defectos.
+- La generación y tutoría dependen de la disponibilidad y configuración del proveedor IA.
 
 ## Pendiente
-- Ningún pendiente bloqueante para cerrar el Sprint 12.
+- Ningún pendiente funcional bloquea el cierre; las verificaciones anteriores deben continuar después de la etiqueta.

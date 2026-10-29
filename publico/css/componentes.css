@@ -520,7 +520,7 @@
   padding: var(--espacio-s) 0;
   position: sticky;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   top: 0;
   z-index: 50;
   box-shadow: var(--sombra-2);
@@ -600,7 +600,8 @@
   gap: var(--espacio-xs);
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--primario-oscuro);
   border-right: 1px solid var(--secundario);
   padding: var(--espacio-m);
@@ -1637,6 +1638,24 @@ body > .cargando {
 }
 
 @media (max-width: 600px) {
+  .btn-flotante-indice-global {
+    top: calc(var(--indice-superior, 0rem) + var(--espacio-s));
+  }
+
+  .panel-notificaciones {
+    position: fixed;
+    top: calc(var(--panel-notificaciones-superior, 0rem) + var(--espacio-xs));
+    right: var(--espacio-m);
+    left: var(--espacio-m);
+    width: auto;
+    max-width: none;
+    max-height: calc(100dvh - var(--panel-notificaciones-superior, 0rem) - var(--espacio-m));
+  }
+
+  .panel-notificaciones__lista {
+    max-height: calc(100dvh - var(--panel-notificaciones-superior, 0rem) - (var(--espacio-2xl) * 3));
+  }
+
   .encabezado__interior {
     align-items: flex-start;
     flex-wrap: wrap;
@@ -1653,6 +1672,14 @@ body > .cargando {
 
   .encabezado__marca {
     font-size: var(--tamano-m);
+  }
+
+  .avatar-guia__lanzador {
+    padding: var(--espacio-xs);
+  }
+
+  .avatar-guia__lanzador > span {
+    display: none;
   }
 
   .pie__enlaces {

@@ -45,6 +45,47 @@
   gap: var(--espacio-xs);
 }
 
+.perfil-manual {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-l);
+  border-left: var(--espacio-xs) solid var(--acento);
+}
+
+.perfil-manual__contenido {
+  min-width: 0;
+}
+
+.perfil-manual__titulo {
+  margin: var(--espacio-xs) 0;
+  font-size: var(--tamano-l);
+  color: var(--primario);
+}
+
+.perfil-manual__descripcion {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--tamano-s);
+}
+
+.perfil-manual__descarga {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .perfil-manual {
+    align-items: stretch;
+    flex-direction: column;
+    gap: var(--espacio-m);
+  }
+
+  .perfil-manual__descarga {
+    width: 100%;
+  }
+}
+
 /* Sección Logros y Gamificación */
 .perfil-logros-seccion {
   max-width: 900px;
@@ -224,4 +265,3 @@
 .condicion-valores {
   color: var(--primario);
 }
-

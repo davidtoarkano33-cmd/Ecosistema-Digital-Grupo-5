@@ -377,6 +377,20 @@ function montarIndiceSeccionesGlobal(tituloPagina) {
     const panel = document.getElementById('panel-indice-global');
     const backdrop = document.getElementById('indice-global-backdrop');
     const btnCerrar = document.getElementById('btn-cerrar-indice-global');
+    const encabezado = document.querySelector('.encabezado');
+
+    function actualizarPosicionIndice() {
+      if (!btnFlotante || !encabezado) return;
+      const limiteEncabezado = encabezado.getBoundingClientRect().bottom;
+      btnFlotante.style.setProperty('--indice-superior', `${Math.max(0, limiteEncabezado)}px`);
+    }
+
+    actualizarPosicionIndice();
+    window.addEventListener('resize', actualizarPosicionIndice);
+    if ('ResizeObserver' in window && encabezado) {
+      const observadorEncabezado = new ResizeObserver(actualizarPosicionIndice);
+      observadorEncabezado.observe(encabezado);
+    }
 
     function alternar(abrir) {
       const debeAbrir = abrir !== undefined ? abrir : !panel.classList.contains('panel-indice-global--abierto');

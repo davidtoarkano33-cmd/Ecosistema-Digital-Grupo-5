@@ -190,6 +190,9 @@ export async function montarCampana() {
   async function alternarPanel() {
     panelAbierto = !panelAbierto;
     if (panel) {
+      const encabezado = contenedorCampana.closest('.encabezado');
+      const limiteEncabezado = encabezado?.getBoundingClientRect().bottom || 0;
+      panel.style.setProperty('--panel-notificaciones-superior', `${Math.max(0, limiteEncabezado)}px`);
       panel.hidden = !panelAbierto;
       btnCampana.setAttribute('aria-expanded', panelAbierto ? 'true' : 'false');
 
@@ -211,6 +214,13 @@ export async function montarCampana() {
       alternarPanel();
     });
   }
+
+  window.addEventListener('resize', () => {
+    if (!panelAbierto || !panel) return;
+    const encabezado = contenedorCampana.closest('.encabezado');
+    const limiteEncabezado = encabezado?.getBoundingClientRect().bottom || 0;
+    panel.style.setProperty('--panel-notificaciones-superior', `${Math.max(0, limiteEncabezado)}px`);
+  });
 
   if (btnActivarAvisos) {
     actualizarBotonAvisos();

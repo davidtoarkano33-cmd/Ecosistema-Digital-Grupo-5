@@ -2,6 +2,7 @@
 export const MENU = [
   { texto: "Inicio", icono: "inicio", href: "/index.html", roles: ["publico"], destacado: true },
   { texto: "Actividades", icono: "actividades", href: "/paginas/actividades.html", roles: ["estudiante", "docente", "admin"] },
+  { texto: "Tutor socrático", icono: "tutor", href: "/paginas/tutor.html", roles: ["estudiante"], destacado: true },
   { texto: "Agenda", icono: "agenda", href: "/paginas/agenda.html", roles: ["sesion"] },
   { texto: "Asignaturas", icono: "asignaturas", href: "/paginas/admin-asignaturas.html", roles: ["admin"] },
   { texto: "Autores y créditos", icono: "autores", href: "/paginas/creditos.html", roles: ["publico"], destacado: true },

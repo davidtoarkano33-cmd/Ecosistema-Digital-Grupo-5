@@ -12,6 +12,10 @@ Estados: Aprobado, Fallido, Pendiente o Bloqueado.
 | TRA-03 | Aprobado parcial | La indisponibilidad de red hacia Gemini devolvió error sin guardar el borrador; falta comprobar visualmente que todos los formularios queden operables. |
 | Resto de prioridad Alta | Pendiente | Requiere ejecución E2E con cuentas por rol, navegador, celular/360 px y teclado. |
 
+## Verificación de manuales
+
+Verificación documental aprobada; prueba con usuario externo pendiente por falta de participante.
+
 ## Resumen
 
 - Aprobados completos: 2 de 37.

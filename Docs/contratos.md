@@ -18,7 +18,7 @@ ui.js        aviso(texto, tipo = "info" | "exito" | "error") · confirmar(texto)
              cargando(bool) · escapar(texto) · limpiar(html)
 util.js      normalizar(texto) · barajar(lista) · fechaLarga(iso) · fechaRelativa(iso)
              parametro(nombre) · formatoBasico(texto) → HTML seguro
-menu.js      MENU = [{ texto, href, roles }]
+menu.js      MENU = [{ texto, icono, href, roles, destacado? }]
              roles: publico | sesion | estudiante | docente | admin
 plantilla.js montarPlantilla({ titulo, roles }) → encabezado, menú filtrado y pie; exige rol
 sesion.js    registrar(datos) · iniciar(correo, clave) · cerrar() · token() · exigirRol(roles)
@@ -49,7 +49,8 @@ ganchos.js   carga servidor/ganchos/<col>.js → { filtrarLista(lista, usuario),
              antesDeGuardar(datos, usuario, anterior),
              despuesDeGuardar(reg, usuario, anterior) }
              aplicar(col, nombre, ...args) · un gancho rechaza con Error y propiedad estado
-acceso.js    gruposDe(usuario) · asignaturasDe(usuario) · asignaturaDeTema(temaId)
+acceso.js    docentesIdsDeGrupo(grupo) · esDocenteDeGrupo(grupo, usuarioId)
+             gruposDe(usuario) · asignaturasDe(usuario) · asignaturaDeTema(temaId)
              puedeEditarAsignatura(usuario, asignaturaId) · estudiantesDe(docenteId)
              docentesDe(estudianteId)
 auth.js      cargarUsuario (pone req.usuario) · exigirRol(...roles)
@@ -67,6 +68,7 @@ Genérica  GET|POST /api/:col · GET|PUT|DELETE /api/:col/:id   (permisos.json +
 Auth      POST /api/auth/registro · POST /api/auth/login (sin sesión) · POST /api/auth/logout
           GET /api/auth/yo · PUT /api/auth/perfil · POST /api/auth/clave
 Admin     POST /api/admin/usuarios/:id/restablecer
+          DELETE /api/admin/usuarios/:id/datos
 Archivos  POST /api/subidas · POST /api/eventos
 Gamif.    POST /api/intentos · GET /api/logros/:usuarioId ("yo" permitido)
 Certif.   GET /api/certificados/estado · POST /api/certificados
@@ -77,7 +79,8 @@ Notif.    GET /api/notificaciones · POST /api/notificaciones
           POST /api/notificaciones/:id/leida · POST /api/notificaciones/leidas
 Alertas   GET /api/alertas?grupoId= → { alertas, mensajesApoyo }
 IA        POST /api/ia/:tarea   tareas: generar-glosario, generar-preguntas, generar-escenario,
-          generar-rol, tutor, rol-simulacion, evaluar-rol · DELETE /api/ia/tutor/historial
+          generar-rol, generar-contenidos-asignatura, tutor, rol-simulacion, evaluar-rol
+          DELETE /api/ia/tutor/historial
           GET /api/ia/prueba (admin)
 Quiz      GET /api/quiz/estado?temaId= · POST /api/quiz/iniciar · POST /api/quiz/responder
           POST /api/quiz/finalizar
@@ -95,7 +98,7 @@ usuarios          nombre, apellido, correo, claveHash, rol, activo, foto,
 sesiones          token, usuarioId, expira
 bitacora.jsonl    usuarioId, tipo, recurso, fecha
 asignaturas       nombre, descripcion, nivel
-distributivo      asignaturaId, paralelo, periodo, docenteId, estudiantes[]
+distributivo      asignaturaId, paralelo, periodo, docenteId, docentesIds[], estudiantes[]
 unidades          asignaturaId, titulo, orden, visible
 temas             unidadId, titulo, orden, objetivos[], resumen, ejemplos[],
                   erroresFrecuentes[], preguntasGuia[], recursos[{tipo, titulo, url}],
@@ -131,6 +134,7 @@ agenda            titulo, tipo(tarea|reunion|fecha-limite|recordatorio), inicio,
 conversaciones    participantes[], ultimo{texto, fecha, autorId}, leidoHasta{usuarioId: fecha}
 mensajes/<convId> autorId, texto, oculto
 bloqueos          usuarioId, bloqueadoId
+autores           nombre, rol, frase, materia, foto, orden, principal
 consultas-tutor   usuarioId, temaId, dia, mensajes
 historial-tutor   usuarioId, temaId, pregunta, respuesta, revisionAutorizada
 simulaciones      temaId, titulo, modo(escenarios|rol), estado, escenaInicial,
