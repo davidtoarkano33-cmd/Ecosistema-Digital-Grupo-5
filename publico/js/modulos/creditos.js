@@ -9,17 +9,44 @@ await montarPlantilla({ titulo: "Autores y créditos" });
 const AUTORES_INICIALES = [
   {
     id: 'aut_000001',
-    nombre: 'Ortiz Vivar Harold Leonardo',
+    nombre: 'Ortiz Vivanco Harold Leonardo',
     rol: 'Maestrante · Docente paramédico',
     frase: 'Prepárate con pasión, actúa con valor y sirve siempre con humanidad',
-    materia: 'Prácticas Preprofesionales',
+    materia: 'PRÁCTICAS PREPROFESIONALES',
     foto: '/recursos/autores/harold-ortiz.png',
     orden: 1,
     principal: true
   },
-  { id: 'aut_000002', nombre: 'Pacheco Quezada Gisselle Cristina', rol: 'Maestrante · Docente paramédico', orden: 2 },
-  { id: 'aut_000003', nombre: 'Solarte Santos Nicole Solange', rol: 'Maestrante · Docente paramédico', orden: 3 },
-  { id: 'aut_000004', nombre: 'Toapanta Vargas David Gonzalo', rol: 'Maestrante · Docente paramédico', orden: 4 }
+  {
+    id: 'aut_000002',
+    nombre: 'Pacheco Quezada Gisselle Cristina',
+    rol: 'Maestrante · Docente paramédico',
+    frase: 'El cuidado del paciente crítico exige conocimiento científico, precisión clínica y decisiones oportunas, donde cada intervención representa una oportunidad para preservar la vida y la dignidad humana.',
+    materia: 'PACIENTE CRÍTICO',
+    foto: '/recursos/autores/gisselle-pacheco.png',
+    orden: 2,
+    principal: true
+  },
+  {
+    id: 'aut_000003',
+    nombre: 'Solarte Santos Solange Nicole',
+    rol: 'Maestrante · Docente paramédico',
+    frase: 'En trauma, cada segundo cuenta y cada decisión puede salvar una vida.',
+    materia: 'MANEJO DE TRAUMAS',
+    foto: '/recursos/autores/solange-solarte.png',
+    orden: 3,
+    principal: true
+  },
+  {
+    id: 'aut_000004',
+    nombre: 'Toapanta Vargas David Gonzalo',
+    rol: 'Maestrante · Docente paramédico',
+    frase: 'Sirve con tus manos al paciente, como si estuvieras sirviendo a Dios. Mi madre a mi me dijo: El ser un APH esa será tu bendición.',
+    materia: 'INSTRUCCIÓN FORMAL',
+    foto: '/recursos/autores/david-toapanta.jpeg',
+    orden: 4,
+    principal: true
+  }
 ];
 
 const esAdmin = usuarioActual()?.rol === 'admin';
