@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Plataforma web de ecosistema educativo digital",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node servidor/server.js",
+    "postinstall": "node servidor/semilla.js",
     "semilla": "node servidor/semilla.js",
     "crear-admin": "node servidor/crear-admin.js"
   },

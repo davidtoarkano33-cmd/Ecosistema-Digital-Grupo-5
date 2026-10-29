@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ecosistema-digital-grupo-5
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: IA_CLAVE
+        sync: false

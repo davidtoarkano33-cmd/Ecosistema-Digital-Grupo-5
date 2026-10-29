@@ -162,7 +162,7 @@ app.use((err, req, res, next) => {
   res.status(estado).json({ error: err.message || 'Error interno del servidor' });
 });
 
-const PUERTO = process.env.PUERTO || 3000;
+const PUERTO = process.env.PORT || process.env.PUERTO || 3000;
 const servidor = app.listen(PUERTO, () => {
   console.log(`Servidor activo en el puerto ${PUERTO}`);
 });
