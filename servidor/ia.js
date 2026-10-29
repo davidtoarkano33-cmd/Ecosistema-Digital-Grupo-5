@@ -347,6 +347,30 @@ function generarRespuestaSimulada(tarea, datos = {}, formato = 'json') {
     ];
   }
 
+  if (tarea === 'generar-contenidos-asignatura') {
+    const totalUnidades = Math.max(1, Math.min(6, Number(datos.cantidadUnidades) || 2));
+    const totalTemas = Math.max(1, Math.min(6, Number(datos.temasPorUnidad) || 2));
+    return {
+      unidades: Array.from({ length: totalUnidades }, (_, indiceUnidad) => ({
+        titulo: `Unidad propuesta ${indiceUnidad + 1}`,
+        temas: Array.from({ length: totalTemas }, (_, indiceTema) => ({
+          titulo: `Tema formativo ${indiceUnidad + 1}.${indiceTema + 1}`,
+          objetivos: [
+            'Explicar los conceptos fundamentales del tema.',
+            'Aplicar los contenidos en una situación relacionada con la asignatura.'
+          ],
+          resumen: 'Introducción pedagógica al tema basada en las indicaciones proporcionadas. La ficha queda en borrador para revisión docente antes de su publicación.',
+          ejemplos: ['Aplicación contextual de los conceptos principales.'],
+          erroresFrecuentes: ['Aplicar el concepto sin considerar el contexto estudiado.'],
+          preguntasGuia: ['¿Cuál es la idea central del tema?', '¿Cómo se aplicaría en una situación práctica?'],
+          palabrasClave: ['fundamentos', 'aplicacion', 'analisis'],
+          dificultad: 'intermedio',
+          fuentes: ''
+        }))
+      }))
+    };
+  }
+
   if (tarea === 'generar-escenario') {
     return {
       titulo: 'Escenario educativo contextual',

@@ -79,7 +79,7 @@ function estadoDelNivel(nivel, maximoAprobado) {
 async function notificarBancoInsuficiente(usuario, tema, unidad, nivel) {
   const grupos = await acceso.gruposDe(usuario);
   const relacionados = grupos.filter(grupo => String(grupo.asignaturaId) === String(unidad.asignaturaId));
-  const docentes = [...new Set(relacionados.map(grupo => grupo.docenteId).filter(Boolean).map(String))];
+  const docentes = [...new Set(relacionados.flatMap(grupo => acceso.docentesIdsDeGrupo(grupo)))];
   const hoy = new Date().toISOString().slice(0, 10);
   const enlace = `/paginas/banco-preguntas.html?temaId=${encodeURIComponent(tema.id)}&nivel=${nivel}`;
 

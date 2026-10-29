@@ -7,6 +7,14 @@
       "admin"
     ]
   },
+  "autores": {
+    "leer": [
+      "publico"
+    ],
+    "escribir": [
+      "admin"
+    ]
+  },
   "sesiones": {
     "leer": [
       "servidor"

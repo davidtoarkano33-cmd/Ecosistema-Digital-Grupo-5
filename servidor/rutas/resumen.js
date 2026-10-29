@@ -285,7 +285,7 @@ router.get('/resumen/grupo/:grupoId', async (req, res) => {
     }
 
     // Validar permisos: docente del grupo o admin
-    if (usuario.rol !== 'admin' && String(grupo.docenteId) !== String(usuario.id)) {
+    if (usuario.rol !== 'admin' && !acceso.esDocenteDeGrupo(grupo, usuario.id)) {
       return res.status(403).json({ error: 'Solo el docente del grupo o el administrador pueden ver este resumen' });
     }
 
@@ -440,7 +440,8 @@ router.get('/resumen/grupo/:grupoId', async (req, res) => {
         asignaturaId: grupo.asignaturaId,
         paralelo: grupo.paralelo,
         periodo: grupo.periodo,
-        docenteId: grupo.docenteId
+        docenteId: grupo.docenteId,
+        docentesIds: acceso.docentesIdsDeGrupo(grupo)
       },
       estudiantes,
       porTema
@@ -468,7 +469,7 @@ router.get('/resumen/tutor/:grupoId', async (req, res) => {
     if (!grupo) return res.status(404).json({ error: 'Grupo no encontrado' });
 
     const autorizado = usuario.rol === 'admin' || (
-      usuario.rol === 'docente' && String(grupo.docenteId) === String(usuario.id)
+      usuario.rol === 'docente' && acceso.esDocenteDeGrupo(grupo, usuario.id)
     );
     if (!autorizado) {
       return res.status(403).json({ error: 'Solo el docente del grupo o el administrador pueden ver este resumen' });

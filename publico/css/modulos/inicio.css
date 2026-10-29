@@ -180,6 +180,20 @@
   gap: var(--espacio-m);
 }
 
+.inicio-asignatura__imagen {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+  background-color: var(--fondo);
+  object-fit: contain;
+}
+
+.inicio-grid-asignaturas .foto-referencial {
+  margin-bottom: var(--espacio-m);
+}
+
 .inicio-grid-noticias {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -245,6 +259,88 @@
   margin-bottom: var(--espacio-m);
 }
 
+/* 8. Presentación del proyecto áulico */
+.inicio-proyecto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+  border-top: var(--espacio-xs) solid var(--acento);
+}
+
+.inicio-proyecto__cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-xs);
+}
+
+.inicio-objetivos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-m);
+}
+
+.inicio-objetivo,
+.inicio-identidad-proyecto__tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-s);
+  padding: var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background-color: var(--fondo);
+}
+
+.inicio-objetivo--general {
+  border-left: var(--espacio-xs) solid var(--info);
+}
+
+.inicio-objetivo h3,
+.inicio-identidad-proyecto__tarjeta h3 {
+  margin: 0;
+  color: var(--primario);
+  font-size: var(--tamano-m);
+}
+
+.inicio-objetivo p,
+.inicio-objetivo li,
+.inicio-identidad-proyecto__tarjeta p {
+  color: var(--texto);
+  font-size: var(--tamano-s);
+}
+
+.inicio-objetivo ol {
+  margin: 0 0 auto;
+  padding-left: var(--espacio-l);
+}
+
+.inicio-objetivo li + li {
+  margin-top: var(--espacio-s);
+}
+
+.inicio-identidad-proyecto {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-m);
+}
+
+.inicio-identidad-proyecto__tarjeta {
+  border-bottom: var(--espacio-xs) solid var(--acento);
+  background-color: var(--superficie);
+}
+
+.inicio-proyecto__imagen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+}
+
+.inicio-proyecto .foto-referencial {
+  margin-top: auto;
+}
+
 /* Ajustes de accesibilidad y responsive */
 @media (max-width: 600px) {
   .inicio-hero__titulo {
@@ -263,5 +359,10 @@
   .inicio-continuar__info {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .inicio-objetivos,
+  .inicio-identidad-proyecto {
+    grid-template-columns: 1fr;
   }
 }

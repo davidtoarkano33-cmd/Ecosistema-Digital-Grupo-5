@@ -38,6 +38,18 @@
   transition: transform var(--transicion), box-shadow var(--transicion);
 }
 
+.actividad-tarjeta > .foto-referencial {
+  margin-bottom: var(--espacio-m);
+}
+
+.actividad-tarjeta__imagen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+}
+
 .actividad-tarjeta:hover,
 .actividad-tarjeta:focus-within {
   transform: translateY(-2px);

@@ -1,7 +1,7 @@
 // servidor/rutas/mensajes.js · Mensajería privada, difusión y moderación
 import { Router } from 'express';
 import * as almacen from '../almacen.js';
-import { gruposDe } from '../acceso.js';
+import { docentesIdsDeGrupo, esDocenteDeGrupo, gruposDe } from '../acceso.js';
 
 const router = Router();
 const enviosPorUsuario = new Map();
@@ -79,7 +79,7 @@ async function obtenerContactosPermitidos(usuario) {
     activos.filter(item => item.rol === 'docente').forEach(item => idsPermitidos.add(String(item.id)));
   } else if (usuario.rol === 'estudiante') {
     for (const grupo of grupos || []) {
-      if (grupo.docenteId) idsPermitidos.add(String(grupo.docenteId));
+      docentesIdsDeGrupo(grupo).forEach(docenteId => idsPermitidos.add(docenteId));
       if (ajustes.chatEntreEstudiantes) {
         for (const estudianteId of grupo.estudiantes || []) idsPermitidos.add(String(estudianteId));
       }
@@ -151,7 +151,7 @@ async function agregarMensaje(conversacion, autorId, texto, contarLimite = true)
   return mensaje;
 }
 
-router.use(exigirSesion);
+router.use('/mensajes', exigirSesion);
 
 // Las rutas fijas se declaran antes de /mensajes/:convId.
 router.get('/mensajes/contactos', async (req, res, next) => {
@@ -244,7 +244,7 @@ router.post('/mensajes/difusion', async (req, res, next) => {
     const texto = validarTexto(req.body?.texto);
     const grupos = await gruposDe(req.usuario);
     const grupo = grupos.find(item => String(item.id) === grupoId);
-    if (!grupo || String(grupo.docenteId) !== String(req.usuario.id)) {
+    if (!grupo || !esDocenteDeGrupo(grupo, req.usuario.id)) {
       rechazar('No tienes acceso al grupo indicado', 403);
     }
 

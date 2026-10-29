@@ -63,6 +63,31 @@ export function validarEsquema(tarea, datos) {
       return Number.isInteger(datos.maxTurnos) && datos.maxTurnos >= 4 && datos.maxTurnos <= 12;
     }
 
+    case 'generar-contenidos-asignatura': {
+      const esListaTexto = (valor, minimo, maximo) =>
+        Array.isArray(valor) && valor.length >= minimo && valor.length <= maximo &&
+        valor.every(item => typeof item === 'string' && item.trim().length > 0);
+      if (typeof datos !== 'object' || Array.isArray(datos) || !Array.isArray(datos.unidades)) return false;
+      if (datos.unidades.length < 1 || datos.unidades.length > 6) return false;
+      return datos.unidades.every(unidad =>
+        unidad &&
+        typeof unidad.titulo === 'string' && unidad.titulo.trim() &&
+        Array.isArray(unidad.temas) && unidad.temas.length >= 1 && unidad.temas.length <= 6 &&
+        unidad.temas.every(tema =>
+          tema &&
+          typeof tema.titulo === 'string' && tema.titulo.trim() &&
+          esListaTexto(tema.objetivos, 1, 6) &&
+          typeof tema.resumen === 'string' && tema.resumen.trim() &&
+          esListaTexto(tema.ejemplos, 1, 5) &&
+          esListaTexto(tema.erroresFrecuentes, 1, 5) &&
+          esListaTexto(tema.preguntasGuia, 1, 6) &&
+          esListaTexto(tema.palabrasClave, 1, 10) &&
+          ['basico', 'intermedio', 'avanzado'].includes(tema.dificultad) &&
+          typeof tema.fuentes === 'string'
+        )
+      );
+    }
+
     case 'evaluar-rol': {
       // { puntaje, maximo, criterios, comentarioGeneral }
       if (typeof datos !== 'object' || Array.isArray(datos)) return false;

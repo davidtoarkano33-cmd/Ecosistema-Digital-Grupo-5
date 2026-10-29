@@ -35,22 +35,29 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
 
   // 4. Filtrar elementos de MENU según el estado de la sesión y el rol
   const rutaActual = window.location.pathname;
-  const menuFiltrado = MENU.filter(item => {
-    if (!item.roles || item.roles.includes('publico')) {
-      return true;
-    }
-    if (!usuario) {
-      return false;
-    }
-    if (item.roles.includes('sesion')) {
-      return true;
-    }
-    return item.roles.includes(usuario.rol);
-  });
+  const menuFiltrado = MENU
+    .filter(item => {
+      if (!item.roles || item.roles.includes('publico')) {
+        return true;
+      }
+      if (!usuario) {
+        return false;
+      }
+      if (item.roles.includes('sesion')) {
+        return true;
+      }
+      return item.roles.includes(usuario.rol);
+    })
+    .sort((a, b) => {
+      if (a.href === '/index.html') return -1;
+      if (b.href === '/index.html') return 1;
+      return a.texto.localeCompare(b.texto, 'es', { sensitivity: 'base' });
+    });
 
   const enlacesMenuHtml = menuFiltrado.map(item => {
     const esActivo = rutaActual === item.href || (item.href === '/index.html' && (rutaActual === '/' || rutaActual === ''));
     const claseActivo = esActivo ? ' activo' : '';
+    const claseDestacado = item.destacado ? ' menu__enlace--destacado' : '';
     const ariaAttr = esActivo ? ' aria-current="page"' : '';
     const esNoticias = item.texto === 'Noticias' || item.href.includes('noticias.html');
     const esMensajes = item.texto === 'Mensajes' || item.href.includes('mensajes.html');
@@ -59,7 +66,10 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
       : esMensajes
         ? ` <span id="badge-mensajes-no-leidos" class="insignia insignia--acento" style="display: none; margin-left: auto;"></span>`
         : '';
-    return `<a href="${item.href}" class="menu__enlace${claseActivo}"${ariaAttr}><span>${item.texto}</span>${badgeHtml}</a>`;
+    const iconoHtml = item.icono
+      ? `<svg class="menu__icono" aria-hidden="true" focusable="false"><use href="/recursos/iconos-navegacion.svg#${item.icono}"></use></svg>`
+      : '';
+    return `<a href="${item.href}" class="menu__enlace${claseDestacado}${claseActivo}"${ariaAttr}>${iconoHtml}<span>${item.texto}</span>${badgeHtml}</a>`;
   }).join('');
 
   // 5. Bloque de autenticación para el encabezado
@@ -78,7 +88,7 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
       : '';
 
     bloqueAuthHtml = `
-      <div class="fila fila--s" style="align-items: center;">
+      <div class="encabezado__sesion">
         ${puntosHtml}
         <div id="contenedor-campana"></div>
         <a href="/paginas/perfil.html" class="encabezado__usuario" style="display: flex; align-items: center; gap: var(--espacio-xs); text-decoration: none;" title="Ver mi perfil">
@@ -112,7 +122,7 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
           <span style="color: #627586;">/</span>
           <span style="font-size: var(--tamano-s); font-weight: var(--peso-medio); color: #bcd0dc;">${titulo}</span>
         </div>
-        <div class="fila fila--m" style="align-items: center;">
+        <div class="fila fila--m encabezado__acciones" style="align-items: center;">
           ${bloqueAuthHtml}
         </div>
       </div>
@@ -147,8 +157,12 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
             Plataforma educativa digital · &copy; ${anioActual}
           </p>
         </div>
-        <div>
-          <small style="color: #bcd0dc;">Universidad Estatal de Milagro</small>
+        <div class="pie__enlaces">
+          <small>Universidad Estatal de Milagro</small>
+          <nav aria-label="Información del proyecto">
+            <a href="/paginas/creditos.html">Autores y créditos</a>
+            <a href="/paginas/privacidad.html">Privacidad</a>
+          </nav>
         </div>
       </div>
     `;
@@ -265,8 +279,8 @@ export async function montarPlantilla({ titulo = "", roles = [] } = {}) {
 
   const contenidoAvatar = document.querySelector('[data-avatar]');
   const instruccionesAvatar = contenidoAvatar?.dataset.avatar?.trim();
+  montarAvatar();
   if (instruccionesAvatar) {
-    montarAvatar();
     decir(instruccionesAvatar);
   }
 }

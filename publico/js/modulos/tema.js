@@ -6,6 +6,7 @@ import { parametro, formatoBasico } from '../nucleo/util.js';
 import { ACTIVIDADES } from '../nucleo/catalogo-actividades.js';
 import { registrarIntento } from '../nucleo/gamificacion.js';
 import { usuarioActual } from '../nucleo/sesion.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
 await montarPlantilla({ titulo: "Tema", roles: ["estudiante", "docente", "admin"] });
 
@@ -171,7 +172,7 @@ if (!temaId) {
                 return `
                   <div class="tarjeta-recurso">
                     <strong>🖼️ ${escapar(rec.titulo)}</strong>
-                    <img src="${escapar(rec.url)}" alt="${escapar(rec.titulo)}" class="recurso-imagen" loading="lazy">
+                    ${fotoReferencial({ src: rec.url, alt: rec.titulo, claseImagen: 'recurso-imagen' })}
                   </div>
                 `;
               }

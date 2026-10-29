@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 import * as almacen from '../almacen.js';
 import { exigirRol } from '../auth.js';
+import { docentesIdsDeGrupo } from '../acceso.js';
 
 const router = Router();
 
@@ -323,7 +324,7 @@ router.delete('/admin/usuarios/:id/datos', exigirRol('admin'), async (req, res, 
     }
 
     const grupos = await almacen.leer('distributivo');
-    if (grupos.some(grupo => String(grupo?.docenteId) === id)) {
+    if (grupos.some(grupo => docentesIdsDeGrupo(grupo).includes(id))) {
       return res.status(409).json({
         error: 'Reasigna o elimina primero los grupos donde este usuario figura como docente'
       });

@@ -2,6 +2,7 @@
 import { montarPlantilla } from '../nucleo/plantilla.js';
 import { listar } from '../nucleo/api.js';
 import { aviso, escapar, cargando } from '../nucleo/ui.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
 export async function calcularAvance(asignaturaId) {
   try {
@@ -89,6 +90,7 @@ if (window.location.pathname.includes('asignaturas.html')) {
         return `
           <article class="tarjeta tarjeta-asignatura-estudiante" data-id="${escapar(asig.id)}">
             <div>
+              ${asig.imagen ? fotoReferencial({ src: asig.imagen, alt: asig.imagenAlt || `Imagen referencial de ${asig.nombre}`, claseImagen: 'tarjeta-asignatura-estudiante__imagen' }) : ''}
               <span class="insignia insignia--info" style="margin-bottom: var(--espacio-xs);">${escapar(asig.nivel || 'Nivel inicial')}</span>
               <h2 class="tarjeta__titulo" style="font-size: var(--tamano-m); margin: var(--espacio-xs) 0;">
                 ${escapar(asig.nombre)}

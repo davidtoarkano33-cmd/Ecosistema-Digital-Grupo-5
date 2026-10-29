@@ -70,7 +70,7 @@ export function cargando(activo) {
   }
 }
 
-export function modal({ titulo = '', contenido = '', acciones = [] } = {}) {
+export function modal({ titulo = '', contenido = '', acciones = [], clase = '' } = {}) {
   return new Promise((resolver) => {
     const focoPrevio = document.activeElement;
     const overlay = document.createElement('div');
@@ -82,7 +82,8 @@ export function modal({ titulo = '', contenido = '', acciones = [] } = {}) {
     overlay.setAttribute('aria-labelledby', tituloId);
 
     const cuadro = document.createElement('div');
-    cuadro.className = 'modal';
+    const clasesAdicionales = String(clase).replace(/[^a-zA-Z0-9_\-\s]/g, '').trim();
+    cuadro.className = `modal ${clasesAdicionales}`.trim();
 
     const encabezado = document.createElement('div');
     encabezado.className = 'modal-encabezado';

@@ -1,6 +1,6 @@
 // servidor/ganchos/agenda.js · Reglas de acceso, filtrado, validación y notificaciones para agenda
 import * as almacen from '../almacen.js';
-import { gruposDe } from '../acceso.js';
+import { docentesIdsDeGrupo, gruposDe } from '../acceso.js';
 import { notificar } from '../notificar.js';
 
 const TIPOS_VALIDOS = ['tarea', 'reunion', 'fecha-limite', 'recordatorio', 'festividad'];
@@ -169,9 +169,9 @@ export async function despuesDeGuardar(registro, usuario, anterior) {
 
       if (grupo) {
         const destinatarios = new Set();
-        if (grupo.docenteId && String(grupo.docenteId) !== String(usuario.id)) {
-          destinatarios.add(String(grupo.docenteId));
-        }
+        docentesIdsDeGrupo(grupo)
+          .filter(docenteId => docenteId !== String(usuario.id))
+          .forEach(docenteId => destinatarios.add(docenteId));
         if (Array.isArray(grupo.estudiantes)) {
           for (const estId of grupo.estudiantes) {
             if (String(estId) !== String(usuario.id)) {

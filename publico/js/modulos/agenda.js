@@ -5,6 +5,7 @@ import * as api from '../nucleo/api.js';
 import * as ui from '../nucleo/ui.js';
 import * as util from '../nucleo/util.js';
 import { ACTIVIDADES } from '../nucleo/catalogo-actividades.js';
+import { esDocenteDeGrupo } from '../nucleo/distributivo.js';
 
 await montarPlantilla({ titulo: 'Agenda', roles: ['sesion'] });
 
@@ -551,7 +552,7 @@ async function cargarDatos() {
     intentos = listaIntentos || [];
 
     if (esDocenteOAdmin) {
-      gruposDocente = (listaDistributivo || []).filter(g => usuario.rol === 'admin' || String(g.docenteId) === String(usuario.id));
+      gruposDocente = (listaDistributivo || []).filter(g => usuario.rol === 'admin' || esDocenteDeGrupo(g, usuario.id));
       temas = listaTemas || [];
 
       // Poblar select de grupos con opción para todos destacada

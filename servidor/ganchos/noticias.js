@@ -69,9 +69,7 @@ export async function despuesDeGuardar(reg, usuario, anterior) {
               if (Array.isArray(g.estudiantes)) {
                 g.estudiantes.forEach(estId => destinatariosIds.add(String(estId)));
               }
-              if (g.docenteId) {
-                destinatariosIds.add(String(g.docenteId));
-              }
+              acceso.docentesIdsDeGrupo(g).forEach(docenteId => destinatariosIds.add(docenteId));
             });
         }
       }
@@ -118,4 +116,3 @@ export default {
   antesDeGuardar,
   despuesDeGuardar
 };
-

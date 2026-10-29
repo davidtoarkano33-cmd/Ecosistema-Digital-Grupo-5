@@ -1,5 +1,6 @@
 // servidor/ganchos/alertas.js · Reglas de acceso y validación para la colección alertas
 import * as almacen from '../almacen.js';
+import { esDocenteDeGrupo } from '../acceso.js';
 
 export async function filtrarLista(lista, usuario) {
   if (!usuario || !Array.isArray(lista)) return [];
@@ -7,7 +8,7 @@ export async function filtrarLista(lista, usuario) {
 
   if (usuario.rol === 'docente') {
     const distributivo = await almacen.leer('distributivo');
-    const misGrupos = (distributivo || []).filter(g => g && String(g.docenteId) === String(usuario.id));
+    const misGrupos = (distributivo || []).filter(g => g && esDocenteDeGrupo(g, usuario.id));
     const misGruposIds = new Set(misGrupos.map(g => String(g.id)));
 
     return lista.filter(a => a && misGruposIds.has(String(a.grupoId)));
@@ -34,7 +35,7 @@ export async function antesDeGuardar(datos, usuario, anterior) {
     if (usuario.rol === 'docente') {
       const distributivo = await almacen.leer('distributivo');
       const esDocenteDelGrupo = (distributivo || []).some(g =>
-        g && String(g.id) === String(anterior.grupoId) && String(g.docenteId) === String(usuario.id)
+        g && String(g.id) === String(anterior.grupoId) && esDocenteDeGrupo(g, usuario.id)
       );
 
       if (!esDocenteDelGrupo) {

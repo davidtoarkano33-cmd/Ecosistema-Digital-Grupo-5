@@ -19,6 +19,20 @@
   box-shadow: var(--sombra-2);
 }
 
+.tarjeta-asignatura-estudiante__imagen {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radio-m);
+  border: 1px solid var(--borde);
+  background-color: var(--fondo);
+  object-fit: contain;
+}
+
+.tarjeta-asignatura-estudiante .foto-referencial {
+  margin-bottom: var(--espacio-m);
+}
+
 .asignatura-avance-seccion {
   margin: var(--espacio-m) 0;
 }

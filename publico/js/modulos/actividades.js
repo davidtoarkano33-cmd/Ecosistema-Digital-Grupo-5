@@ -3,11 +3,24 @@ import { montarPlantilla } from '../nucleo/plantilla.js';
 import { ACTIVIDADES } from '../nucleo/catalogo-actividades.js';
 import { escapar } from '../nucleo/ui.js';
 import { usuarioActual } from '../nucleo/sesion.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
-await montarPlantilla({ titulo: "Actividades", roles: ["estudiante", "docente"] });
+await montarPlantilla({ titulo: "Actividades", roles: ["estudiante", "docente", "admin"] });
 
 const contenido = document.getElementById('contenido');
-const esDocente = usuarioActual()?.rol === 'docente';
+const rolActual = usuarioActual()?.rol;
+const puedeGestionar = rolActual === 'docente' || rolActual === 'admin';
+
+const IMAGENES_ACTIVIDAD = {
+  ahorcado: ['/recursos/proyecto/actividad-ahorcado.png', 'Estudiantes paramédicos resolviendo una palabra clínica oculta'],
+  pareja: ['/recursos/proyecto/actividad-parejas.png', 'Estudiantes relacionando parejas de instrumentos y conceptos médicos'],
+  'sopa-letras': ['/recursos/proyecto/actividad-sopa-letras.png', 'Estudiantes buscando conceptos clínicos en una sopa de letras digital'],
+  crucigrama: ['/recursos/proyecto/actividad-crucigrama.png', 'Estudiante resolviendo un crucigrama médico con orientación docente'],
+  quiz: ['/recursos/proyecto/actividad-quiz-niveles.png', 'Estudiantes paramédicos celebrando el avance en un quiz por niveles'],
+  canciones: ['/recursos/proyecto/actividad-canciones.png', 'Docentes paramédicos grabando una canción educativa'],
+  tutor: ['/recursos/proyecto/vision-ia-educativa.png', 'Docente paramédico utilizando inteligencia artificial educativa'],
+  simulador: ['/recursos/proyecto/mision-docencia-simulacion.png', 'Docente paramédico guiando una simulación clínica']
+};
 
 function gestionDeActividad(id) {
   if (id === 'quiz') {
@@ -42,8 +55,10 @@ function renderizarActividades() {
   const tarjetasHtml = ACTIVIDADES.map(act => {
     const icono = obtenerIconoActividad(act.id);
     const gestion = gestionDeActividad(act.id);
+    const [imagen, imagenAlt] = IMAGENES_ACTIVIDAD[act.id] || IMAGENES_ACTIVIDAD.quiz;
     return `
       <article class="tarjeta actividad-tarjeta">
+        ${fotoReferencial({ src: imagen, alt: imagenAlt, claseImagen: 'actividad-tarjeta__imagen' })}
         <div class="actividad-tarjeta__cabecera">
           <span class="actividad-tarjeta__icono" aria-hidden="true">${icono}</span>
           <h2 class="actividad-tarjeta__titulo">${escapar(act.texto)}</h2>
@@ -51,9 +66,9 @@ function renderizarActividades() {
         <p class="actividad-tarjeta__descripcion">${escapar(act.descripcion || '')}</p>
         <div class="actividad-tarjeta__accion">
           <a href="${escapar(act.href)}" class="btn btn--primario">
-            ${esDocente ? 'Probar actividad' : 'Jugar'}
+            ${puedeGestionar ? 'Probar actividad' : 'Jugar'}
           </a>
-          ${esDocente ? `<a href="${escapar(gestion.href)}" class="btn btn--secundario">${escapar(gestion.texto)}</a>` : ''}
+          ${puedeGestionar ? `<a href="${escapar(gestion.href)}" class="btn btn--secundario">${escapar(gestion.texto)}</a>` : ''}
         </div>
       </article>
     `;
@@ -63,15 +78,15 @@ function renderizarActividades() {
     <header class="actividades-encabezado">
       <h1 class="actividades-encabezado__titulo">Actividades Formativas</h1>
       <p class="actividades-encabezado__subtitulo">
-        ${esDocente
+        ${puedeGestionar
           ? 'Prueba las actividades y gestiona el contenido académico que utiliza cada una.'
           : 'Refuerza tus conocimientos y acumula puntos jugando con los contenidos de tus asignaturas.'}
       </p>
     </header>
 
-    ${esDocente ? `
+    ${puedeGestionar ? `
       <aside class="tarjeta actividades-ayuda">
-        <strong>Edición docente</strong>
+        <strong>Gestión de actividades</strong>
         <p>Los juegos se actualizan desde los glosarios de cada tema; el quiz se administra desde el banco de preguntas.</p>
       </aside>` : ''}
 

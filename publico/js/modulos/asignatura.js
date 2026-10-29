@@ -3,6 +3,7 @@ import { montarPlantilla } from '../nucleo/plantilla.js';
 import { obtener, listar } from '../nucleo/api.js';
 import { aviso, escapar, cargando } from '../nucleo/ui.js';
 import { parametro } from '../nucleo/util.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
 await montarPlantilla({ titulo: "Asignatura", roles: ["estudiante", "docente", "admin"] });
 
@@ -200,6 +201,7 @@ if (!asignaturaId) {
               <a href="/paginas/asignaturas.html" class="btn btn--texto btn--pequeno">← Volver a Mis Asignaturas</a>
               <span class="insignia insignia--info">${escapar(asig.nivel || 'Nivel Superior')}</span>
             </div>
+            ${asig.imagen ? fotoReferencial({ src: asig.imagen, alt: asig.imagenAlt || `Imagen referencial de ${asig.nombre}`, claseImagen: 'asignatura-cabecera__imagen', carga: 'eager' }) : ''}
             <div class="asignatura-cabecera__fila-titulo">
               <div>
                 <h1 class="tarjeta__titulo" style="margin: 0; color: var(--primario);">${escapar(asig.nombre)}</h1>

@@ -17,6 +17,25 @@
   background-color: var(--superficie);
 }
 
+.distributivo-seleccion-lista {
+  max-height: calc(var(--espacio-2xl) * 4);
+  overflow-y: auto;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-s);
+  background-color: var(--superficie);
+}
+
+.distributivo-docentes {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.distributivo-docentes legend {
+  font-weight: var(--peso-seminegrita);
+}
+
 .distributivo-estudiante-item {
   display: flex;
   align-items: center;

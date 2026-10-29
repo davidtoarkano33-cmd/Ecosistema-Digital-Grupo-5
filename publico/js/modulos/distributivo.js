@@ -2,6 +2,7 @@
 import { montarPlantilla } from '../nucleo/plantilla.js';
 import { listar, crear, actualizar, eliminar } from '../nucleo/api.js';
 import { aviso, confirmar, modal, escapar, cargando } from '../nucleo/ui.js';
+import { docentesIdsDeGrupo } from '../nucleo/distributivo.js';
 
 await montarPlantilla({ titulo: "Distributivo", roles: ["admin"] });
 
@@ -27,7 +28,7 @@ if (contenido) {
               <th>Asignatura</th>
               <th>Paralelo</th>
               <th>Período</th>
-              <th>Docente</th>
+              <th>Docentes</th>
               <th>Estudiantes</th>
               <th style="text-align: right;">Acciones</th>
             </tr>
@@ -93,7 +94,9 @@ if (contenido) {
 
     cuerpoTabla.innerHTML = grupos.map(g => {
       const nombreAsignatura = mapaAsignaturas.get(g.asignaturaId) || g.asignaturaId || 'Sin asignar';
-      const nombreDocente = mapaUsuarios.get(g.docenteId) || 'Docente no asignado';
+      const nombresDocentes = docentesIdsDeGrupo(g)
+        .map(id => mapaUsuarios.get(id))
+        .filter(Boolean);
       const cantEstudiantes = Array.isArray(g.estudiantes) ? g.estudiantes.length : 0;
 
       return `
@@ -101,7 +104,9 @@ if (contenido) {
           <td><strong>${escapar(nombreAsignatura)}</strong></td>
           <td><span class="insignia insignia--secundario">${escapar(g.paralelo || 'N/A')}</span></td>
           <td>${escapar(g.periodo || 'N/A')}</td>
-          <td>${escapar(nombreDocente)}</td>
+          <td>${nombresDocentes.length
+            ? nombresDocentes.map(nombre => `<span class="insignia insignia--secundario">${escapar(nombre)}</span>`).join(' ')
+            : 'Docente no asignado'}</td>
           <td><span class="insignia insignia--info">${cantEstudiantes} estudiantes</span></td>
           <td style="text-align: right;">
             <div class="fila fila--xs" style="justify-content: flex-end;">
@@ -157,6 +162,7 @@ if (contenido) {
     const todosEstudiantes = usuarios.filter(u => u.rol === 'estudiante' && u.activo !== false);
 
     const seleccionados = new Set(esEdicion && Array.isArray(grupo.estudiantes) ? grupo.estudiantes : []);
+    const docentesSeleccionados = new Set(esEdicion ? docentesIdsDeGrupo(grupo) : []);
 
     const form = document.createElement('form');
     form.className = 'pila pila--m';
@@ -186,16 +192,18 @@ if (contenido) {
         </div>
       </div>
 
-      <div class="campo">
-        <label for="grupo-docente">Docente asignado</label>
-        <select id="grupo-docente" required>
-          <option value="">Selecciona un docente</option>
+      <fieldset class="campo distributivo-docentes">
+        <legend>Docentes asignados</legend>
+        <small class="campo__ayuda">Selecciona uno o varios docentes. Todos podrán administrar contenidos y crear con IA.</small>
+        <div class="distributivo-seleccion-lista">
           ${docentes.map(d => `
-            <option value="${escapar(d.id)}" ${esEdicion && grupo.docenteId === d.id ? 'selected' : ''}>
-              ${escapar(d.nombre)} ${escapar(d.apellido)} (${escapar(d.correo)})
-            </option>
-          `).join('')}
-        </select>
+            <label class="distributivo-estudiante-item">
+              <input type="checkbox" class="chk-docente" value="${escapar(d.id)}" ${docentesSeleccionados.has(String(d.id)) ? 'checked' : ''}>
+              <span>${escapar(d.nombre)} ${escapar(d.apellido)} <small>(${escapar(d.correo)})</small></span>
+            </label>
+          `).join('') || '<p class="campo__ayuda">No hay docentes activos disponibles.</p>'}
+        </div>
+      </fieldset>
       </div>
 
       <div class="campo">
@@ -215,7 +223,6 @@ if (contenido) {
     const selectAsig = form.querySelector('#grupo-asig');
     const inputParalelo = form.querySelector('#grupo-paralelo');
     const inputPeriodo = form.querySelector('#grupo-periodo');
-    const selectDocente = form.querySelector('#grupo-docente');
     const inputBuscarEst = form.querySelector('#buscar-estudiante-modal');
     const contEstudiantes = form.querySelector('#lista-estudiantes-contenedor');
     const contadorSpan = form.querySelector('#contador-seleccionados');
@@ -272,11 +279,11 @@ if (contenido) {
       const asignaturaId = selectAsig.value;
       const paralelo = inputParalelo.value.trim();
       const periodo = inputPeriodo.value.trim();
-      const docenteId = selectDocente.value;
+      const docentesIds = Array.from(form.querySelectorAll('.chk-docente:checked')).map(item => item.value);
       const estudiantes = Array.from(seleccionados);
 
-      if (!asignaturaId || !paralelo || !periodo || !docenteId) {
-        aviso('Todos los campos son obligatorios.', 'error');
+      if (!asignaturaId || !paralelo || !periodo || !docentesIds.length) {
+        aviso('Completa los campos y selecciona al menos un docente.', 'error');
         return;
       }
 
@@ -284,7 +291,8 @@ if (contenido) {
         asignaturaId,
         paralelo,
         periodo,
-        docenteId,
+        docenteId: docentesIds[0],
+        docentesIds,
         estudiantes
       };
 

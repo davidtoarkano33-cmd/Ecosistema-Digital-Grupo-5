@@ -5,11 +5,79 @@ import { listar } from '../nucleo/api.js';
 import { escapar, cargando } from '../nucleo/ui.js';
 import { fechaRelativa } from '../nucleo/util.js';
 import { calcularAvance } from './asignaturas.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
 await montarPlantilla({ titulo: "Inicio" });
 
 const usuario = usuarioActual();
 const contenido = document.getElementById('contenido');
+
+function presentacionProyectoHtml() {
+  return `
+    <section class="tarjeta inicio-proyecto" aria-labelledby="titulo-proyecto-aulico">
+      <header class="inicio-proyecto__cabecera">
+        <span class="insignia insignia--info">Proyecto áulico · Tercer nivel</span>
+        <h2 id="titulo-proyecto-aulico" class="inicio-seccion__titulo">Propósito del ecosistema</h2>
+        <p class="inicio-seccion__descripcion">
+          Propuesta construida por docentes paramédicos para estudiantes de Tecnología Superior en Emergencias Médicas.
+        </p>
+      </header>
+
+      <div class="inicio-objetivos">
+        <article class="inicio-objetivo inicio-objetivo--general">
+          <h3>Objetivo general</h3>
+          <p>
+            Diseñar e implementar un ecosistema educativo digital inteligente que fortalezca la priorización y la toma de decisiones en la valoración primaria XABCDE y el manejo inicial del trauma, mediante recursos multimedia, gamificación e inteligencia artificial generativa con supervisión docente.
+          </p>
+          ${fotoReferencial({
+            src: '/recursos/proyecto/objetivo-general-programacion.png',
+            alt: 'Docentes paramédicos programando recursos educativos con inteligencia artificial',
+            claseImagen: 'inicio-proyecto__imagen'
+          })}
+        </article>
+
+        <article class="inicio-objetivo">
+          <h3>Objetivos específicos</h3>
+          <ol>
+            <li>Integrar contenidos y recursos clínicos curados que faciliten el aprendizaje accesible y basado en evidencia.</li>
+            <li>Aplicar los conocimientos mediante juegos y simulaciones con progreso, retroalimentación inmediata y oportunidades de mejora.</li>
+            <li>Utilizar la inteligencia artificial como apoyo socrático para orientar el razonamiento, analizar respuestas y promover el uso responsable de fuentes digitales.</li>
+          </ol>
+          ${fotoReferencial({
+            src: '/recursos/proyecto/objetivos-especificos-colaboracion.png',
+            alt: 'Docente paramédica orientando el análisis colaborativo de una simulación clínica',
+            claseImagen: 'inicio-proyecto__imagen'
+          })}
+        </article>
+      </div>
+
+      <div class="inicio-identidad-proyecto">
+        <article class="inicio-identidad-proyecto__tarjeta">
+          <h3>Misión</h3>
+          <p>
+            Acompañar la formación de tecnólogos en Emergencias Médicas con experiencias digitales activas, seguras y contextualizadas que conecten la evidencia clínica con la toma de decisiones prehospitalarias.
+          </p>
+          ${fotoReferencial({
+            src: '/recursos/proyecto/mision-docencia-simulacion.png',
+            alt: 'Docente paramédico guiando una práctica segura con simulador clínico',
+            claseImagen: 'inicio-proyecto__imagen'
+          })}
+        </article>
+        <article class="inicio-identidad-proyecto__tarjeta">
+          <h3>Visión</h3>
+          <p>
+            Ser un referente de innovación docente en educación paramédica de tercer nivel, integrando tecnología, pensamiento crítico y práctica responsable para mejorar la preparación ante emergencias.
+          </p>
+          ${fotoReferencial({
+            src: '/recursos/proyecto/vision-ia-educativa.png',
+            alt: 'Docente paramédico utilizando inteligencia artificial para educación y simulación',
+            claseImagen: 'inicio-proyecto__imagen'
+          })}
+        </article>
+      </div>
+    </section>
+  `;
+}
 
 if (contenido) {
   if (!usuario) {
@@ -25,16 +93,17 @@ function renderizarSinSesion() {
     <div class="inicio-bienvenida">
       <section class="inicio-hero" aria-labelledby="hero-titulo">
         <span class="insignia insignia--acento" style="width: fit-content;">Ecosistema Educativo Digital</span>
-        <h1 id="hero-titulo" class="inicio-hero__titulo">Aprende, participa y alcanza tus metas formativas</h1>
+        <h1 id="hero-titulo" class="inicio-hero__titulo">Entrena decisiones que protegen la vida</h1>
         <p class="inicio-hero__descripcion">
-          Bienvenido al entorno digital de aprendizaje. Accede a asignaturas interactivas, contenidos multimedia,
-          canciones educativas sincronizadas, desafíos formativos y tutoría inteligente adaptada a tu ritmo.
+          Explora la valoración XABCDE, practica con casos clínicos, recibe retroalimentación y fortalece tu razonamiento prehospitalario mediante recursos interactivos e inteligencia artificial educativa.
         </p>
         <div class="inicio-hero__acciones">
           <a href="/paginas/ingreso.html" class="btn btn--primario">Ingresar</a>
           <a href="/paginas/registro.html" class="btn btn--secundario">Registrarse</a>
         </div>
       </section>
+
+      ${presentacionProyectoHtml()}
 
       <section class="inicio-pilares" aria-label="Características destacadas">
         <div class="tarjeta">
@@ -125,6 +194,8 @@ async function renderizarConSesion() {
             </div>
           </div>
         </header>
+
+        ${presentacionProyectoHtml()}
     `;
 
     // Continuar donde te quedaste
@@ -212,6 +283,7 @@ async function renderizarConSesion() {
         html += `
           <article class="tarjeta" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
+              ${asig.imagen ? fotoReferencial({ src: asig.imagen, alt: asig.imagenAlt || `Imagen referencial de ${asig.nombre}`, claseImagen: 'inicio-asignatura__imagen' }) : ''}
               <span class="insignia insignia--info" style="margin-bottom: var(--espacio-xs);">${escapar(asig.nivel || 'Nivel')}</span>
               <h3 class="tarjeta__titulo" style="font-size: var(--tamano-m); margin: var(--espacio-xs) 0;">
                 ${escapar(asig.nombre)}

@@ -3,6 +3,7 @@ import { montarPlantilla } from '../nucleo/plantilla.js';
 import { llamar, listar, crear } from '../nucleo/api.js';
 import { usuarioActual } from '../nucleo/sesion.js';
 import * as ui from '../nucleo/ui.js';
+import { esDocenteDeGrupo } from '../nucleo/distributivo.js';
 
 await montarPlantilla({ titulo: 'Mensajes', roles: ['sesion'] });
 
@@ -255,7 +256,7 @@ async function alternarBloqueo() {
 async function enviarDifusion() {
   try {
     const [grupos, asignaturas] = await Promise.all([listar('distributivo'), listar('asignaturas')]);
-    const propios = grupos.filter(grupo => String(grupo.docenteId) === String(usuario.id));
+    const propios = grupos.filter(grupo => esDocenteDeGrupo(grupo, usuario.id));
     if (!propios.length) return ui.aviso('No tienes grupos asignados.', 'info');
     const nombres = new Map(asignaturas.map(item => [String(item.id), item.nombre]));
     const caja = document.createElement('div');

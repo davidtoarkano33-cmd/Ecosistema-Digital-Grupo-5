@@ -42,6 +42,7 @@
   /* 2. Tipografía */
   --fuente-base: Poppins, Arial, sans-serif;
   --fuente-titulos: Poppins, Arial, sans-serif;
+  --fuente-manuscrita: Caveat, "Segoe Print", cursive;
   --fuente-mono: ui-monospace, SFMono-Regular, Consolas, monospace; /* PROVISIONAL */
 
   /* Tamaños de tipografía (xs a 3xl) */
@@ -72,6 +73,7 @@
   --espacio-l: 1.5rem;            /* 24px */
   --espacio-xl: 2rem;             /* 32px */
   --espacio-2xl: 3rem;            /* 48px */
+  --incremento-panel-usuario: 0.75cm;
 
   /* 4. Radios de borde (s, m, l, completo) */
   --radio-s: 4px;
@@ -91,4 +93,5 @@
 
   /* 7. Ancho máximo */
   --ancho-maximo: 1280px;
+  --ancho-menu-lateral: 16.25rem;
 }

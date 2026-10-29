@@ -1,5 +1,5 @@
 /* publico/css/base.css · Estilos base, reset ligero, tipografía y utilidades */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 /* 1. Reset ligero */
 *,
@@ -29,7 +29,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: var(--ancho-menu-lateral) 1fr;
   grid-template-areas:
     "encabezado encabezado"
     "menu contenido"

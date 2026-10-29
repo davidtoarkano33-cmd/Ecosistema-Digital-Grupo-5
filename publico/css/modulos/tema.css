@@ -97,10 +97,13 @@
 }
 
 .recurso-imagen {
-  max-width: 100%;
-  height: auto;
+  display: block;
+  width: 100%;
+  max-height: calc(var(--espacio-2xl) * 8);
   border-radius: var(--radio-m);
   border: 1px solid var(--borde);
+  background: var(--fondo);
+  object-fit: contain;
 }
 
 .actividades-grid {

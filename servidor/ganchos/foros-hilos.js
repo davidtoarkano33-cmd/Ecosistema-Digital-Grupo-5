@@ -1,6 +1,6 @@
 // servidor/ganchos/foros-hilos.js · Acceso, autoría y moderación de hilos
 import * as almacen from '../almacen.js';
-import { asignaturasDe } from '../acceso.js';
+import { asignaturasDe, docentesIdsDeGrupo } from '../acceso.js';
 
 import { notificar } from '../notificar.js';
 
@@ -95,9 +95,9 @@ export async function despuesDeGuardar(registro, usuario, anterior) {
 
     for (const g of distributivo || []) {
       if (String(g.asignaturaId) === String(registro.asignaturaId)) {
-        if (g.docenteId && String(g.docenteId) !== String(usuario.id)) {
-          destinatarios.add(String(g.docenteId));
-        }
+        docentesIdsDeGrupo(g)
+          .filter(docenteId => docenteId !== String(usuario.id))
+          .forEach(docenteId => destinatarios.add(docenteId));
         if (Array.isArray(g.estudiantes)) {
           for (const estId of g.estudiantes) {
             if (String(estId) !== String(usuario.id)) {
@@ -121,4 +121,3 @@ export async function despuesDeGuardar(registro, usuario, anterior) {
 }
 
 export default { filtrarLista, antesDeGuardar, despuesDeGuardar };
-

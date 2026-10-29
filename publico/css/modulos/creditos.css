@@ -1,0 +1,398 @@
+/* publico/css/modulos/creditos.css · Créditos y bibliografía del proyecto */
+.creditos-pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+  margin-bottom: var(--espacio-xl);
+}
+
+.creditos-portada {
+  overflow: hidden;
+  border-radius: var(--radio-l);
+  background-color: var(--primario-oscuro);
+  box-shadow: var(--sombra-2);
+}
+
+.creditos-portada__texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  padding: var(--espacio-l);
+  border-top: var(--espacio-xs) solid var(--acento);
+  color: var(--texto-inverso);
+}
+
+.creditos-portada__texto h1 {
+  color: var(--texto-inverso);
+  font-size: var(--tamano-2xl);
+}
+
+.creditos-portada__texto p {
+  max-width: var(--ancho-maximo);
+  color: var(--texto-inverso);
+  font-size: var(--tamano-s);
+}
+
+.creditos-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+}
+
+.creditos-seccion__titulo {
+  color: var(--primario);
+  font-size: var(--tamano-xl);
+}
+
+.creditos-seccion__descripcion {
+  color: var(--texto-suave);
+  font-size: var(--tamano-s);
+}
+
+.autores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-m);
+}
+
+.autores-destacados {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-l);
+}
+
+.autor-destacado {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+  gap: var(--espacio-xl);
+  padding: var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-l);
+  background: linear-gradient(135deg, var(--superficie), var(--info-fondo));
+  box-shadow: var(--sombra-1);
+}
+
+.autor-destacado__media {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  gap: var(--espacio-s);
+}
+
+.autor-destacado__foto {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radio-l);
+  background-color: var(--fondo);
+}
+
+.autor-destacado__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.autor-ver-foto {
+  align-self: center;
+  padding: var(--espacio-xs) var(--espacio-s);
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  color: var(--info);
+  background-color: transparent;
+  font: inherit;
+  font-size: var(--tamano-s);
+  font-weight: var(--peso-seminegrita);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.autor-ver-foto:hover,
+.autor-ver-foto:focus-visible {
+  color: var(--primario);
+}
+
+.autor-destacado__contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--espacio-m);
+  min-width: 0;
+  padding: var(--espacio-m) 0;
+}
+
+.autor-destacado__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+}
+
+.autor-destacado__cabecera h3 {
+  margin-top: var(--espacio-s);
+  color: var(--primario);
+  font-size: var(--tamano-2xl);
+  line-height: var(--interlineado-ajustado);
+}
+
+.autor-destacado__rol {
+  color: var(--info);
+  font-size: var(--tamano-l);
+}
+
+.autor-destacado__frase {
+  margin: 0;
+  padding: var(--espacio-m) 0;
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+  color: var(--primario);
+  font-family: var(--fuente-manuscrita);
+  font-size: var(--tamano-2xl);
+  font-weight: var(--peso-seminegrita);
+  line-height: var(--interlineado-ajustado);
+}
+
+.autor-destacado__materia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  color: var(--info);
+  font-size: var(--tamano-s);
+}
+
+.autor-destacado__materia strong {
+  color: var(--primario);
+  font-size: var(--tamano-l);
+}
+
+.autores-pendientes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-l);
+  padding-top: var(--espacio-l);
+  border-top: 1px solid var(--borde);
+}
+
+.autores-pendientes h3 {
+  color: var(--primario);
+  font-size: var(--tamano-l);
+}
+
+.autores-pendientes p {
+  color: var(--texto-suave);
+  font-size: var(--tamano-s);
+}
+
+.autor-tarjeta {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  padding: var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-left: var(--espacio-xs) solid var(--acento);
+  border-radius: var(--radio-m);
+  background-color: var(--superficie);
+}
+
+.autor-tarjeta__media {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+.autor-tarjeta__foto {
+  width: calc(var(--espacio-2xl) + var(--espacio-xs));
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radio-m);
+  object-fit: cover;
+}
+
+.autor-tarjeta__datos {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  min-width: 0;
+}
+
+.autor-tarjeta__inicial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 calc(var(--espacio-2xl) + var(--espacio-xs));
+  width: calc(var(--espacio-2xl) + var(--espacio-xs));
+  height: calc(var(--espacio-2xl) + var(--espacio-xs));
+  border-radius: var(--radio-completo);
+  color: var(--texto-inverso);
+  background-color: var(--primario);
+  font-weight: var(--peso-negrita);
+}
+
+.autor-tarjeta strong {
+  color: var(--primario);
+}
+
+.autor-tarjeta span {
+  color: var(--texto-suave);
+  font-size: var(--tamano-xs);
+}
+
+.autor-formulario {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: var(--espacio-l);
+}
+
+.autor-formulario__foto,
+.autor-formulario__campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-s);
+}
+
+.autor-formulario__vista {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  color: var(--texto-inverso);
+  background-color: var(--primario);
+  font-size: var(--tamano-xl);
+  font-weight: var(--peso-negrita);
+}
+
+.autor-formulario__vista img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.autor-formulario__foto small {
+  color: var(--texto-suave);
+}
+
+.modal--foto {
+  width: auto;
+  max-width: calc(var(--ancho-maximo) - var(--espacio-2xl));
+}
+
+.modal--foto .modal-cuerpo {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+.visor-foto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-s);
+  margin: 0;
+}
+
+.visor-foto img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - var(--espacio-2xl) - var(--espacio-2xl) - var(--espacio-2xl) - var(--espacio-2xl));
+  border-radius: var(--radio-m);
+  object-fit: contain;
+}
+
+.visor-foto figcaption {
+  color: var(--texto-suave);
+  font-size: var(--tamano-s);
+  text-align: center;
+}
+
+.creditos-licencia {
+  padding: var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background-color: var(--info-fondo);
+  font-size: var(--tamano-s);
+}
+
+.prompts-lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-s);
+  padding: 0;
+  list-style: none;
+}
+
+.prompts-lista li {
+  padding: var(--espacio-s) var(--espacio-m);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background-color: var(--fondo);
+  font-size: var(--tamano-s);
+}
+
+.bibliografia-grupo {
+  padding: var(--espacio-l);
+}
+
+.bibliografia-grupo h3 {
+  margin-bottom: var(--espacio-m);
+  color: var(--primario);
+  font-size: var(--tamano-l);
+}
+
+.referencias-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-m);
+  margin: 0;
+  padding-left: var(--espacio-l);
+}
+
+.referencia {
+  padding-left: var(--espacio-xs);
+  color: var(--texto);
+  font-size: var(--tamano-s);
+  overflow-wrap: anywhere;
+}
+
+.referencia cite {
+  color: var(--primario);
+  font-style: italic;
+}
+
+.referencia__enlace {
+  display: inline-block;
+  margin-top: var(--espacio-xs);
+}
+
+@media (max-width: 700px) {
+  .autores-grid,
+  .prompts-lista,
+  .autor-destacado,
+  .autor-formulario {
+    grid-template-columns: 1fr;
+  }
+
+  .autor-destacado__cabecera {
+    flex-direction: column;
+  }
+
+  .autor-destacado__contenido {
+    padding: 0;
+  }
+
+  .autor-destacado__cabecera h3,
+  .autor-destacado__frase {
+    font-size: var(--tamano-xl);
+  }
+
+  .creditos-portada__texto,
+  .bibliografia-grupo {
+    padding: var(--espacio-m);
+  }
+}

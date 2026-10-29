@@ -94,6 +94,24 @@
   margin-top: var(--espacio-xs);
 }
 
+.asignatura-cabecera__imagen {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(calc(var(--espacio-2xl) * 10), 65vh);
+  border-radius: var(--radio-m);
+  object-fit: contain;
+}
+
+.asignatura-cabecera-principal > .foto-referencial {
+  margin: var(--espacio-s) 0 var(--espacio-m);
+  padding: var(--espacio-s);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-m);
+  background-color: var(--fondo);
+}
+
 .btn-accion-indice-top {
   border-color: var(--primario);
   color: var(--primario);

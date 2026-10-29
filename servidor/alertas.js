@@ -1,6 +1,7 @@
 // servidor/alertas.js · Evaluación de alertas de rendimiento e inactividad
 import * as almacen from './almacen.js';
 import { notificar } from './notificar.js';
+import { docentesIdsDeGrupo } from './acceso.js';
 
 /**
  * Evalúa reglas de alerta sobre un intento completado ("promedioBajo", "fallosQuiz").
@@ -299,13 +300,16 @@ async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, 
     });
   }
 
-  // Notificar al docente del grupo con enlace al panel
+  // Notificar a todos los docentes del grupo con enlace al panel
   const mensajeNotif = `Alerta de apoyo para ${nombreEstudiante || 'un estudiante'}: ${detalle}`;
   const enlacePanel = `/paginas/panel-docente.html?grupoId=${encodeURIComponent(grupoId)}`;
+  const distributivo = await almacen.leer('distributivo');
+  const grupo = (distributivo || []).find(item => item && String(item.id) === String(grupoId));
+  const docentesIds = grupo ? docentesIdsDeGrupo(grupo) : (docenteId ? [String(docenteId)] : []);
 
-  if (docenteId) {
+  for (const destinatarioId of docentesIds) {
     try {
-      await notificar(docenteId, {
+      await notificar(destinatarioId, {
         tipo: 'alerta-docente',
         mensaje: mensajeNotif,
         enlace: enlacePanel
@@ -323,7 +327,7 @@ async function crearAlertaSiNoExiste({ estudianteId, docenteId, grupoId, regla, 
       const admins = (todosUsuarios || []).filter(u => u && u.rol === 'admin' && u.activo !== false);
 
       for (const adm of admins) {
-        if (adm.id && String(adm.id) !== String(docenteId)) {
+        if (adm.id && !docentesIds.includes(String(adm.id))) {
           await notificar(adm.id, {
             tipo: 'alerta-admin',
             mensaje: `[Admin] ${mensajeNotif}`,

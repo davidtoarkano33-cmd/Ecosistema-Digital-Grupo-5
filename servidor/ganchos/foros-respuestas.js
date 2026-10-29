@@ -1,6 +1,6 @@
 // servidor/ganchos/foros-respuestas.js · Respuestas, moderación y actividad del foro
 import * as almacen from '../almacen.js';
-import { asignaturasDe } from '../acceso.js';
+import { asignaturasDe, docentesIdsDeGrupo } from '../acceso.js';
 import { notificar } from '../notificar.js';
 import { procesarIntento } from '../gamificacion.js';
 
@@ -96,9 +96,9 @@ export async function despuesDeGuardar(registro, usuario, anterior) {
     const distributivo = await almacen.leer('distributivo');
     for (const g of distributivo || []) {
       if (String(g.asignaturaId) === String(hilo.asignaturaId)) {
-        if (g.docenteId && String(g.docenteId) !== String(usuario.id)) {
-          destinatarios.add(String(g.docenteId));
-        }
+        docentesIdsDeGrupo(g)
+          .filter(docenteId => docenteId !== String(usuario.id))
+          .forEach(docenteId => destinatarios.add(docenteId));
       }
     }
 

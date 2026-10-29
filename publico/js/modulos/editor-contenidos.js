@@ -1,6 +1,6 @@
 // publico/js/modulos/editor-contenidos.js · Editor de unidades y temas
 import { montarPlantilla } from '../nucleo/plantilla.js';
-import { listar, crear, actualizar } from '../nucleo/api.js';
+import { listar, crear, actualizar, ia } from '../nucleo/api.js';
 import { aviso, modal, escapar, cargando } from '../nucleo/ui.js';
 
 await montarPlantilla({ titulo: "Contenidos", roles: ["docente", "admin"] });
@@ -15,11 +15,16 @@ if (contenido) {
           <h1 class="tarjeta__titulo">Editor de Contenidos</h1>
           <p class="tarjeta__subtitulo">Estructuración y publicación de unidades didácticas y temas formativos</p>
         </div>
-        <div class="editor-selector-asignatura">
-          <label for="select-asignatura" style="font-weight: var(--peso-seminegrita); font-size: var(--tamano-s);">Asignatura:</label>
-          <select id="select-asignatura" style="margin-top: var(--espacio-xs);">
-            <option value="">Cargando asignaturas...</option>
-          </select>
+        <div class="editor-cabecera__acciones">
+          <div class="editor-selector-asignatura">
+            <label for="select-asignatura" style="font-weight: var(--peso-seminegrita); font-size: var(--tamano-s);">Asignatura:</label>
+            <select id="select-asignatura" style="margin-top: var(--espacio-xs);">
+              <option value="">Cargando asignaturas...</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn--primario" id="btn-generar-contenidos-ia" disabled>
+            ✨ Crear con IA
+          </button>
         </div>
       </div>
 
@@ -76,6 +81,7 @@ if (contenido) {
   const contTemas = document.getElementById('contenedor-temas');
   const btnAgregarUnidad = document.getElementById('btn-agregar-unidad');
   const btnAgregarTema = document.getElementById('btn-agregar-tema');
+  const btnGenerarIa = document.getElementById('btn-generar-contenidos-ia');
   const tituloUnidadEl = document.getElementById('titulo-unidad-seleccionada');
   const subtituloUnidadEl = document.getElementById('subtitulo-unidad-seleccionada');
 
@@ -96,10 +102,12 @@ if (contenido) {
         ${asignaturas.map(a => `<option value="${escapar(a.id)}">${escapar(a.nombre)} (${escapar(a.nivel || '')})</option>`).join('')}
       `;
 
-      // Seleccionar automáticamente la primera si solo hay una
-      if (asignaturas.length === 1) {
-        selectAsig.value = asignaturas[0].id;
-        await cargarUnidadesDeAsignatura(asignaturas[0].id);
+      const asignaturaSolicitada = new URLSearchParams(window.location.search).get('asignaturaId');
+      const seleccionInicial = asignaturas.find(item => item.id === asignaturaSolicitada)
+        || (asignaturas.length === 1 ? asignaturas[0] : null);
+      if (seleccionInicial) {
+        selectAsig.value = seleccionInicial.id;
+        await cargarUnidadesDeAsignatura(seleccionInicial.id);
       }
     } catch (err) {
       aviso(err.message || 'Error al cargar asignaturas', 'error');
@@ -109,6 +117,7 @@ if (contenido) {
   }
 
   async function cargarUnidadesDeAsignatura(asignaturaId) {
+    btnGenerarIa.disabled = !asignaturaId;
     if (!asignaturaId) {
       unidades = [];
       temas = [];
@@ -579,12 +588,229 @@ if (contenido) {
     });
   }
 
+  async function leerMaterialApoyo(input) {
+    const archivos = Array.from(input.files || []);
+    const extensiones = new Set(['txt', 'md', 'csv', 'json', 'html', 'htm']);
+    if (archivos.length > 3) throw new Error('Puedes adjuntar hasta 3 archivos de apoyo');
+
+    const partes = [];
+    for (const archivo of archivos) {
+      const extension = archivo.name.split('.').pop()?.toLowerCase();
+      if (!extensiones.has(extension)) {
+        throw new Error(`El archivo “${archivo.name}” no es un documento de texto admitido`);
+      }
+      if (archivo.size > 512 * 1024) {
+        throw new Error(`El archivo “${archivo.name}” supera el máximo de 512 KB`);
+      }
+      const texto = (await archivo.text()).replace(/\0/g, '').trim();
+      if (texto) partes.push(`[Archivo: ${archivo.name}]\n${texto}`);
+    }
+
+    const material = partes.join('\n\n');
+    if (material.length > 6000) {
+      throw new Error('El texto conjunto de los archivos supera 6.000 caracteres; reduce o divide el material');
+    }
+    return material;
+  }
+
+  function listaTexto(valor, maximo = 8, longitud = 500) {
+    return (Array.isArray(valor) ? valor : [])
+      .map(item => String(item || '').trim().slice(0, longitud))
+      .filter(Boolean)
+      .slice(0, maximo);
+  }
+
+  async function guardarPropuestaIa(propuesta, indices) {
+    const asignaturaId = selectAsig.value;
+    let ordenUnidad = unidades.length;
+    let unidadesCreadas = 0;
+    let temasCreados = 0;
+
+    try {
+      cargando(true);
+      for (const indice of indices) {
+        const unidadPropuesta = propuesta.unidades[indice];
+        if (!unidadPropuesta) continue;
+        ordenUnidad += 1;
+        const unidadCreada = await crear('unidades', {
+          asignaturaId,
+          titulo: String(unidadPropuesta.titulo || '').trim().slice(0, 160),
+          orden: ordenUnidad,
+          visible: false
+        });
+        unidadesCreadas += 1;
+
+        for (const [indiceTema, tema] of unidadPropuesta.temas.entries()) {
+          await crear('temas', {
+            unidadId: unidadCreada.id,
+            titulo: String(tema.titulo || '').trim().slice(0, 160),
+            orden: indiceTema + 1,
+            objetivos: listaTexto(tema.objetivos, 6),
+            resumen: String(tema.resumen || '').trim().slice(0, 6000),
+            ejemplos: listaTexto(tema.ejemplos, 5),
+            erroresFrecuentes: listaTexto(tema.erroresFrecuentes, 5),
+            preguntasGuia: listaTexto(tema.preguntasGuia, 6),
+            recursos: [],
+            palabrasClave: listaTexto(tema.palabrasClave, 10, 80),
+            dificultad: ['basico', 'intermedio', 'avanzado'].includes(tema.dificultad)
+              ? tema.dificultad
+              : 'intermedio',
+            fuentes: String(tema.fuentes || '').trim().slice(0, 2000),
+            estado: 'borrador'
+          });
+          temasCreados += 1;
+        }
+      }
+      aviso(`Propuesta aplicada: ${unidadesCreadas} unidad(es) y ${temasCreados} tema(s) en borrador.`, 'exito');
+    } catch (err) {
+      aviso(`${err.message || 'No se pudo aplicar toda la propuesta'}. Se guardaron ${unidadesCreadas} unidad(es) y ${temasCreados} tema(s).`, 'error');
+    } finally {
+      cargando(false);
+      await cargarUnidadesDeAsignatura(asignaturaId);
+    }
+  }
+
+  async function revisarPropuestaIa(propuesta) {
+    const contenedorRevision = document.createElement('div');
+    contenedorRevision.className = 'propuesta-ia';
+    contenedorRevision.innerHTML = `
+      <p class="campo__ayuda">Selecciona las unidades que deseas agregar. Se crearán ocultas y sus temas quedarán en borrador.</p>
+      <div class="propuesta-ia__lista">
+        ${propuesta.unidades.map((unidad, indice) => `
+          <article class="propuesta-ia__unidad">
+            <label class="propuesta-ia__seleccion">
+              <input type="checkbox" class="propuesta-ia__casilla" data-indice="${indice}" checked>
+              <strong>${escapar(unidad.titulo)}</strong>
+            </label>
+            <div class="propuesta-ia__temas">
+              ${unidad.temas.map(tema => `
+                <details>
+                  <summary>${escapar(tema.titulo)} <span class="insignia insignia--xs">${escapar(tema.dificultad)}</span></summary>
+                  <p>${escapar(tema.resumen)}</p>
+                  <strong>Objetivos propuestos</strong>
+                  <ul>${tema.objetivos.map(objetivo => `<li>${escapar(objetivo)}</li>`).join('')}</ul>
+                </details>
+              `).join('')}
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    `;
+
+    const aplicar = await modal({
+      titulo: 'Revisar propuesta de contenidos',
+      contenido: contenedorRevision,
+      acciones: [
+        { texto: 'Descartar', valor: false, clase: 'btn-secundario' },
+        { texto: 'Agregar seleccionadas', valor: true, clase: 'btn-primario' }
+      ]
+    });
+    if (!aplicar) return;
+
+    const indices = Array.from(contenedorRevision.querySelectorAll('.propuesta-ia__casilla:checked'))
+      .map(casilla => Number(casilla.dataset.indice));
+    if (!indices.length) {
+      aviso('Selecciona al menos una unidad para aplicar la propuesta.', 'info');
+      return;
+    }
+    await guardarPropuestaIa(propuesta, indices);
+  }
+
+  async function abrirGeneradorIa() {
+    const asignatura = asignaturas.find(item => item.id === selectAsig.value);
+    if (!asignatura) {
+      aviso('Selecciona primero una asignatura.', 'info');
+      return;
+    }
+
+    const form = document.createElement('form');
+    form.className = 'pila pila--m generador-ia';
+    form.noValidate = true;
+    form.innerHTML = `
+      <p>La IA propondrá contenidos nuevos para <strong>${escapar(asignatura.nombre)}</strong> sin reemplazar lo existente.</p>
+      <div class="campo">
+        <label for="ia-instrucciones">Indicaciones para la propuesta</label>
+        <textarea id="ia-instrucciones" rows="5" maxlength="2000" placeholder="Ej.: Diseña una secuencia práctica centrada en valoración inicial, con casos aplicados y progresión de dificultad."></textarea>
+        <small class="campo__ayuda">Indica enfoque, competencias, temas obligatorios o resultados de aprendizaje.</small>
+      </div>
+      <div class="generador-ia__cantidades">
+        <div class="campo">
+          <label for="ia-unidades">Unidades</label>
+          <input type="number" id="ia-unidades" min="1" max="6" value="3">
+        </div>
+        <div class="campo">
+          <label for="ia-temas">Temas por unidad</label>
+          <input type="number" id="ia-temas" min="1" max="6" value="3">
+        </div>
+      </div>
+      <small class="campo__ayuda">Puedes generar hasta 18 temas por propuesta y repetir el proceso para ampliar la asignatura.</small>
+      <div class="campo">
+        <label for="ia-archivos">Archivos de apoyo (opcional)</label>
+        <input type="file" id="ia-archivos" accept=".txt,.md,.csv,.json,.html,.htm,text/plain,text/csv,application/json,text/html" multiple>
+        <small class="campo__ayuda">Hasta 3 archivos TXT, MD, CSV, JSON o HTML; 512 KB por archivo y 6.000 caracteres en total. Su contenido se usa como referencia y no se publica.</small>
+      </div>
+    `;
+
+    const generar = await modal({
+      titulo: '✨ Crear contenidos con IA',
+      contenido: form,
+      acciones: [
+        { texto: 'Cancelar', valor: false, clase: 'btn-secundario' },
+        { texto: 'Generar propuesta', valor: true, clase: 'btn-primario' }
+      ]
+    });
+    if (!generar) return;
+
+    const instrucciones = form.querySelector('#ia-instrucciones').value.trim();
+    const cantidadUnidades = Number(form.querySelector('#ia-unidades').value);
+    const temasPorUnidad = Number(form.querySelector('#ia-temas').value);
+
+    try {
+      const materialApoyo = await leerMaterialApoyo(form.querySelector('#ia-archivos'));
+      if (!instrucciones && !materialApoyo) {
+        aviso('Escribe indicaciones o adjunta al menos un archivo de apoyo.', 'error');
+        return;
+      }
+      if (!Number.isInteger(cantidadUnidades) || cantidadUnidades < 1 || cantidadUnidades > 6 ||
+          !Number.isInteger(temasPorUnidad) || temasPorUnidad < 1 || temasPorUnidad > 6) {
+        aviso('Las cantidades deben estar entre 1 y 6.', 'error');
+        return;
+      }
+      if (cantidadUnidades * temasPorUnidad > 18) {
+        aviso('La propuesta puede contener un máximo de 18 temas.', 'error');
+        return;
+      }
+
+      cargando(true);
+      const propuesta = await ia('generar-contenidos-asignatura', {
+        asignaturaId: asignatura.id,
+        instrucciones,
+        materialApoyo,
+        cantidadUnidades,
+        temasPorUnidad
+      });
+      if (!Array.isArray(propuesta?.unidades) || !propuesta.unidades.length) {
+        throw new Error('La IA no devolvió una propuesta válida');
+      }
+      if (propuesta.unidades.length !== cantidadUnidades ||
+          propuesta.unidades.some(unidad => unidad.temas.length !== temasPorUnidad)) {
+        throw new Error('La IA no respetó la cantidad de unidades y temas solicitada; inténtalo nuevamente');
+      }
+      cargando(false);
+      await revisarPropuestaIa(propuesta);
+    } catch (err) {
+      cargando(false);
+      aviso(err.message || 'No se pudo generar la propuesta de contenidos.', 'error');
+    }
+  }
+
   selectAsig.addEventListener('change', async (e) => {
     await cargarUnidadesDeAsignatura(e.target.value);
   });
 
   btnAgregarUnidad.addEventListener('click', () => abrirModalUnidad());
   btnAgregarTema.addEventListener('click', () => abrirModalTema());
+  btnGenerarIa.addEventListener('click', abrirGeneradorIa);
 
   await inicializar();
 }

@@ -1,6 +1,16 @@
 // servidor/acceso.js · Control y resolución de acceso por grupos y asignaturas
 import * as almacen from './almacen.js';
 
+export function docentesIdsDeGrupo(grupo) {
+  const ids = Array.isArray(grupo?.docentesIds) ? [...grupo.docentesIds] : [];
+  if (grupo?.docenteId) ids.push(grupo.docenteId);
+  return [...new Set(ids.filter(Boolean).map(String))];
+}
+
+export function esDocenteDeGrupo(grupo, usuarioId) {
+  return Boolean(usuarioId) && docentesIdsDeGrupo(grupo).includes(String(usuarioId));
+}
+
 export async function gruposDe(usuario) {
   if (!usuario) return [];
   if (usuario.rol === 'admin') {
@@ -9,7 +19,7 @@ export async function gruposDe(usuario) {
 
   const distributivo = await almacen.leer('distributivo');
   if (usuario.rol === 'docente') {
-    return distributivo.filter(g => g && String(g.docenteId) === String(usuario.id));
+    return distributivo.filter(g => g && esDocenteDeGrupo(g, usuario.id));
   }
 
   if (usuario.rol === 'estudiante') {
@@ -50,7 +60,7 @@ export async function puedeEditarAsignatura(usuario, asignaturaId) {
   if (usuario.rol !== 'docente') return false;
 
   const distributivo = await almacen.leer('distributivo');
-  return distributivo.some(g => g && g.asignaturaId === asignaturaId && String(g.docenteId) === String(usuario.id));
+  return distributivo.some(g => g && g.asignaturaId === asignaturaId && esDocenteDeGrupo(g, usuario.id));
 }
 
 export async function estudiantesDe(docenteId) {
@@ -58,7 +68,7 @@ export async function estudiantesDe(docenteId) {
   const distributivo = await almacen.leer('distributivo');
   const estudiantesIds = new Set();
   distributivo
-    .filter(g => g && String(g.docenteId) === String(docenteId) && Array.isArray(g.estudiantes))
+    .filter(g => g && esDocenteDeGrupo(g, docenteId) && Array.isArray(g.estudiantes))
     .forEach(g => g.estudiantes.forEach(estId => estudiantesIds.add(estId)));
 
   const usuarios = await almacen.leer('usuarios');
@@ -72,7 +82,7 @@ export async function docentesDe(estudianteId) {
   distributivo
     .filter(g => g && Array.isArray(g.estudiantes) && g.estudiantes.some(estId => String(estId) === String(estudianteId)))
     .forEach(g => {
-      if (g.docenteId) docentesIds.add(g.docenteId);
+      docentesIdsDeGrupo(g).forEach(docenteId => docentesIds.add(docenteId));
     });
 
   const usuarios = await almacen.leer('usuarios');
@@ -80,6 +90,8 @@ export async function docentesDe(estudianteId) {
 }
 
 export default {
+  docentesIdsDeGrupo,
+  esDocenteDeGrupo,
   gruposDe,
   asignaturasDe,
   asignaturaDeTema,

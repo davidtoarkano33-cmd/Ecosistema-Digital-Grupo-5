@@ -34,14 +34,14 @@ router.get('/alertas', async (req, res) => {
         return res.status(404).json({ error: 'Grupo no encontrado' });
       }
 
-      if (usuario.rol !== 'admin' && String(grupo.docenteId) !== String(usuario.id)) {
+      if (usuario.rol !== 'admin' && !acceso.esDocenteDeGrupo(grupo, usuario.id)) {
         return res.status(403).json({ error: 'No tienes permiso para ver las alertas de este grupo' });
       }
 
       alertasFiltradas = alertasFiltradas.filter(a => a && String(a.grupoId) === String(grupoId));
     } else if (usuario.rol === 'docente') {
       // Si no especificó grupoId, filtrar por todos los grupos del docente
-      const misGrupos = (todosDistributivos || []).filter(g => g && String(g.docenteId) === String(usuario.id));
+      const misGrupos = (todosDistributivos || []).filter(g => g && acceso.esDocenteDeGrupo(g, usuario.id));
       const misGruposIds = new Set(misGrupos.map(g => String(g.id)));
       alertasFiltradas = alertasFiltradas.filter(a => a && misGruposIds.has(String(a.grupoId)));
     }

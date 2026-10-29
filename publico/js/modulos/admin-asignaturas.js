@@ -2,6 +2,7 @@
 import { montarPlantilla } from '../nucleo/plantilla.js';
 import { listar, crear, actualizar, eliminar } from '../nucleo/api.js';
 import { aviso, confirmar, modal, escapar, cargando } from '../nucleo/ui.js';
+import { fotoReferencial } from '../nucleo/imagenes.js';
 
 await montarPlantilla({ titulo: "Asignaturas", roles: ["admin"] });
 
@@ -68,6 +69,7 @@ if (contenido) {
       return `
         <article class="tarjeta tarjeta-asignatura" data-id="${escapar(asig.id)}">
           <div class="tarjeta-asignatura__cuerpo">
+            ${asig.imagen ? fotoReferencial({ src: asig.imagen, alt: asig.imagenAlt || `Imagen referencial de ${asig.nombre}`, claseImagen: 'tarjeta-asignatura__imagen' }) : ''}
             <div class="tarjeta-asignatura__nivel">
               <span class="insignia insignia--info">${escapar(asig.nivel || 'Nivel no especificado')}</span>
             </div>
@@ -78,6 +80,9 @@ if (contenido) {
             </div>
           </div>
           <div class="tarjeta-asignatura__acciones">
+            <a href="/paginas/editor-contenidos.html?asignaturaId=${encodeURIComponent(asig.id)}" class="btn btn--primario btn--pequeno">
+              Contenidos
+            </a>
             <button type="button" class="btn btn--secundario btn--pequeno btn-editar" data-id="${escapar(asig.id)}">
               Editar
             </button>
