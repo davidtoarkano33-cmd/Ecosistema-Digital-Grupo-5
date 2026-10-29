@@ -1,1 +1,20 @@
-[{"id":"asi_000001","nombre":"GENERALIDADES DE ABORDAJE INICIAL DEL PACIENTE","descripcion":"Fundamentos clínicos y protocolos de triage, anamnesis, exploración y soporte vital inicial.","nivel":"Tecnología Superior en Emergencias Médicas · primer semestre","fecha":"2026-10-24T00:00:00.000Z"}]
+[
+  {
+    "id": "asi_000001",
+    "nombre": "GENERALIDADES DE ABORDAJE INICIAL DEL PACIENTE",
+    "descripcion": "Fundamentos clínicos y protocolos de triage, anamnesis, exploración y soporte vital inicial.",
+    "nivel": "Tecnología Superior en Emergencias Médicas · primer semestre",
+    "imagen": "/recursos/asignaturas/asignatura-abordaje-ia.jpg",
+    "imagenAlt": "Ilustración referencial de un docente paramédico integrando inteligencia artificial y simulación clínica",
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "nombre": "SEMIOLOGÍA APLICADA A EMERGENCIAS MÉDICAS",
+    "nivel": "PRIMER NIVEL",
+    "descripcion": "La semiología, semiotecnia, nos ayuda a entender síntomas y signos del paciente, terminología médica y una correcta historia clínica con valoración céfalo caudal del paciente, para aplicación de sus 4 tiempos de examen físico",
+    "imagen": "/recursos/asignaturas/asignatura-semiologia-monitor.jpg",
+    "imagenAlt": "Clase referencial de semiología y monitorización impartida por docentes paramédicos",
+    "id": "asi_000002",
+    "fecha": "2026-10-29T02:40:32.316Z"
+  }
+]

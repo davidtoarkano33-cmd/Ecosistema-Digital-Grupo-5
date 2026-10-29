@@ -1,1 +1,34 @@
-[{"id":"uni_000001","asignaturaId":"asi_000001","titulo":"Valoración Primaria y Soporte Vital","orden":1,"visible":true,"fecha":"2026-10-24T00:00:00.000Z"}]
+[
+  {
+    "id": "uni_000001",
+    "asignaturaId": "asi_000001",
+    "titulo": "Valoración Primaria y Soporte Vital",
+    "orden": 1,
+    "visible": true,
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "asignaturaId": "asi_000002",
+    "titulo": "Fundamentos de Semiología y Terminología Médica en Emergencias",
+    "orden": 1,
+    "visible": true,
+    "id": "uni_000002",
+    "fecha": "2026-10-29T04:28:16.679Z"
+  },
+  {
+    "asignaturaId": "asi_000002",
+    "titulo": "Historia Clínica y Anamnesis en el Contexto de Urgencias",
+    "orden": 2,
+    "visible": true,
+    "id": "uni_000003",
+    "fecha": "2026-10-29T04:28:16.720Z"
+  },
+  {
+    "asignaturaId": "asi_000002",
+    "titulo": "Valoración Céfalo-Caudal y los Cuatro Tiempos del Examen Físico",
+    "orden": 3,
+    "visible": true,
+    "id": "uni_000004",
+    "fecha": "2026-10-29T04:28:16.756Z"
+  }
+]

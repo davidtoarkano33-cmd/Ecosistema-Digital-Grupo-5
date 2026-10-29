@@ -331,5 +331,130 @@
         ]
       }
     ]
+  },
+  {
+    "titulo": "Evaluación primaria y signos vitales en síncope por golpe de calor",
+    "temaId": "tem_000003",
+    "modo": "rol",
+    "estado": "publicado",
+    "escenaInicial": "E1",
+    "escenas": [],
+    "id": "sim_000002",
+    "fecha": "2026-10-28T00:38:59.369Z",
+    "personaje": {
+      "nombre": "Dr. Carlos Mendoza",
+      "descripcion": "Médico de guardia y tutor clínico del área de prehospitalaria, exigente pero dispuesto a guiar al estudiante de primer semestre de Tecnología Superior en Emergencias Médicas.",
+      "contexto": "Se encuentra en el área de triaje con un paciente adulto joven que sufrió un cuadro de síncope tras realizar actividad física intensa durante una hora sin desayunar ni hidratarse, sufriendo un golpe de calor. El estudiante debe justificar la importancia de la toma de signos vitales en este escenario e identificar cuáles debe evaluar en el marco de la evaluación primaria.",
+      "objetivo": "Explicar al docente por qué es necesario tomar los signos vitales en este paciente y mencionar cuáles son los parámetros específicos que se deben evaluar durante el abordaje inicial."
+    },
+    "rubrica": [
+      {
+        "criterio": "Justificación clínica",
+        "descripcion": "Explica claramente por qué es obligatorio tomar los signos vitales en un paciente con síncope y antecedente de golpe de calor.",
+        "puntos": 25
+      },
+      {
+        "criterio": "Identificación de signos vitales",
+        "descripcion": "Menciona de forma correcta y completa los signos vitales prioritarios a evaluar en la evaluación primaria (presión arterial, frecuencia cardíaca, frecuencia respiratoria, saturación de oxígeno y temperatura).",
+        "puntos": 25
+      },
+      {
+        "criterio": "Relación con el contexto",
+        "descripcion": "Conecta los signos vitales con la condición de deshidratación, ayuno y el esfuerzo físico prolongado del paciente.",
+        "puntos": 25
+      },
+      {
+        "criterio": "Terminología y respeto",
+        "descripcion": "Emplea un lenguaje técnico adecuado para emergencias médicas y mantiene un trato respetuoso hacia el docente.",
+        "puntos": 25
+      }
+    ],
+    "maxTurnos": 8
+  },
+  {
+    "titulo": "Abordaje Inicial y Triage en Trauma Grave",
+    "temaId": "tem_000002",
+    "modo": "escenarios",
+    "estado": "publicado",
+    "escenaInicial": "E1",
+    "escenas": [
+      {
+        "id": "E1",
+        "texto": "Te encuentras en la escena de un accidente de tránsito. Tu paciente es un adulto con amputación traumática en la pierna izquierda, trauma craneoencefálico, disnea severa y signos evidentes de shock hipovolémico hemorrágico. Acabas de finalizar la evaluación primaria (ABCDE) y debes iniciar la valoración de los signos vitales.",
+        "imagen": "",
+        "opciones": [
+          {
+            "texto": "Medir inmediatamente frecuencia cardíaca, presión arterial, frecuencia respiratoria, saturación de oxígeno y temperatura, sin confiarme solo de la apariencia.",
+            "destino": "E2",
+            "puntos": 10,
+            "consecuencia": "Excelente decisión. Cuantificar todos los signos vitales evita el error frecuente de subestimar la gravedad y permite detectar deterioro hemodinámico temprano."
+          },
+          {
+            "texto": "Como el paciente respira y tiene buen color en la cara a simple vista, asumo que está estable y mido solo la saturación de pulso.",
+            "destino": "E3",
+            "puntos": -10,
+            "consecuencia": "Error crítico. Confiar en la apariencia y medir solo la saturometría oculta el shock hipovolémico descompensado y la acidosis metabólica."
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "texto": "Al cuantificar los parámetros vitales, obtienes: FC 130 lpm (taquicardia severa), PA 80/50 mmHg (hipotensión), FR 28 rpm (taquipnea) y SpO2 88%. El paciente presenta además alteración del estado de conciencia debido al trauma craneal y la hipoperfusión.",
+        "imagen": "",
+        "opciones": [
+          {
+            "texto": "Clasificar al paciente como Código Rojo (prioridad máxima) y preparar reposición agresiva de volumen y control de la hemorragia.",
+            "destino": "E4",
+            "puntos": 10,
+            "consecuencia": "Correcto. La combinación de signos vitales alterados confirma un shock hipovolémico descompensado que requiere categorización y manejo de máxima urgencia."
+          },
+          {
+            "texto": "Clasificar como Código Amarillo porque el paciente responde a estímulos verbales y mantener observación pasiva.",
+            "destino": "E5",
+            "puntos": -10,
+            "consecuencia": "Error de triage. Ignorar los signos vitales de choque y basarse solo en la respuesta verbal pone en riesgo inminente la vida del paciente."
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "texto": "Te centras únicamente en la saturación de pulso que marca 94% gracias al oxígeno suplementario, ignorando la presión arterial y el pulso periférico débil. El paciente comienza a desorientarse más.",
+        "imagen": "",
+        "opciones": [
+          {
+            "texto": "Reaccionar tarde, realizar un control completo de signos vitales de emergencia y reevaluar la gravedad.",
+            "destino": "E5",
+            "puntos": 0,
+            "consecuencia": "Reaccionas tarde, pero logras corregir parcialmente el error antes del paro."
+          },
+          {
+            "texto": "Continuar esperando traslado sin reevaluar, confiando en que la SpO2 es normal.",
+            "destino": "E6",
+            "puntos": -10,
+            "consecuencia": "Caíste en el error clásico de confundir una saturometría aceptable con una ventilación y perfusión adecuadas, agravando el shock."
+          }
+        ]
+      },
+      {
+        "id": "E4",
+        "texto": "Has aplicado correctamente el triage estandarizado y la interpretación de signos vitales. El paciente es transferido rápidamente al área de trauma con soporte vital avanzado en curso.",
+        "imagen": "",
+        "opciones": []
+      },
+      {
+        "id": "E5",
+        "texto": "El retraso en la identificación correcta del shock y la clasificación errónea provocan una caída crítica de la presión arterial antes de llegar al hospital.",
+        "imagen": "",
+        "opciones": []
+      },
+      {
+        "id": "E6",
+        "texto": "El paciente sufre un paro cardiorrespiratorio secundario a shock hipovolémico no compensado y no detectado a tiempo por omisión de parámetros vitales clave.",
+        "imagen": "",
+        "opciones": []
+      }
+    ],
+    "id": "sim_000003",
+    "fecha": "2026-10-28T01:32:19.449Z"
   }
 ]

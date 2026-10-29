@@ -1,0 +1,279 @@
+[
+  {
+    "id": "age_000001",
+    "titulo": "INDEPENDENCIA DE MACHACHI",
+    "tipo": "recordatorio",
+    "todoElDia": true,
+    "inicio": "2026-11-11T00:00:00.000Z",
+    "fin": "2026-11-11T23:59:59.000Z",
+    "recordatorios": [
+      1440,
+      60
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T16:57:58.867Z"
+  },
+  {
+    "id": "age_000002",
+    "titulo": "NAVIDAD",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2026-12-25T00:00:00.000Z",
+    "fin": "2026-12-25T23:59:59.000Z",
+    "recordatorios": [
+      1440,
+      60
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T17:47:43.940Z"
+  },
+  {
+    "id": "age_000003",
+    "titulo": "Día de los Difuntos (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2026-11-02T00:00:00.000Z",
+    "fin": "2026-11-02T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000004",
+    "titulo": "Independencia de Cuenca (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2026-11-03T00:00:00.000Z",
+    "fin": "2026-11-03T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000005",
+    "titulo": "Fundación de Quito (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2026-12-06T00:00:00.000Z",
+    "fin": "2026-12-06T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000006",
+    "titulo": "Fin de Año (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2026-12-31T00:00:00.000Z",
+    "fin": "2026-12-31T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000007",
+    "titulo": "Año Nuevo (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-01-01T00:00:00.000Z",
+    "fin": "2027-01-01T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000008",
+    "titulo": "Carnaval (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-02-08T00:00:00.000Z",
+    "fin": "2027-02-09T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000009",
+    "titulo": "Viernes Santo (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-03-26T00:00:00.000Z",
+    "fin": "2027-03-26T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000010",
+    "titulo": "Día del Trabajo (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-05-01T00:00:00.000Z",
+    "fin": "2027-05-01T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000011",
+    "titulo": "Batalla de Pichincha (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-05-24T00:00:00.000Z",
+    "fin": "2027-05-24T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000012",
+    "titulo": "Primer Grito de Independencia (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-08-10T00:00:00.000Z",
+    "fin": "2027-08-10T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "id": "age_000013",
+    "titulo": "Independencia de Guayaquil (Ecuador)",
+    "tipo": "festividad",
+    "todoElDia": true,
+    "inicio": "2027-10-09T00:00:00.000Z",
+    "fin": "2027-10-09T23:59:59.000Z",
+    "recordatorios": [
+      1440
+    ],
+    "grupoId": "todos",
+    "esInstitucional": true,
+    "actividad": null,
+    "temaId": null,
+    "fecha": "2026-10-26T12:00:00.000Z"
+  },
+  {
+    "titulo": "INDEPENDENCIA DE MACHACHI",
+    "tipo": "recordatorio",
+    "todoElDia": true,
+    "inicio": "2026-11-11T00:00:00.000Z",
+    "fin": "2026-11-11T00:00:00.000Z",
+    "recordatorios": [
+      1440,
+      60
+    ],
+    "esInstitucional": true,
+    "grupoId": "todos",
+    "actividad": null,
+    "temaId": null,
+    "propietarioId": "usu_000001",
+    "avisados": {},
+    "id": "age_000014",
+    "fecha": "2026-10-27T02:34:54.330Z"
+  },
+  {
+    "titulo": "CONVERSATORIO DOCENTE - ALUMNO",
+    "tipo": "fecha-limite",
+    "todoElDia": true,
+    "inicio": "2026-10-26T00:00:00.000Z",
+    "fin": "2026-10-26T00:00:00.000Z",
+    "recordatorios": [
+      1440,
+      60
+    ],
+    "esInstitucional": false,
+    "grupoId": "dis_000001",
+    "actividad": "ahorcado",
+    "temaId": "tem_000002",
+    "propietarioId": "usu_000002",
+    "avisados": {
+      "usu_000001": [
+        1440,
+        60
+      ],
+      "usu_000002": [
+        1440,
+        60
+      ],
+      "usu_000006": [
+        1440,
+        60
+      ],
+      "usu_000004": [
+        1440,
+        60
+      ],
+      "usu_000005": [
+        1440,
+        60
+      ],
+      "usu_000007": [
+        1440,
+        60
+      ],
+      "usu_000003": [
+        1440,
+        60
+      ]
+    },
+    "id": "age_000015",
+    "fecha": "2026-10-27T02:39:50.376Z"
+  }
+]

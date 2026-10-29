@@ -1,0 +1,15 @@
+[
+  {
+    "asignaturaId": "asi_000001",
+    "temaId": null,
+    "titulo": "VENDAJES",
+    "texto": "¿Cuáles son los tipos de vendajes más usados en atención prehospitalaria?\nMe gusta el vendaje en libro para quemaduras, y el de capelina, pero tengo una pregunta, ¿se usan gasas parafinadas o gasas secas o gasas húmedas para quemaduras?",
+    "autorId": "usu_000004",
+    "fijado": true,
+    "cerrado": false,
+    "oculto": false,
+    "ultimoMovimiento": "2026-10-26T03:41:35.911Z",
+    "id": "for_000001",
+    "fecha": "2026-10-26T03:37:16.412Z"
+  }
+]

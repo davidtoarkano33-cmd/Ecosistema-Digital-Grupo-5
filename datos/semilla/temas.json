@@ -1,1 +1,361 @@
-[{"id":"tem_000001","unidadId":"uni_000001","titulo":"Protocolo ABCDE en Emergencias","orden":1,"objetivos":["Identificar y jerarquizar amenazas inmediatas a la vida","Aplicar la secuencia estandarizada ABCDE de forma ordenada y eficaz"],"resumen":"El enfoque ABCDE es el algoritmo universal para el reconocimiento y estabilización sistemática del paciente crítico en escenarios de urgencia o trauma prehospitalario y hospitalario.","ejemplos":["Aseguramiento de vía aérea con control cervical en traumatismo craneoencefálico","Auscultación pulmonar y descompresión ante sospecha de neumotórax a tensión"],"erroresFrecuentes":["Saltarse la evaluación de vía aérea para tratar hemorragias periféricas no exanguinantes","Retirar la inmovilización cervical antes de completar la evaluación secundaria"],"preguntasGuia":["¿Qué signo clínico define prioridad inmediata en la fase A?","¿Cómo se clasifica el estado de conciencia usando la escala AVDI o Glasgow en la fase D?"],"recursos":[{"tipo":"enlace","titulo":"Guía de Soporte Vital y Trauma","url":"https://unemi.edu.ec/recursos/abcde.pdf"}],"palabrasClave":["via-aerea","respiracion","circulacion","deficit-neurologico","exposicion"],"dificultad":"intermedio","fuentes":"Manual de Soporte Vital Avanzado en Trauma (ATLS)","estado":"publicado","fecha":"2026-10-24T00:00:00.000Z"},{"id":"tem_000002","unidadId":"uni_000001","titulo":"Triage y Monitorización de Signos Vitales","orden":2,"objetivos":["Clasificar la gravedad de pacientes mediante sistemas de triage estandarizados","Interpretar los signos vitales para detectar deterioro hemodinámico temprano"],"resumen":"El triage permite priorizar la atención según la gravedad clínica y los recursos disponibles, complementado con la toma precisa y continua de parámetros vitales.","ejemplos":["Clasificación con código rojo para shock hipovolémico descompensado","Detección precoz de bradicardia e hipotensión en sospecha de shock neurogénico"],"erroresFrecuentes":["Asignar prioridad baja basándose únicamente en la apariencia del paciente sin cuantificar signos vitales","Confundir saturometría de pulso normal con ventilación adecuada en acidosis metabólica"],"preguntasGuia":["¿Cuáles son las categorías y tiempos de espera recomendados en el sistema Manchester o START?","¿Qué patrones de presión arterial media sugieren hipoperfusión tisular crítica?"],"recursos":[{"tipo":"enlace","titulo":"Protocolo de Triage y Signos Vitales","url":"https://unemi.edu.ec/recursos/triage.pdf"}],"palabrasClave":["triage","signos-vitales","presion-arterial","frecuencia-cardiaca","saturacion"],"dificultad":"basico","fuentes":"Sistema de Triage Manchester / OPS Triage Hospitalario","estado":"publicado","fecha":"2026-10-24T00:00:00.000Z"}]
+[
+  {
+    "id": "tem_000001",
+    "unidadId": "uni_000001",
+    "titulo": "Protocolo XABCDE en Emergencias",
+    "orden": 1,
+    "objetivos": [
+      "Identificar y jerarquizar amenazas inmediatas a la vida",
+      "Aplicar la secuencia estandarizada ABCDE de forma ordenada y eficaz"
+    ],
+    "resumen": "El enfoque XABCDE es el algoritmo universal para el reconocimiento y estabilización sistemática del paciente crítico en escenarios de urgencia o trauma prehospitalario y hospitalario.",
+    "ejemplos": [
+      "Aseguramiento de vía aérea con control cervical en traumatismo craneoencefálico",
+      "Auscultación pulmonar y descompresión ante sospecha de neumotórax a tensión"
+    ],
+    "erroresFrecuentes": [
+      "Saltarse la evaluación de vía aérea para tratar hemorragias periféricas no exanguinantes",
+      "Retirar la inmovilización cervical antes de completar la evaluación secundaria"
+    ],
+    "preguntasGuia": [
+      "¿Qué signo clínico define prioridad inmediata en la fase A?",
+      "¿Cómo se clasifica el estado de conciencia usando la escala AVDI o Glasgow en la fase D?"
+    ],
+    "recursos": [
+      {
+        "tipo": "enlace",
+        "titulo": "Guía de Soporte Vital y Trauma",
+        "url": "https://unemi.edu.ec/recursos/abcde.pdf"
+      },
+      {
+        "tipo": "imagen",
+        "titulo": "Referencia visual: evaluación primaria XABCDE",
+        "url": "/recursos/asignaturas/tema-xabcde-evaluacion.jpeg"
+      }
+    ],
+    "palabrasClave": [
+      "control-hemorragias-via-aerea",
+      "respiracion",
+      "circulacion",
+      "deficit-neurologico",
+      "exposicion"
+    ],
+    "dificultad": "intermedio",
+    "fuentes": "Manual de Soporte Vital Avanzado en Trauma (ATLS)",
+    "estado": "publicado",
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "id": "tem_000002",
+    "unidadId": "uni_000001",
+    "titulo": "Triage y Monitorización de Signos Vitales",
+    "orden": 2,
+    "objetivos": [
+      "Clasificar la gravedad de pacientes mediante sistemas de triage estandarizados",
+      "Interpretar los signos vitales para detectar deterioro hemodinámico temprano"
+    ],
+    "resumen": "El triage permite priorizar la atención según la gravedad clínica y los recursos disponibles, complementado con la toma precisa y continua de parámetros vitales.",
+    "ejemplos": [
+      "Clasificación con código rojo para shock hipovolémico descompensado",
+      "Detección precoz de bradicardia e hipotensión en sospecha de shock neurogénico"
+    ],
+    "erroresFrecuentes": [
+      "Asignar prioridad baja basándose únicamente en la apariencia del paciente sin cuantificar signos vitales",
+      "Confundir saturometría de pulso normal con ventilación adecuada en acidosis metabólica"
+    ],
+    "preguntasGuia": [
+      "¿Cuáles son las categorías y tiempos de espera recomendados en el sistema Manchester o START?",
+      "¿Qué patrones de presión arterial media sugieren hipoperfusión tisular crítica?"
+    ],
+    "recursos": [
+      {
+        "tipo": "enlace",
+        "titulo": "Protocolo de Triage y Signos Vitales",
+        "url": "https://unemi.edu.ec/recursos/triage.pdf"
+      },
+      {
+        "tipo": "imagen",
+        "titulo": "Práctica referencial de monitorización y manejo de la vía aérea",
+        "url": "/recursos/asignaturas/tema-monitorizacion-simulacion.png"
+      }
+    ],
+    "palabrasClave": [
+      "triage",
+      "signos-vitales",
+      "presion-arterial",
+      "frecuencia-cardiaca",
+      "saturacion"
+    ],
+    "dificultad": "basico",
+    "fuentes": "Sistema de Triage Manchester / OPS Triage Hospitalario",
+    "estado": "publicado",
+    "fecha": "2026-10-24T00:00:00.000Z"
+  },
+  {
+    "unidadId": "uni_000001",
+    "titulo": "Abordaje inicial",
+    "orden": 3,
+    "objetivos": [],
+    "resumen": "Requerimiento específico de revisión: evaluación primaria del paciente",
+    "ejemplos": [],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [
+      {
+        "tipo": "imagen",
+        "titulo": "XABCDE",
+        "url": "/recursos/asignaturas/tema-xabcde.png"
+      },
+      {
+        "tipo": "imagen",
+        "titulo": "Demostración referencial de valoración inicial de la vía aérea",
+        "url": "/recursos/asignaturas/tema-abordaje-via-aerea.jpeg"
+      }
+    ],
+    "palabrasClave": [
+      "xabcde"
+    ],
+    "dificultad": "intermedio",
+    "fuentes": "Manual de Soporte Vital en Trauma Prehospitalario (PHLS)",
+    "estado": "publicado",
+    "id": "tem_000003",
+    "fecha": "2026-10-24T18:43:27.049Z"
+  },
+  {
+    "unidadId": "uni_000002",
+    "titulo": "Introducción a los Conceptos de Semiología",
+    "orden": 1,
+    "objetivos": [
+      "Definir los conceptos fundamentales de la semiología aplicada al ámbito prehospitalario y de emergencias.",
+      "Diferenciar con precisión entre síntoma, signo, síndrome y diagnóstico.",
+      "Reconocer la importancia de la observación clínica temprana en pacientes críticos."
+    ],
+    "resumen": "La semiología es la disciplina fundamental de la medicina que se encarga del estudio de los síntomas y signos de las enfermedades, constituyendo el pilar para la construcción diagnóstica. En el contexto de las emergencias médicas, la rapidez y precisión semiológica determinan la oportunidad y pertinencia de las maniobras de soporte vital y estabilización del paciente.\n\nComprender el lenguaje clínico implica dominar la distinción entre lo que el paciente experimenta subjetivamente, conocido como síntoma, y lo que el personal de salud objetiva mediante la exploración, denominado signo. Estos elementos se agrupan en síndromes que orientan el razonamiento clínico inicial bajo situaciones de alta presión.",
+    "ejemplos": [
+      "Identificar el dolor torácico referido por el paciente como un síntoma cardinal de origen isquémico.",
+      "Observar la presencia de cianosis perioral como un signo objetivo de hipoxia tisular aguda."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [
+      {
+        "tipo": "imagen",
+        "titulo": "Docente paramédica y estudiantes en formación",
+        "url": "/recursos/asignaturas/tema-semiologia-docente.png"
+      }
+    ],
+    "palabrasClave": [],
+    "dificultad": "basico",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "publicado",
+    "id": "tem_000004",
+    "fecha": "2026-10-29T04:28:16.690Z"
+  },
+  {
+    "unidadId": "uni_000002",
+    "titulo": "Aplicación de la Semiotecnia en Urgencias",
+    "orden": 2,
+    "objetivos": [
+      "Explicar el rol de la semiotecnia como conjunto de métodos para la obtención de datos clínicos.",
+      "Describir la aplicación práctica de los procedimientos exploratorios básicos en situaciones críticas."
+    ],
+    "resumen": "La semiotecnia representa el conjunto de procedimientos y métodos de los que se vale el clínico para obtener los síntomas y signos, es decir, el camino técnico para realizar el examen físico. Su correcta aplicación en emergencias médicas requiere metodologías estandarizadas que no interfieran con las acciones de reanimación o soporte vital avanzado.\n\nA través de maniobras sistemáticas, el personal de salud extrae información clínica valiosa en el menor tiempo posible, adaptando las técnicas tradicionales a escenarios complejos y dinámicos donde cada segundo es crítico para la supervivencia del paciente.",
+    "ejemplos": [
+      "Aplicar técnicas semiotécnicas rápidas para evaluar la permeabilidad de la vía aérea en un paciente politraumatizado."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [
+      {
+        "tipo": "imagen",
+        "titulo": "Práctica referencial de semiotecnia en un escenario simulado",
+        "url": "/recursos/asignaturas/tema-semiotecnia-practica.jpg"
+      }
+    ],
+    "palabrasClave": [],
+    "dificultad": "basico",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "publicado",
+    "id": "tem_000005",
+    "fecha": "2026-10-29T04:28:16.701Z"
+  },
+  {
+    "unidadId": "uni_000002",
+    "titulo": "Terminología Médica Esencial para el Personal de Emergencias",
+    "orden": 3,
+    "objetivos": [
+      "Utilizar correctamente la terminología médica básica relacionada con patologías agudas y emergencias.",
+      "Interpretar prefijos, sufijos y raíces en la descripción de cuadros clínicos de presentación súbita.",
+      "Redactar reportes de emergencia empleando un lenguaje técnico estandarizado y comprensible."
+    ],
+    "resumen": "El dominio de la terminología médica garantiza una comunicación clara, unívoca y profesional entre los integrantes del equipo de salud en todos los niveles de atención. En emergencias, el uso de términos precisos evita confusiones en la transmisión de datos críticos sobre el estado del paciente.\n\nLos componentes léxicos derivados del griego y del latín permiten construir conceptos complejos relacionados con alteraciones funcionales, anatómicas y patológicas, facilitando el registro oportuno en los formularios de atención prehospitalaria y hospitalaria.",
+    "ejemplos": [
+      "Emplear el término 'taquipnea' para reportar un aumento en la frecuencia respiratoria del paciente.",
+      "Utilizar el concepto de 'disnea' para documentar la dificultad respiratoria aguda."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "basico",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "publicado",
+    "id": "tem_000006",
+    "fecha": "2026-10-29T04:28:16.712Z"
+  },
+  {
+    "unidadId": "uni_000003",
+    "titulo": "Conceptos Fundamentales de la Historia Clínica en Emergencias",
+    "orden": 1,
+    "objetivos": [
+      "Comprender la estructura y finalidad de la historia clínica adaptada al ámbito de emergencias médicas.",
+      "Identificar las diferencias operativas entre la historia clínica convencional y la de atención urgente."
+    ],
+    "resumen": "La historia clínica constituye el documento médico-legal y epidemiológico de mayor relevancia en la práctica asistencial. En el contexto de emergencias, su diseño se enfoca hacia la inmediatez, priorizando la recopilación de datos orientados a la identificación de amenazas vitales inmediatas y la toma de decisiones terapéuticas urgentes.\n\nSu correcta gestión asegura la continuidad asistencial desde el sitio del evento hasta el ingreso a la unidad de salud, registrando de manera cronológica y fidedigna las intervenciones realizadas por el personal de primera respuesta.",
+    "ejemplos": [
+      "Completar el formato de historia clínica prehospitalaria enfocada en la estabilización inicial del paciente."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "intermedio",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000007",
+    "fecha": "2026-10-29T04:28:16.730Z"
+  },
+  {
+    "unidadId": "uni_000003",
+    "titulo": "Técnicas de Anamnesis en Situaciones Críticas",
+    "orden": 2,
+    "objetivos": [
+      "Aplicar estrategias de interrogatorio rápido y dirigido durante la anamnesis en emergencias.",
+      "Recopilar antecedentes patológicos, farmacológicos y alérgicos de manera eficiente bajo presión."
+    ],
+    "resumen": "La anamnesis es el interrogatorio clínico destinado a recopilar información sobre el padecimiento actual y los antecedentes del paciente. En situaciones de emergencia, el tiempo es un recurso limitado, por lo que el profesional debe emplear técnicas de anamnesis dirigida, enfocándose en los datos que impactan directamente en la conducta terapéutica.\n\nCuando el paciente se encuentra con alteración del estado de conciencia o incapacidad para comunicarse, la anamnesis debe obtenerse a partir de fuentes secundarias, como familiares, testigos o mediante la revisión de identificaciones y dispositivos médicos de alerta.",
+    "ejemplos": [
+      "Aplicar el interrogatorio enfocado en la nemotecnia de características del dolor (aparición, localización, irradiación, intensidad, duración)."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "intermedio",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000008",
+    "fecha": "2026-10-29T04:28:16.739Z"
+  },
+  {
+    "unidadId": "uni_000003",
+    "titulo": "Organización y Estructura de la Entrevista Clínica de Urgencia",
+    "orden": 3,
+    "objetivos": [
+      "Estructurar la secuencia lógica de la entrevista clínica en el entorno prehospitalario o de urgencias.",
+      "Establecer una comunicación empática y efectiva con el paciente y sus acompañantes en momentos de crisis."
+    ],
+    "resumen": "La entrevista clínica de urgencia requiere una organización metódica que permita establecer una relación terapéutica rápida y de confianza con el paciente y su entorno. A pesar del estrés inherente a la emergencia, el profesional debe mantener una actitud calmada, directiva y respetuosa para facilitar la entrega de información veraz.\n\nLa estructuración adecuada de las preguntas guía el proceso de pensamiento clínico, permitiendo descartar diagnósticos diferenciales graves y conectar los datos subjetivos con los hallazgos que posteriormente arrojará el examen físico.",
+    "ejemplos": [
+      "Conducir la entrevista de manera estructurada preguntando inicialmente por el motivo de consulta principal."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "intermedio",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000009",
+    "fecha": "2026-10-29T04:28:16.748Z"
+  },
+  {
+    "unidadId": "uni_000004",
+    "titulo": "Metodología de la Valoración Céfalo-Caudal en Emergencias",
+    "orden": 1,
+    "objetivos": [
+      "Describir la secuencia sistemática de la valoración céfalo-caudal en pacientes de emergencia.",
+      "Identificar lesiones y alteraciones morfológicas o funcionales en cada segmento corporal."
+    ],
+    "resumen": "La valoración céfalo-caudal es un método sistemático de exploración física que permite revisar al paciente de manera ordenada desde la cabeza hasta los pies, asegurando que no se pase por alto ninguna lesión oculta. En la atención de emergencias, este enfoque es vital para pacientes politraumatizados o con cuadros clínicos complejos de origen desconocido.\n\nEste proceso metódico combina la observación global con la revisión focalizada por regiones anatómicas, permitiendo priorizar aquellas intervenciones que salvan la vida conforme se avanza en la exploración del cuerpo.",
+    "ejemplos": [
+      "Inspeccionar el cráneo y la cara en busca de signos de traumatismo, contusiones o asimetrías."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "avanzado",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000010",
+    "fecha": "2026-10-29T04:28:16.767Z"
+  },
+  {
+    "unidadId": "uni_000004",
+    "titulo": "Aplicación de los Cuatro Tiempos del Examen Físico",
+    "orden": 2,
+    "objetivos": [
+      "Definir y diferenciar los cuatro tiempos del examen físico: inspección, palpación, percusión y auscultación.",
+      "Aplicar de forma integrada los tiempos semiológicos en la evaluación clínica de urgencia."
+    ],
+    "resumen": "El examen físico se sustenta en cuatro tiempos fundamentales que constituyen la base de la exploración semiológica: inspección, palpación, percusión y auscultación. Cada uno aporta datos sensoriales específicos que, al ser interpretados en conjunto, revelan el estado funcional de los diferentes aparatos y sistemas del organismo.\n\nEn el contexto de emergencias médicas, si bien se mantiene la secuencia conceptual, la prioridad clínica puede modificar el orden de ejecución, destacando frecuentemente el uso inmediato de la inspección y la palpación para detectar alteraciones severas de manera rápida.",
+    "ejemplos": [
+      "Realizar auscultación pulmonar y cardiaca para evaluar la presencia de ruidos agregados o anormalidades hemodinámicas."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "avanzado",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000011",
+    "fecha": "2026-10-29T04:28:16.777Z"
+  },
+  {
+    "unidadId": "uni_000004",
+    "titulo": "Integración del Examen Físico en Escenarios Críticos",
+    "orden": 3,
+    "objetivos": [
+      "Sintetizar los hallazgos de la anamnesis y el examen físico para la formulación de impresiones diagnósticas preliminares.",
+      "Demostrar criterio clínico en la toma de decisiones basadas en la exploración física sistemática."
+    ],
+    "resumen": "La integración final de los datos obtenidos mediante la anamnesis y los cuatro tiempos del examen físico en la valoración céfalo-caudal permite al personal de emergencias construir un panorama clínico coherente. Esta síntesis es el puente directo hacia la selección de los protocolos de atención y transporte adecuados para el paciente.\n\nEl desarrollo de esta competencia clínica requiere práctica constante, juicio crítico y la capacidad de discernir entre hallazgos normales y patológicos bajo condiciones de alta exigencia operativa en el ámbito prehospitalario y hospitalario.",
+    "ejemplos": [
+      "Correlacionar los datos de dolor abdominal obtenidos en la anamnesis con los hallazgos de dolor a la palpación profunda durante el examen físico."
+    ],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [
+      {
+        "tipo": "imagen",
+        "titulo": "Integración práctica del examen físico en entrenamiento de campo",
+        "url": "/recursos/asignaturas/tema-integracion-practica-campo.jpeg"
+      }
+    ],
+    "palabrasClave": [],
+    "dificultad": "avanzado",
+    "fuentes": "2.2 - 4 - ANAMNESIS - Notas.txt",
+    "estado": "borrador",
+    "id": "tem_000012",
+    "fecha": "2026-10-29T04:28:16.786Z"
+  },
+  {
+    "unidadId": "uni_000002",
+    "titulo": "GLOSARIO SEMIOLOGÍA",
+    "orden": 4,
+    "objetivos": [],
+    "resumen": "",
+    "ejemplos": [],
+    "erroresFrecuentes": [],
+    "preguntasGuia": [],
+    "recursos": [],
+    "palabrasClave": [],
+    "dificultad": "intermedio",
+    "fuentes": "",
+    "estado": "publicado",
+    "id": "tem_000013",
+    "fecha": "2026-10-29T04:28:44.421Z"
+  }
+]

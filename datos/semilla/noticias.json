@@ -1,0 +1,58 @@
+[
+  {
+    "titulo": "IA GENERATIVA EN EL AULA PREHOSPITALARIA",
+    "resumen": "Actualización RCP - OVACE 2025-2026 AHA",
+    "cuerpo": "Se exhorta a actualizarse constantemente a verificar las fuentes de las cuales se obtiene la **MEDICINA PREHOSPITALARIA** basada en:\n- Evidencia\n- Información actualizada\nEs esencial que reporten o notifiquen algún artículo o información académica, con el fin de: **CORROBORAR** y verificar su uso y aplicación en clases",
+    "categoria": "Académica",
+    "temaId": "tem_000001",
+    "imagen": "/recursos/noticias/ia-generativa-aula-prehospitalaria.png",
+    "destacada": true,
+    "estado": "publicado",
+    "autorId": "usu_000002",
+    "fechaPublicacion": "2026-10-24T18:29:01.420Z",
+    "id": "not_000001",
+    "fecha": "2026-10-24T18:29:01.420Z"
+  },
+  {
+    "titulo": "Collarín cervical",
+    "resumen": "Infografía general del uso de collarín",
+    "cuerpo": "¿Cómo usar el collarín?\nUso selectivo vs no rutinario",
+    "categoria": "Institucional",
+    "temaId": "tem_000001",
+    "imagen": "/recursos/noticias/collarin-cervical.jpg",
+    "destacada": true,
+    "estado": "publicado",
+    "autorId": "usu_000001",
+    "fechaPublicacion": "2026-10-24T20:40:39.314Z",
+    "id": "not_000002",
+    "fecha": "2026-10-24T20:40:39.318Z"
+  },
+  {
+    "titulo": "¿Conoces la escala de Coma de Glasgow?",
+    "resumen": "¿Estás listo para valorar el nivel de conciencia de tu paciente?",
+    "cuerpo": "La Escala de Coma de Glasgow es una herramienta clínica que permite evaluar el nivel de conciencia y el estado neurológico del paciente mediante tres respuestas: ocular, verbal y motora. Su puntuación varía de 3 a 15 puntos, permitiendo identificar la gravedad de la alteración neurológica y monitorear su evolución (Teasdale et al., 2014).\n\n**1. Apertura Ocular (1-4 puntos)**\n4: Espontánea.\n3: Al habla (orden verbal).\n2: Al dolor.\n1: Sin respuesta.\n\n**2. Respuesta Verbal (1-5 puntos)**\n5: Orientada (tiempo, lugar, persona). \n4: Confusa (conversación posible pero desorientada). \n3: Inapropiada (palabras sueltas, sin conversación).\n2: Incomprensible (sonidos/gemidos).\n1: Sin respuesta.\n\n**3. Respuesta Motora (1-6 puntos)**\n6: Obedece órdenes.\n5: Localiza el dolor. \n4: Retirada al dolor (flexión normal). \n3: Flexión anormal (decorticación).\n2: Extensión anormal (descerebración). \n1: Sin respuesta.\n\n**GLASGOW PEDIÁTRICO**\nPara lactantes, la respuesta verbal se adapta (ej.  llanto irritable = 4, balbuceo = 5) y la motora evalúa movimientos intencionales o retirada al tacto. La puntuación se expresa comúnmente como desglose (ej. E4 V5 M6 = 15).",
+    "categoria": "Institucional",
+    "temaId": "tem_000002",
+    "imagen": "/recursos/noticias/escala-coma-glasgow.jpg",
+    "destacada": true,
+    "estado": "publicado",
+    "autorId": "usu_000001",
+    "fechaPublicacion": "2026-10-24T20:46:21.220Z",
+    "id": "not_000003",
+    "fecha": "2026-10-24T20:46:21.225Z"
+  },
+  {
+    "titulo": "¿Sabes cómo valorar a un paciente?",
+    "resumen": "QUEREMOS ESCUCHARTE",
+    "cuerpo": "🚑🚨Estimado estudiante, tu opinión **ES IMPORTANTE**\nPor eso **QUEREMEOS INVITARTE A PARTICIPAR** en el **CONVERSATORIO DE GENERALIDADES DE PRIMEROX AUXILIOS**  para personal de **PRIMER Y SEGUNDO SEMESTRE** 🚑🚨\n\n📍 QTH: **AUDITORIO INSTITUTO**\n⏰QTR: **10H00**\n📅DÍA: **02/11/2026**",
+    "categoria": "Eventos",
+    "temaId": "tem_000001",
+    "imagen": "/recursos/noticias/conversatorio-valoracion-paciente.png",
+    "destacada": true,
+    "estado": "publicado",
+    "autorId": "usu_000001",
+    "fechaPublicacion": "2026-10-25T13:50:32.775Z",
+    "id": "not_000004",
+    "fecha": "2026-10-25T13:50:32.779Z"
+  }
+]
